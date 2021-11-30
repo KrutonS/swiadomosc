@@ -12,7 +12,6 @@
 		"plugin:@next/next/recommended",
 		"prettier"
 	],
-	"ecmaFeatures": { "jsx": true },
 	"rules": {
 		"react/jsx-filename-extension": 0,
 		"react/function-component-definition": 0,
@@ -20,6 +19,17 @@
 		"arrow-body-style": 0,
 		"react/react-in-jsx-scope": 0,
 		"react/jsx-props-no-spreading": 0,
+		"react/require-default-props": 0,
+		"import/extensions": [
+			2,
+			"ignorePackages",
+			{
+				"js": "never",
+				"jsx": "never",
+				"ts": "never",
+				"tsx": "never"
+			}
+		],
 		"spaced-comment": [
 			"warn",
 			"always",

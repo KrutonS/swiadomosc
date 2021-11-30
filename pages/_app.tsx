@@ -1,8 +1,18 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+// import { useRouter } from 'next/dist/client/router';
+import Header from '../components/header';
 
-function MyApp({ Component, pageProps }: AppProps) {
-	return <Component {...pageProps} />;
+function App({ Component, pageProps }: AppProps) {
+	// const { pathname } = useRouter();
+	// console.log(pathname);
+
+	return (
+		<>
+			<Header />
+			<Component {...pageProps} />
+		</>
+	);
 }
 
-// export default MyApp;
+export default App;
