@@ -1,3 +1,34 @@
 {
-  "extends": "next/core-web-vitals"
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"next/core-web-vitals",
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended",
+		"airbnb",
+		"airbnb/hooks",
+		"airbnb-typescript",
+		"stylelint-config-recommended",
+		"prettier"
+	],
+	"parserOptions": { "project": "./tsconfig.json" },
+	"ecmaFeatures": { "jsx": true },
+	"rules": {
+		"react/jsx-filename-extension": 0,
+		"react/function-component-definition": 0,
+		"react/prop-types": 0,
+		"arrow-body-style": 0,
+		"spaced-comment": [
+			"warn",
+			"always",
+			{
+				"line": {
+					"markers": ["#region", "#endregion", "region", "endregion"]
+				}
+			}
+		]
+	}
 }
