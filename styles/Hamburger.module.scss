@@ -1,4 +1,4 @@
-@use 'globals';
+@use 'variables';
 
 .hamburger {
 	--color: --var(color-contrast1);
@@ -37,7 +37,7 @@
 	bottom: --var(distance-from-block);
 }
 
-@media screen and (min-width: globals.$breakpoint1) {
+@media screen and (min-width: variables.$breakpoint1) {
 	.hamburger {
 		display: none;
 	}
