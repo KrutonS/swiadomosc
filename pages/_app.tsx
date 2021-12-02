@@ -6,7 +6,6 @@ import Header from '../components/header';
 function App({ Component, pageProps }: AppProps) {
 	// const { pathname } = useRouter();
 	// console.log(pathname);
-
 	return (
 		<>
 			<Header />

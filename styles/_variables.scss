@@ -1,1 +1,35 @@
+// #region Variables;
 $breakpoint1: 900px;
+// #endregion
+// #region Typography
+@mixin h1 {
+	font-size: 1.5em;
+	letter-spacing: 0.225em;
+	font-weight: 700;
+	color: var(--color-accent1);
+}
+@mixin h2 {
+	font-size: 1.222em;
+	font-weight: 500;
+}
+@mixin h3 {
+	font-size: 1.111em;
+}
+@mixin small {
+	font-size: 0.889em;
+	font-weight: 200;
+}
+// #endregion
+// #region Utils
+@mixin cell(
+	$primary-color: var(--color-overlay3),
+	$secondary-color: var(--color-overlay1)
+) {
+	background: $primary-color;
+	padding: 0.3em 0.833em;
+	width: 100%;
+	&:where(:nth-child(2n)) {
+		background: $secondary-color;
+	}
+}
+// #endregion

@@ -1,7 +1,7 @@
 // @import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
+@use 'variables' as var;
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;400;700;900&display=swap');
-
-/* #region Resets */
+// #region Resets
 *,
 *::after,
 *::before {
@@ -37,7 +37,7 @@ a {
 	--radius2: 10px;
 	--radius3: 15px;
 
-	--page-padding-block: calc(5vw + 1px);
+	--page-padding-inline: calc(5vw + 1px);
 }
 /* #endregion */
 /* #region Root Elements */
@@ -57,21 +57,16 @@ body {
 	line-height: 0.852em;
 }
 h1 {
-	font-size: 1.5em;
-	letter-spacing: 0.225em;
-	font-weight: 700;
-	color: var(--color-accent1);
+	@include var.h1;
 }
 h2 {
-	font-size: 1.222em;
-	font-weight: 500;
+	@include var.h2;
 }
 h3 {
-	font-size: 1.111em;
+	@include var.h3;
 }
 small {
-	font-size: 0.889em;
-	font-weight: 200;
+	@include var.small;
 }
 /* #endregion */
 /* #endregion */

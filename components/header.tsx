@@ -1,25 +1,39 @@
-import classNames from 'classnames';
-import { FC } from 'react';
+import cn from 'classnames';
+import { FC, useState } from 'react';
+import Link from 'next/link';
 
 import PagesLinks from './pages-links';
-import styles from '../styles/Header.module.css';
+import styles from '../styles/Header.module.scss';
 import Logo from './logo';
+import Hamburger from './hamburger';
 
 interface Props {
 	showBackground?: boolean;
 }
+console.log(styles);
 
 const Header: FC<Props> = ({ showBackground }) => {
+	const [show, setShow] = useState(false);
+	const menuToggle = () => setShow(!show);
+
 	return (
 		<header
-			className={classNames(styles.header, {
+			className={cn(styles.header, {
 				[`${styles.header}--bg`]: showBackground,
 			})}
 		>
-			<Logo className={`${styles.header}__logo`} />
-			<nav className={`${styles.header}__nav`}>
-				<PagesLinks className={styles.link} />
-			</nav>
+			<Logo className={styles.logo} />
+			<Hamburger onClick={menuToggle} />
+
+			<div className={styles['nav-wrapper']}>
+				<nav className={cn(styles.nav, { [styles['menu-open']]: show })}>
+					<PagesLinks className={`${styles.link} cell`} />
+					<Link href="/login">
+						{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+						<a className={`${styles.link} page-link cell`}>Zaloguj&nbsp;się</a>
+					</Link>
+				</nav>
+			</div>
 		</header>
 	);
 };

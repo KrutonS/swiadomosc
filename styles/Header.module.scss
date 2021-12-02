@@ -1,0 +1,64 @@
+@use 'variables' as var;
+
+.header {
+	position: fixed;
+	top: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--color-overlay3);
+	width: 100%;
+	padding-inline: var(--page-padding-inline);
+	height: 10vh;
+}
+
+.logo {
+	font-size: 0.5rem;
+}
+.nav-wrapper {
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	transform: translateY(100%);
+}
+.nav {
+	transition: transform 0.5s ease-in-out;
+	transform: translateX(100%);
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 15px 0 15px 15px;
+	gap: 10px;
+	background: var(--color-overlay4);
+	& > * {
+		width: 100%;
+		&:last-child {
+			margin-left: auto;
+		}
+	}
+	&.menu-open {
+		transform: translateX(0);
+	}
+}
+.link {
+	@include var.cell;
+}
+@media screen and (min-width: var.$breakpoint1) {
+	.nav-wrapper {
+		position: static;
+		overflow: visible;
+		transform: none;
+	}
+	.nav {
+		transition: none;
+		flex-direction: row;
+		transform: none;
+		background: revert;
+		padding: 0;
+	}
+	.link {
+		background: none;
+		padding: 0;
+	}
+}

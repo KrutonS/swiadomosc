@@ -11,7 +11,7 @@ const PagesLinks: FC<Props> = ({ className }) => {
 	return (
 		<>
 			<Link href="/o-nas">
-				<a className={cn('page-link', className)}>O nas</a>
+				<a className={cn('page-link', className)}>O&nbsp;nas</a>
 			</Link>
 			<Link href="/spotkania">
 				<a className={cn('page-link', className)}>Spotkania</a>

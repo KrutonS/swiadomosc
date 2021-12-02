@@ -1,43 +1,44 @@
-@use 'variables';
+@use 'variables' as var;
 
 .hamburger {
-	--color: --var(color-contrast1);
+	--color: var(--color-contrast1);
 	--thickness: 1px;
 	--distance-from-block: 0.6em;
 	box-sizing: content-box;
-	background: --var(color-black-overlay1);
-	border-radius: --var(radius1);
+	background: var(--color-black-overlay1);
+	border-radius: var(--radius1);
 	position: relative;
 	border: 2px solid var(--color);
 	width: 38px;
+	min-width: 1em;
 	height: 31px;
 	cursor: pointer;
-}
-.hamburger > div,
-.hamburger::after,
-.hamburger::before {
-	background: --var(color);
-	width: 1.6em;
-	height: --var(thickness);
-	content: '';
-	display: block;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	border-radius: 5px;
-}
-.hamburger::before,
-.hamburger::after {
-	transform: translate(-50%, 50%);
-}
-.hamburger::before {
-	top: --var(distance-from-block);
-}
-.hamburger::after {
-	bottom: --var(distance-from-block);
+	& > div,
+	&::after,
+	&::before {
+		background: var(--color);
+		width: 1.6em;
+		height: var(--thickness);
+		content: '';
+		display: block;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 5px;
+	}
+	&::before,
+	&::after {
+		transform: translate(-50%, 50%);
+	}
+	&::before {
+		top: var(--distance-from-block);
+	}
+	&::after {
+		bottom: var(--distance-from-block);
+	}
 }
 
-@media screen and (min-width: variables.$breakpoint1) {
+@media screen and (min-width: var.$breakpoint1) {
 	.hamburger {
 		display: none;
 	}
