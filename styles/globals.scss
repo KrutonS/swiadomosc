@@ -1,6 +1,6 @@
 // @import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
 @use 'variables' as var;
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;300;500;700;900&display=swap');
 // #region Resets
 *,
 *::after,
@@ -41,20 +41,14 @@ a {
 }
 /* #endregion */
 /* #region Root Elements */
-html {
-	font-family: Spartan, sans-serif;
-	font-size: 18px;
-	letter-spacing: 0.1em;
-	color: var(--color-contrast1);
-}
 body {
 	background-color: var(--color-primary);
 }
 /* #endregion */
 /* #region Mobile Device */
 /* #region Typography */
-:is(h1, h2, h3, h4, h5, h6) {
-	line-height: 0.852em;
+html {
+	@include var.regular;
 }
 h1 {
 	@include var.h1;

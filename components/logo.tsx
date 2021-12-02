@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { FC } from 'react';
-import LogoSVG from '../assets/svg/logo.svg';
+import Link from 'next/link';
+
+import LogoSVG from '../public/logo.svg';
 import styles from '../styles/Logo.module.scss';
 
 interface Props {
@@ -8,13 +10,14 @@ interface Props {
 }
 
 const Logo: FC<Props> = ({ className }) => {
-	console.log(className);
-
 	return (
-		<div className={cn(styles.logo, className)}>
-			<LogoSVG width="75" alt="logo" />
-			<h1>ŚWiadomość</h1>
-		</div>
+		<Link href="/o-nas">
+			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+			<a className={cn(styles.logo, className)}>
+				<LogoSVG width="75" alt="logo" />
+				<h1>ŚWiadomość</h1>
+			</a>
+		</Link>
 	);
 };
 

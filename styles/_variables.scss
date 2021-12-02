@@ -2,23 +2,38 @@
 $breakpoint1: 900px;
 // #endregion
 // #region Typography
+// #region Mobile
+// NOTE regular will spread to other styles
+@mixin regular {
+	font-family: Spartan, sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	line-height: 1.7em;
+	letter-spacing: 0.1em;
+	color: var(--color-contrast1);
+}
 @mixin h1 {
 	font-size: 1.5em;
 	letter-spacing: 0.225em;
 	font-weight: 700;
+	line-height: 0.95em;
 	color: var(--color-accent1);
 }
 @mixin h2 {
 	font-size: 1.222em;
+	line-height: 0.95em;
 	font-weight: 500;
 }
 @mixin h3 {
 	font-size: 1.111em;
+	line-height: 0.95em;
 }
 @mixin small {
 	font-size: 0.889em;
-	font-weight: 200;
+	font-weight: 100;
 }
+// #endregion
+
 // #endregion
 // #region Utils
 @mixin cell(
