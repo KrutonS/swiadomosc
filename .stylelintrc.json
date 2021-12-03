@@ -4,5 +4,5 @@
 		"stylelint-config-recommended-scss",
 		"stylelint-config-prettier"
 	],
-	"rules": { "at-rule-no-unknown": null, "scss/at-rule-no-unknown": null }
+	"rules": { "at-rule-no-unknown": null, "scss/at-rule-no-unknown": null, "scss/no-global-function-names":null}
 }

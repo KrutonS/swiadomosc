@@ -7,20 +7,15 @@ import styles from '../styles/Header.module.scss';
 import Logo from './logo';
 import Hamburger from './hamburger';
 
-interface Props {
-	showBackground?: boolean;
-}
-console.log(styles);
-
-const Header: FC<Props> = ({ showBackground }) => {
+const Header: FC = () => {
 	const [show, setShow] = useState(false);
+
 	const menuToggle = () => setShow(!show);
 
 	return (
 		<header
-			className={cn(styles.header, {
-				[`${styles.header}--bg`]: showBackground,
-			})}
+			className={cn(styles.header)}
+			// 	[styles['show-bg']] showBackground,
 		>
 			<Logo className={styles.logo} />
 			<Hamburger onClick={menuToggle} />

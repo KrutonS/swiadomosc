@@ -1,6 +1,7 @@
 @use 'variables' as var;
 
 .header {
+	z-index: 9999;
 	position: fixed;
 	top: 0;
 	display: flex;
@@ -8,8 +9,9 @@
 	align-items: center;
 	background-color: var(--color-overlay3);
 	width: 100%;
-	padding: 8px var(--page-padding-inline);
+	padding: 0 var(--page-padding-inline);
 	height: 10vh;
+	min-height: 2.5em;
 }
 
 .logo {

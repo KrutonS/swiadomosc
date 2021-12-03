@@ -1,3 +1,4 @@
+/* stylelint-disable no-duplicate-selectors */
 // @import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
 @use 'variables' as var;
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;300;500;700;900&display=swap');
@@ -8,7 +9,8 @@
 	margin: 0;
 	box-sizing: border-box;
 }
-ul {
+ul,
+ol {
 	list-style-type: none;
 }
 a {
@@ -64,3 +66,14 @@ small {
 }
 /* #endregion */
 /* #endregion */
+// #region global effects
+main > * {
+	padding-inline: var(--page-padding-inline);
+}
+main > * + * {
+	padding-top: 1em;
+}
+html {
+	scroll-behavior: smooth;
+}
+// #endregion
