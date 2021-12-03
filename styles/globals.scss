@@ -47,7 +47,7 @@ body {
 	background-color: var(--color-primary);
 }
 /* #endregion */
-/* #region Mobile Device */
+/* #region Mobile First */
 /* #region Typography */
 html {
 	@include var.regular;
@@ -65,7 +65,7 @@ small {
 	@include var.small;
 }
 /* #endregion */
-// #region global effects
+// #region Global Effects
 main > * {
 	padding-inline: var(--page-padding-inline);
 }
@@ -89,8 +89,8 @@ html {
 	scroll-behavior: smooth;
 }
 // #endregion
-// #region desktop
-// #region global effects
+// #region Desktop And Resets
+// #region Global Effects
 @media screen and (min-width: var.$breakpoint1) {
 	article {
 		margin-inline: revert;
