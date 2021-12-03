@@ -65,7 +65,6 @@ small {
 	@include var.small;
 }
 /* #endregion */
-/* #endregion */
 // #region global effects
 main > * {
 	padding-inline: var(--page-padding-inline);
@@ -73,7 +72,30 @@ main > * {
 main > * + * {
 	padding-top: 1em;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+article {
+	max-width: 60ch;
+}
+article {
+	margin-inline: auto;
+}
 html {
 	scroll-behavior: smooth;
 }
 // #endregion
+// #region desktop
+// #region global effects
+@media screen and (min-width: var.$breakpoint1) {
+	article {
+		margin-inline: revert;
+	}
+}
+// #endregion
+// #endregion
+/* #endregion */

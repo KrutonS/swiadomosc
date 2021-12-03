@@ -1,9 +1,15 @@
+// #region Local
+@mixin paragraphSpacing {
+	margin-top: 1em;
+	margin-bottom: 0.6em;
+}
+// #endregion
 // #region Variables;
 $breakpoint1: 900px;
 // #endregion
 // #region Typography
 // #region Mobile
-// NOTE regular will spread to other styles
+// NOTE regular will spread font attributes to other styles as expected in normal document flow
 @mixin regular {
 	font-family: Spartan, sans-serif;
 	font-size: 18px;
@@ -18,15 +24,20 @@ $breakpoint1: 900px;
 	font-weight: 700;
 	line-height: 0.95em;
 	color: var(--color-accent1);
+	text-align: center;
+	@include paragraphSpacing();
 }
 @mixin h2 {
 	font-size: 1.222em;
 	line-height: 0.95em;
 	font-weight: 500;
+	text-align: center;
+	@include paragraphSpacing();
 }
 @mixin h3 {
 	font-size: 1.111em;
 	line-height: 0.95em;
+	@include paragraphSpacing();
 }
 @mixin small {
 	font-size: 0.889em;
