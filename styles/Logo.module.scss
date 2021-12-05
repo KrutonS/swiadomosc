@@ -4,13 +4,16 @@
 	align-items: center;
 	gap: 0.7em;
 	height: 100%;
+	font-size: calc(1.1vw + 10px);
 	& svg {
-		width: 3.5em;
+		width: 2em;
 	}
-}
-.logo > h1::first-letter {
-	color: var(--color-contrast1);
-}
-.logo > h1 {
-	font-weight: 900;
+	& > h1::first-letter {
+		color: var(--color-contrast1);
+	}
+	& > h1 {
+		font-weight: 900;
+		font-size: 1em;
+		margin: 0;
+	}
 }

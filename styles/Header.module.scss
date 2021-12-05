@@ -70,7 +70,7 @@
 			margin-left: auto;
 		}
 		&:last-child {
-			@include var.small;
+			@include var.small-m;
 		}
 	}
 }

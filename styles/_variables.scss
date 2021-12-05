@@ -1,6 +1,6 @@
 // #region Local
 @mixin paragraphSpacing {
-	margin-top: 1em;
+	// margin-top: 1em;
 	margin-bottom: 0.6em;
 }
 // #endregion
@@ -9,8 +9,9 @@ $breakpoint1: 900px;
 // #endregion
 // #region Typography
 // #region Mobile
-// NOTE regular will spread font attributes to other styles as expected in normal document flow
-@mixin regular {
+// XXX available weights: 100 300 500 700 900
+// NOTE regular-m will spread font attributes to other styles as expected in normal document flow
+@mixin regular-m {
 	font-family: Spartan, sans-serif;
 	font-size: 18px;
 	font-weight: 300;
@@ -18,7 +19,7 @@ $breakpoint1: 900px;
 	letter-spacing: 0.1em;
 	color: var(--color-contrast1);
 }
-@mixin h1 {
+@mixin h1-m {
 	font-size: 1.5em;
 	letter-spacing: 0.225em;
 	font-weight: 700;
@@ -27,24 +28,45 @@ $breakpoint1: 900px;
 	text-align: center;
 	@include paragraphSpacing();
 }
-@mixin h2 {
+@mixin h2-m {
 	font-size: 1.222em;
 	line-height: 0.95em;
 	font-weight: 500;
 	text-align: center;
 	@include paragraphSpacing();
 }
-@mixin h3 {
+@mixin h3-m {
 	font-size: 1.111em;
 	line-height: 0.95em;
 	@include paragraphSpacing();
 }
-@mixin small {
+@mixin small-m {
 	font-size: 0.889em;
 	font-weight: 100;
 }
 // #endregion
-
+// #region Desktop reset
+@mixin regular-d {
+	letter-spacing: 10%;
+}
+@mixin h1-d {
+	font-size: 4.444em;
+	line-height: 1.12em;
+	text-align: left;
+}
+@mixin h2-d {
+	font-size: 3.556em;
+	text-align: left;
+}
+@mixin h3-d {
+	font-size: 2.222em;
+	text-align: left;
+	line-height: 1.275em;
+}
+@mixin small-d {
+	font-size: 1rem;
+}
+// #endregion
 // #endregion
 // #region Utils
 @mixin cell(
@@ -57,5 +79,12 @@ $breakpoint1: 900px;
 	&:where(:nth-child(2n)) {
 		background: $secondary-color;
 	}
+}
+@mixin letter-in-circle($size, $vMultiplier: 1) {
+	height: $size;
+	line-height: calc($vMultiplier * $size);
+	width: $size;
+	text-align: center;
+	border-radius: 100%;
 }
 // #endregion

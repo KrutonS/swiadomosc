@@ -1,0 +1,41 @@
+/* stylelint-disable-next-line block-no-empty */
+// <section className={styles.post}>
+// 			<h2>{title}</h2>
+// 			<h3 className={styles['post-title']}>
+// 				<Link href="/">{post.title}</Link>
+// 			</h3>
+// 			<div className={styles['video-layout']}>
+// 				<div className={styles['top-bar']}>
+// 					<small>{author.name}</small>
+// 					<Image src="/mock/avatar.jpg" width="25px" height="23px" />
+// 					<small>{post.commentsCount}</small>
+// 					<Image src="/comments.svg" width="20px" height="17.5px" />
+// 				</div>
+// 				<iframe
+// 					width="560"
+// 					height="315"
+// 					src={post.ytUrl}
+// 					title="YouTube video player"
+// 					frameBorder="0"
+// 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+// 					allowFullScreen
+// 				/>
+// 			</div>
+// 		</section>
+
+.post {
+	background-color: var(--color-contrast2);
+	position: relative;
+	text-shadow: -1px -1px 0 #00000055, 1px -1px 0 #00000055, -1px 1px 0 #00000055,
+		1px 1px 0 #00000055;
+	& small {
+		font-weight: 500;
+	}
+}
+.post::before {
+	position: absolute;
+	inset: 0 0 6em;
+	content: '';
+	background-color: var(--color-accent1);
+	z-index: -1;
+}

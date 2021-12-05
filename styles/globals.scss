@@ -20,7 +20,6 @@ a {
 
 /* #endregion */
 /* #region Variables */
-
 :root {
 	--color-primary: #2b3a40;
 	--color-accent1: #f2a679;
@@ -47,30 +46,57 @@ body {
 	background-color: var(--color-primary);
 }
 /* #endregion */
-/* #region Mobile First */
 /* #region Typography */
+
+// #region Mobile
 html {
-	@include var.regular;
+	@include var.regular-m;
 }
 h1 {
-	@include var.h1;
+	@include var.h1-m;
 }
 h2 {
-	@include var.h2;
+	@include var.h2-m;
 }
 h3 {
-	@include var.h3;
+	@include var.h3-m;
 }
 small {
-	@include var.small;
+	@include var.small-m;
 }
+// #endregion
+// #region Desktop reset
+@media screen and (min-width: var.$breakpoint1) {
+	html {
+		@include var.regular-d;
+	}
+	h1 {
+		@include var.h1-d;
+	}
+	h2 {
+		@include var.h2-d;
+	}
+	h3 {
+		@include var.h3-d;
+	}
+	small {
+		@include var.small-d;
+	}
+}
+// #endregion
 /* #endregion */
+/* #region Mobile First */
 // #region Global Effects
 main > * {
 	padding-inline: var(--page-padding-inline);
 }
 main > * + * {
 	padding-top: 1em;
+}
+main > section:not(:first-child) {
+	// position: sticky;
+	// top: 4em;
+	padding-bottom: 2em 4em;
 }
 h1,
 h2,
@@ -84,10 +110,13 @@ article {
 }
 article {
 	margin-inline: auto;
+	text-indent: 1em;
 }
 html {
 	scroll-behavior: smooth;
 }
+
+// #endregion
 // #endregion
 // #region Desktop And Resets
 // #region Global Effects
@@ -96,6 +125,5 @@ html {
 		margin-inline: revert;
 	}
 }
-// #endregion
 // #endregion
 /* #endregion */
