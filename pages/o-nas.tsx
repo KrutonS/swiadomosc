@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Hero from '../components/hero';
 import LastPost from '../components/last-post';
 import TexTImage from '../components/text-image';
-import TwoColumn from '../components/two-column';
+import TwoColumn from '../components/text-list';
 import styles from '../styles/About.module.scss';
 import { Post } from '../types';
 

@@ -9,7 +9,7 @@ interface Props {
 	className?: string;
 }
 
-const TwoColumn: FC<Props> = ({
+const TextList: FC<Props> = ({
 	text,
 	listItems,
 	title,
@@ -38,4 +38,4 @@ const TwoColumn: FC<Props> = ({
 	);
 };
 
-export default TwoColumn;
+export default TextList;
