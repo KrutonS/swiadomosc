@@ -39,6 +39,8 @@ a {
 	--radius3: 15px;
 
 	--page-padding-inline: calc(5vw + 1px);
+
+	--text-indent: 1em;
 }
 /* #endregion */
 /* #region Root Elements */
@@ -93,10 +95,10 @@ main > * {
 main > * + * {
 	padding-top: 1em;
 }
-main > section:not(:first-child) {
+* + section {
 	// position: sticky;
 	// top: 4em;
-	padding-bottom: 2em 4em;
+	padding-block: 2em 3em;
 }
 h1,
 h2,
@@ -110,7 +112,7 @@ article {
 }
 article {
 	margin-inline: auto;
-	text-indent: 1em;
+	text-indent: var(--text-indent);
 }
 html {
 	scroll-behavior: smooth;

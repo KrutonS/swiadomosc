@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Image from 'next/image';
 import styles from '../styles/TwoColumn.module.scss';
+import FixedImage from './fixed-image';
 
 interface Props {
 	title: string;
@@ -26,7 +26,7 @@ const TexTImage: FC<Props> = ({
 			<h2>{title}</h2>
 			<div className={`${styles['two-column-flex']}`}>
 				<article className={styles['first-column']}>{text}</article>
-				<Image
+				<FixedImage
 					className={styles.image}
 					src={src}
 					layout="fill"
