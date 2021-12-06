@@ -37,4 +37,5 @@ const LastPost: FC<Props> = ({ title, post }) => {
 	);
 };
 
+// console.log("force");
 export default LastPost;
