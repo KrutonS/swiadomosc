@@ -1,31 +1,25 @@
-import { ButtonHTMLAttributes, FC, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler, ReactNode } from 'react';
 import Link from 'next/link';
 
 import styles from '../styles/Button.module.scss';
+import { ButtonTypes } from '../types';
 
-interface OnClickProps {
-	onClick: MouseEventHandler;
-	type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+interface ClickProps {
+	onClick?: MouseEventHandler;
+	type?: ButtonTypes;
 }
 interface LinkProps {
 	href: string;
 }
+
 export type ButtonProps = {
 	className?: string;
-} & (OnClickProps | LinkProps);
+	children: ReactNode;
+} & (ClickProps | LinkProps);
 
 const Button: FC<ButtonProps> = props => {
 	const { className = '', children } = props;
 	const nodeClass = `${className} ${styles.btn}`;
-	if ('onClick' in props) {
-		const { type = 'button', onClick } = props;
-		return (
-			// eslint-disable-next-line react/button-has-type
-			<button type={type} onClick={onClick} className={nodeClass}>
-				{children}
-			</button>
-		);
-	}
 	if ('href' in props) {
 		const { href } = props;
 		return (
@@ -35,7 +29,13 @@ const Button: FC<ButtonProps> = props => {
 			</Link>
 		);
 	}
-	return <p className="error">error</p>;
+	const { type = 'button', onClick } = props;
+	return (
+		// eslint-disable-next-line react/button-has-type
+		<button type={type} onClick={onClick} className={nodeClass}>
+			{children}
+		</button>
+	);
 };
 
 export default Button;

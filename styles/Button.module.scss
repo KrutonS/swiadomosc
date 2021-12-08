@@ -1,6 +1,8 @@
+@use 'variables' as var;
+
 .btn {
 	border-radius: var(--radius1);
 	background-color: var(--color-overlay1);
 	border: 2px solid var(--color-accent1);
-	padding: 0.5em 2.2em;
+	@include var.text-padding;
 }

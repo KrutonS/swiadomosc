@@ -87,4 +87,7 @@ $breakpoint1: 900px;
 	text-align: center;
 	border-radius: 100%;
 }
+@mixin text-padding {
+	padding: 0.5em 2.2em;
+}
 // #endregion

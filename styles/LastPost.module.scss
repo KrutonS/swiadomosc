@@ -9,6 +9,13 @@
 	& small {
 		font-weight: 500;
 	}
+	& > h2 {
+		text-align: center;
+		font-weight: 900;
+	}
+	& > h3 {
+		text-indent: var(--text-indent);
+	}
 	&::before {
 		position: absolute;
 		top: 0;
@@ -18,12 +25,6 @@
 		content: '';
 		background-color: var(--color-accent1);
 		z-index: -1;
-	}
-	& > h2 {
-		text-align: center;
-	}
-	& > h3 {
-		text-indent: var(--text-indent);
 	}
 }
 

@@ -10,7 +10,7 @@
 }
 
 // To hide hero scroll button
-.hero ~ * {
+:where(.hero ~ *) {
 	background-color: var(--color-primary);
 	z-index: 20;
 	position: relative;

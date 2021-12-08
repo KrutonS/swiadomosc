@@ -1,5 +1,5 @@
-import { FC } from 'react';
 import Image from 'next/image';
+import { FC } from 'react';
 import Button, { ButtonProps } from './button';
 import styles from '../styles/CallToAction.module.scss';
 
@@ -7,12 +7,11 @@ type Props = {
 	backgroundUrl: string;
 } & ButtonProps;
 
-type ButtonAttributes = ButtonProps & Partial<Pick<Props, 'backgroundUrl'>>;
-
-const CallToAction: FC<Props> = props => {
-	const { children, backgroundUrl, className = '' } = props;
-	const buttonProps: ButtonAttributes = { ...props };
-	delete buttonProps.backgroundUrl;
+const CallToAction: FC<Props> = ({
+	backgroundUrl,
+	className,
+	...buttonProps
+}) => {
 	return (
 		<section className={styles.section}>
 			<Image
@@ -24,9 +23,7 @@ const CallToAction: FC<Props> = props => {
 			<Button
 				{...buttonProps}
 				className={`${styles['action-button']} ${className}`}
-			>
-				{children}
-			</Button>
+			/>
 		</section>
 	);
 };

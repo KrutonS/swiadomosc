@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { CSSProperties, FC } from 'react';
 import styles from '../styles/TwoColumn.module.scss';
 import FixedImage from './fixed-image';
 
@@ -17,11 +17,13 @@ const TexTImage: FC<Props> = ({
 	className = '',
 	backgroundColor,
 }) => {
-	const inlineStyle = backgroundColor ? { backgroundColor } : {};
+	const sectionStyle: CSSProperties = backgroundColor
+		? { backgroundColor }
+		: {};
 	return (
 		<section
 			className={`${styles['two-column']} ${className}`}
-			style={inlineStyle}
+			style={sectionStyle}
 		>
 			<h2>{title}</h2>
 			<div className={`${styles['two-column-flex']}`}>

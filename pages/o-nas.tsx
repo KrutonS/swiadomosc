@@ -47,6 +47,7 @@ const Home: NextPage = () => {
 				title="Na czym polegaja spotkania?"
 				text={textMock2}
 				backgroundColor="black"
+				textHasShadow
 			/>
 			<CallToAction href="/kalendarz" backgroundUrl="/books.jpg">
 				Zobacz kalendarz ⮚⮚⮚
