@@ -87,12 +87,21 @@ const Input = <F extends FieldValues>({
 		...register(id, options),
 	};
 	return (
-		<div className="container">
-			<label htmlFor={id}>{label}</label>
+		<div className={styles.container}>
+			<label className="" htmlFor={id}>
+				{label}
+			</label>
 			{multiLine ? (
-				<textarea {...commonAttr}>{defaultValue}</textarea>
+				<textarea className={styles.input} {...commonAttr}>
+					{defaultValue}
+				</textarea>
 			) : (
-				<input {...commonAttr} defaultValue={defaultValue} type={type} />
+				<input
+					className={styles.input}
+					{...commonAttr}
+					defaultValue={defaultValue}
+					type={type}
+				/>
 			)}
 			{errorMessage && (
 				<p role="alert" className={`${styles.error} error`}>
