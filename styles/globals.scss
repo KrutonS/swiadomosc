@@ -27,6 +27,7 @@ a {
 
 	--color-contrast1: #eee;
 	--color-contrast2: #1c1c1c;
+	--color-contrast3: #1a1a1a;
 
 	--color-overlay1: hsla(0, 0%, 0%, 0.102);
 	--color-overlay2: hsla(0, 0%, 0%, 0.12);
@@ -95,7 +96,7 @@ main > * {
 main > * + * {
 	padding-top: 1em;
 }
-* + section {
+main > * + section {
 	// position: sticky;
 	// top: 4em;
 	padding-block: 2em 3em;

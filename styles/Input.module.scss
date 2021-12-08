@@ -1,0 +1,4 @@
+@use 'variables' as var;
+.input {
+	@include var.text-padding;
+}
