@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import styles from '../../styles/footer.module.scss';
+import styles from '../../styles/Footer.module.scss';
 import Button from '../button';
 import Logo from '../logo';
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import styles from '../../styles/footer.module.scss';
+import styles from '../../styles/Footer.module.scss';
 import Button from '../button';
 import Input from '../input';
 

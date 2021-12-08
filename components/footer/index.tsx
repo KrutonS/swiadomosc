@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from '../../styles/footer.module.scss';
+import styles from '../../styles/Footer.module.scss';
 import Left from './left.';
 import Right from './right';
 
