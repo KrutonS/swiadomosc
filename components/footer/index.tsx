@@ -6,11 +6,13 @@ import Right from './right';
 const Footer: FC = () => {
 	return (
 		<footer className={styles.footer}>
-			<Left />
-			<Right />
+			<div className={styles.main}>
+				<Left />
+				<Right />
+			</div>
 
 			<small className={styles.copyright}>
-				Copyright 2022 Marcin Smarzewski
+				Copyright&nbsp;2022 Marcin&nbsp;Smarzewski
 			</small>
 		</footer>
 	);

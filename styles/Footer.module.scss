@@ -1,0 +1,138 @@
+@use 'variables' as var;
+.footer {
+	@extend %page-padding-inline;
+	@extend %center-text;
+	position: relative;
+	background-color: var(--color-gray4);
+	z-index: 20;
+	padding-block: 50px;
+}
+.line {
+	height: 3px;
+	background-color: var(--color-gray1);
+}
+.address-desktop {
+	display: none;
+}
+.email {
+	word-break: break-all;
+}
+.row a {
+	display: block;
+	&:not(.button) {
+		width: fit-content;
+		margin-inline: auto;
+	}
+}
+.main :where(* + :not([class*='input'])) {
+	margin-top: 22px;
+}
+.left-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	& > * {
+		margin: 0;
+	}
+}
+.logo {
+	align-items: flex-end;
+	font-size: 0.9em;
+}
+.facebook {
+	width: 50px;
+	height: 50px;
+}
+.copyright {
+	display: block;
+	margin-top: 2em;
+	opacity: 0.6;
+	@extend %center-text;
+}
+
+@media screen and (min-width: var.$breakpoint1) {
+	%center-local {
+		text-align: center;
+	}
+	.left * + * {
+		margin: 0;
+	}
+	.footer {
+		padding-inline: calc(8vw + 1px);
+	}
+
+	.left,
+	.column,
+	.row,
+	.main,
+	.contact {
+		display: flex;
+	}
+
+	.left,
+	.column,
+	.contact {
+		flex-direction: column;
+	}
+	.address-mobile {
+		display: none;
+	}
+	h5.address-desktop {
+		display: block;
+		margin-bottom: 20px;
+	}
+
+	.left,
+	.right {
+		flex-basis: 50%;
+	}
+	.main {
+		gap: 5vw;
+	}
+	.left,
+	.row {
+		justify-content: space-between;
+	}
+	.column {
+		&:first-of-type {
+			gap: 30px;
+			flex-basis: 0%;
+		}
+		&:not(:first-of-type) {
+			justify-content: space-between;
+			@extend %center-local;
+		}
+		&:last-child {
+			flex-basis: 30%;
+		}
+	}
+	// .left,
+	// .column {
+	// 	justify-content: space-between;
+	// 	flex-direction: column;
+	// }
+	// .row {
+	// 	gap:30px;
+	// }
+	.right {
+		margin-block: 0;
+		padding: 3vw;
+		border: 3px solid var(--color-accent2);
+		border-radius: var(--radius1);
+
+		// & h3{
+		// 	@include var.h4;
+		// }
+	}
+	.left {
+		text-align: left;
+	}
+	.contact {
+		text-align: right;
+		gap: 20px;
+	}
+	.button {
+		padding-inline: revert;
+		@extend %center-local;
+	}
+}

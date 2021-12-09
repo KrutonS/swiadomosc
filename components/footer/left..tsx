@@ -4,6 +4,8 @@ import styles from '../../styles/Footer.module.scss';
 import Button from '../button';
 import Logo from '../logo';
 import Address from './address';
+// @ts-ignore
+import Facebook from '../../public/facebook.svg';
 
 // #region Local
 
@@ -12,9 +14,9 @@ const Column: FCClass = ({ children, className = '' }) => (
 	<div className={`${styles.column} ${className}`}>{children}</div>
 );
 
-const Row: FCClass = ({ className = '', children }) => (
-	<section className={`${styles.row} ${className}`}>{children}</section>
-);
+// const Container: FCClass = ({ className = '', children }) => (
+// 	<section className={`${styles.container} ${className}`}>{children}</section>
+// );
 const Line = () => <div className={styles.line} />;
 
 // #endregion
@@ -27,33 +29,35 @@ const ADDRESS = {
 
 const Left = () => (
 	<div className={styles.left}>
-		<Row>
+		<div className={styles['left-top']}>
 			<Logo className={styles.logo} />
-			{/* <Socials /> */} <div />
-		</Row>
+			<Facebook viewBox="0 0 70 70" className={styles.facebook} alt="error" />
+		</div>
 		<Line />
-		<nav className={`${styles.row} ${styles.navigation}`}>
-			<h4>adres</h4>
-			<Column className={styles['address-desktop']}>
-				<Address {...ADDRESS} />
-			</Column>
-			<Column>
-				<Link href="/o-nas">O nas</Link>
-				<Link href="/blog">Blog</Link>
-			</Column>
-			<Column>
-				<Link href="/dyskusje">Dyskusje</Link>
-				<Button href="/spotkania" className={styles.button}>
-					Zapisz się
-				</Button>
-			</Column>
-		</nav>
+		<div>
+			<h5 className={styles['address-desktop']}>adres</h5>
+			<nav className={styles.row}>
+				<Column className={styles['address-desktop']}>
+					<Address {...ADDRESS} />
+				</Column>
+				<Column>
+					<Link href="/o-nas">O&nbsp;nas</Link>
+					<Link href="/blog">Blog</Link>
+				</Column>
+				<Column>
+					<Link href="/dyskusje">Dyskusje</Link>
+					<Button href="/spotkania" className={styles.button}>
+						Zapisz&nbsp;się
+					</Button>
+				</Column>
+			</nav>
+		</div>
 		<Line />
-		<Row className={styles.contact}>
-			<h4>kontakt</h4>
+		<div className={styles.contact}>
+			<h5>kontakt</h5>
 			<p>+48 555 555 555</p>
 			<p className={styles.email}>swiadomosc@gmail.com</p>
-		</Row>
+		</div>
 		<div className={styles['address-mobile']}>
 			<Address {...ADDRESS} />
 		</div>

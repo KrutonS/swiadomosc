@@ -2,15 +2,15 @@
 
 .header {
 	@extend %page-padding-inline;
+	@extend %flex;
 	z-index: 9999;
 	position: fixed;
 	top: 0;
-	@extend %flex;
 	justify-content: space-between;
 	align-items: center;
 	background-color: var(--color-overlay3);
 	width: 100%;
-	height: 10vh;
+	// height: 10vh;
 	min-height: 2.5em;
 }
 

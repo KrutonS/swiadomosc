@@ -12,7 +12,7 @@ $breakpoint1: 900px;
 	font-weight: 500;
 	font-size: 1.5em;
 	line-height: 1.27em;
-	text-align: center;
+	@extend %center-text;
 }
 @mixin h5 {
 	font-size: 1.222em;
@@ -35,14 +35,14 @@ $breakpoint1: 900px;
 	font-weight: 700;
 	line-height: 0.95em;
 	color: var(--color-accent1);
-	text-align: center;
+	@extend %center-text;
 	@extend %paragraphSpacing;
 }
 @mixin h2-m {
 	font-size: 2.2em;
 	line-height: 0.95em;
 	font-weight: 500;
-	text-align: center;
+	@extend %center-text;
 	@extend %paragraphSpacing;
 }
 @mixin h3-m {
@@ -79,7 +79,7 @@ $breakpoint1: 900px;
 	margin-bottom: 0.6em;
 }
 %center-in-oval {
-	text-align: center;
+	@extend %center-text;
 	border-radius: 100%;
 }
 %button-padding {
@@ -122,5 +122,8 @@ $breakpoint1: 900px;
 	letter-spacing: inherit;
 	font-weight: inherit;
 	line-height: inherit;
+}
+%center-text {
+	text-align: center;
 }
 // #endregion
