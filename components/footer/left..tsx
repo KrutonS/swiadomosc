@@ -7,7 +7,7 @@ import Logo from '../logo';
 const Left: FC = () => (
 	<div className={styles.left}>
 		<section className={styles.row}>
-			<Logo />
+			<Logo className={styles.logo} />
 			{/* <Socials /> */} <div />
 			<section className={styles.row}>
 				<div className={styles.line} />

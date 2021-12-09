@@ -1,13 +1,13 @@
 // #region Local
-@mixin paragraphSpacing {
-	// margin-top: 1em;
-	margin-bottom: 0.6em;
-}
 // #endregion
 // #region Variables;
 $breakpoint1: 900px;
 // #endregion
 // #region Typography
+@mixin small {
+	font-size: 0.889em;
+	font-weight: 100;
+}
 // #region Mobile
 // XXX available weights: 100 300 500 700 900
 // NOTE regular-m will spread font attributes to other styles as expected in normal document flow
@@ -26,23 +26,19 @@ $breakpoint1: 900px;
 	line-height: 0.95em;
 	color: var(--color-accent1);
 	text-align: center;
-	@include paragraphSpacing();
+	@extend %paragraphSpacing;
 }
 @mixin h2-m {
 	font-size: 1.222em;
 	line-height: 0.95em;
 	font-weight: 500;
 	text-align: center;
-	@include paragraphSpacing();
+	@extend %paragraphSpacing;
 }
 @mixin h3-m {
 	font-size: 1.111em;
 	line-height: 0.95em;
-	@include paragraphSpacing();
-}
-@mixin small-m {
-	font-size: 0.889em;
-	font-weight: 100;
+	@extend %paragraphSpacing;
 }
 // #endregion
 // #region Desktop reset
@@ -63,16 +59,34 @@ $breakpoint1: 900px;
 	text-align: left;
 	line-height: 1.275em;
 }
-@mixin small-d {
-	font-size: 1rem;
-}
+
 // #endregion
 // #endregion
 // #region Utils
-@mixin cell(
-	$primary-color: var(--color-overlay3),
-	$secondary-color: var(--color-overlay1)
-) {
+
+%paragraphSpacing {
+	// margin-top: 1em;
+	margin-bottom: 0.6em;
+}
+%center-in-oval {
+	text-align: center;
+	border-radius: 100%;
+}
+%button-padding {
+	padding: 0.5em 2.2em;
+}
+%text-padding {
+	padding: 0.5em 1em;
+}
+%border {
+	border-radius: var(--radius1);
+	background-color: var(--color-overlay1);
+	border: 2px solid var(--color-accent1);
+	color: var(--color-gray1);
+}
+%cell {
+	$primary-color: var(--primary-color);
+	$secondary-color: var(--secondary-color);
 	background: $primary-color;
 	padding: 0.3em 0.833em;
 	width: 100%;
@@ -80,14 +94,10 @@ $breakpoint1: 900px;
 		background: $secondary-color;
 	}
 }
-@mixin letter-in-circle($size, $vMultiplier: 1) {
+@mixin letterInCircle($size, $vMultiplier: 1) {
 	height: $size;
 	line-height: calc($vMultiplier * $size);
 	width: $size;
-	text-align: center;
-	border-radius: 100%;
-}
-@mixin text-padding {
-	padding: 0.5em 2.2em;
+	@extend %center-in-oval;
 }
 // #endregion

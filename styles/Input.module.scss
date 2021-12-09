@@ -1,4 +1,13 @@
 @use 'variables' as var;
 .input {
-	@include var.text-padding;
+	@extend %border;
+	@extend %text-padding;
+	background-color: var(--color-gray2);
+	width: 100%;
+	max-width: 500px;
+}
+textarea.input {
+	resize: none;
+	height: 100%;
+	max-height: 250px;
 }

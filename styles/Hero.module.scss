@@ -29,5 +29,5 @@
 	left: 50%;
 	transform: translateX(-50%);
 	mix-blend-mode: screen;
-	@include var.letter-in-circle($size, $vMultiplier);
+	@include var.letterInCircle($size, $vMultiplier);
 }

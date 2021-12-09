@@ -24,7 +24,7 @@ $imageZ: calc(100% + 30px);
 			flex-shrink: 0;
 			left: calc(-1 * $size - 10px);
 			border: 2px solid var(--color-accent2);
-			@include var.letter-in-circle($size, 1);
+			@include var.letterInCircle($size, 1);
 		}
 	}
 	& > li + li {
