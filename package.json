@@ -6,8 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged --debug --verbose"
+    "prepare": "husky install"
   },
   "dependencies": {
     "classnames": "^2.3.1",

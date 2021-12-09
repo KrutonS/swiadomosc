@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { FC } from 'react';
 import Link from 'next/link';
-
+// @ts-ignore
 import LogoSVG from '../public/logo.svg';
 import styles from '../styles/Logo.module.scss';
 

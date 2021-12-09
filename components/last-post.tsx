@@ -4,6 +4,7 @@ import Image from 'next/image';
 import ReactPlayer from 'react-player/youtube';
 import { Post } from '../types';
 import styles from '../styles/LastPost.module.scss';
+// @ts-ignore
 import CommentsIcon from '../public/comments.svg';
 
 interface Props {

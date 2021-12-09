@@ -15,9 +15,9 @@ const Right: FC = () => {
 		formState: { errors },
 		handleSubmit,
 	} = useForm<FormData>();
-
+	//
 	// eslint-disable-next-line no-console
-	const onSubmit = (data: FormData) => console.log(data);
+	const onSubmit = (data: FormData) => console.log(data); // TODO make this work dang it
 
 	return (
 		<form className={styles.right} onSubmit={handleSubmit(onSubmit)}>

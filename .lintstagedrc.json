@@ -5,6 +5,6 @@
 	],
 	"./**/*.{css,scss}":[
 		"prettier --config .prettierrc --write",
-		"npx stylelint **/*.{css,scss} --fix -f \"verbose\""
+		"npx stylelint **/*.{css,scss} --fix"
 	]
 }
