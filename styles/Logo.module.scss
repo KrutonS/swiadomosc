@@ -1,6 +1,8 @@
+@use 'variables' as var;
+
 .logo {
 	color: var(--color-accent1);
-	display: flex;
+	@extend %flex;
 	align-items: center;
 	gap: 0.7em;
 	height: 100%;

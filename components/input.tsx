@@ -88,7 +88,7 @@ const Input = <F extends FieldValues>({
 	};
 	return (
 		<div className={styles.container}>
-			<label className="" htmlFor={id}>
+			<label className={styles.label} htmlFor={id}>
 				{label}
 			</label>
 			{multiLine ? (

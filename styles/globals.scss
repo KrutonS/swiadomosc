@@ -25,10 +25,10 @@ a {
 	--color-accent1: #f2a679;
 	--color-accent2: #c8d98b;
 
-	--color-gray1: #eee;
-	--color-gray2: #191919;
-	--color-gray3: #1c1c1c;
-	--color-gray4: #1a1a1a;
+	--color-gray1: hsl(0, 0%, 93%);
+	--color-gray2: hsl(0, 0%, 13%);
+	--color-gray3: hsl(0, 0%, 10%);
+	--color-gray4: hsl(0, 0%, 10%);
 
 	--color-overlay1: hsla(0, 0%, 0%, 0.102);
 	--color-overlay2: hsla(0, 0%, 0%, 0.12);
@@ -92,7 +92,7 @@ small {
 /* #region Mobile First */
 // #region Global Effects
 main > * {
-	padding-inline: var(--page-padding-inline);
+	@extend %page-section-padding-inline;
 }
 main > * + * {
 	padding-top: 1em;

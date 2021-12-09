@@ -15,7 +15,7 @@ $imageZ: calc(100% + 30px);
 	& > li {
 		// font-size: 20px;
 		counter-increment: fancy-numbers;
-		display: flex;
+		@extend %flex;
 		gap: 10px;
 		&::before {
 			display: block;
@@ -54,12 +54,15 @@ $imageZ: calc(100% + 30px);
 	filter: brightness(0.15);
 }
 @media screen and (min-width: var.$breakpoint1) {
+	%flex-media {
+		display: flex;
+	}
 	.image {
 		object-position: 70% $imageZ;
 		filter: none;
 	}
 	.two-column-flex {
-		display: flex;
+		@extend %flex-media;
 		gap: 5em;
 		& h3 {
 			@include var.h3-d;
@@ -70,7 +73,7 @@ $imageZ: calc(100% + 30px);
 	}
 	.two-column-list {
 		height: calc(100% - 5.278em);
-		display: flex;
+		@extend %flex-media;
 		justify-content: space-between;
 		flex-direction: column;
 		& > li + li {

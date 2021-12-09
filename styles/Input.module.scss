@@ -1,10 +1,15 @@
 @use 'variables' as var;
 .input {
-	@extend %border;
 	@extend %text-padding;
+	border-radius: var(--radius1);
+	border: none;
 	background-color: var(--color-gray2);
+	color: var(--color-gray1);
 	width: 100%;
 	max-width: 500px;
+}
+.label {
+	display: block;
 }
 textarea.input {
 	resize: none;

@@ -14,7 +14,7 @@
 	min-width: 1em;
 	height: 31px;
 	cursor: pointer;
-	display: flex;
+	@extend %flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;

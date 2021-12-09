@@ -100,4 +100,10 @@ $breakpoint1: 900px;
 	width: $size;
 	@extend %center-in-oval;
 }
+%page-section-padding-inline {
+	padding-inline: var(--page-padding-inline);
+}
+%flex {
+	display: flex;
+}
 // #endregion
