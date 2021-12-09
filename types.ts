@@ -15,3 +15,9 @@ export interface Post {
 	ytUrl: string;
 }
 export type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>['type'];
+
+export type AddressType = {
+	city: string;
+	street: string;
+	zip: string;
+};

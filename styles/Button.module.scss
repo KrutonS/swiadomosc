@@ -3,4 +3,6 @@
 .btn {
 	@extend %button-padding;
 	@extend %border;
+	@extend %text-reset;
+	width: 100%;
 }

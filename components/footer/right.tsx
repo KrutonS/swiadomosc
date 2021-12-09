@@ -51,7 +51,9 @@ const Right: FC = () => {
 				errorMessage={errors.message?.message}
 				placeholder="You have freedom here. The only guide is your heart."
 			/>
-			<Button type="submit">Wyślij</Button>
+			<Button type="submit" className={styles.button}>
+				Wyślij
+			</Button>
 		</form>
 	);
 };

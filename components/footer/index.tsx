@@ -8,6 +8,7 @@ const Footer: FC = () => {
 		<footer className={styles.footer}>
 			<Left />
 			<Right />
+
 			<small className={styles.copyright}>
 				Copyright 2022 Marcin Smarzewski
 			</small>

@@ -8,14 +8,12 @@ $imageZ: calc(100% + 30px);
 	opacity: 0.9;
 	counter-reset: fancy-numbers;
 	position: relative;
-
 	// flex-basis: 20%;
 	$size: 57px;
 	// --size: $size;
 	& > li {
-		// font-size: 20px;
-		counter-increment: fancy-numbers;
 		@extend %flex;
+		counter-increment: fancy-numbers;
 		gap: 10px;
 		&::before {
 			display: block;
@@ -39,6 +37,7 @@ $imageZ: calc(100% + 30px);
 }
 .second-column {
 	flex-basis: 50%;
+	margin-top: 35px;
 }
 .two-column-flex {
 	& h3 {
@@ -67,9 +66,6 @@ $imageZ: calc(100% + 30px);
 		& h3 {
 			@include var.h3-d;
 		}
-		// & > *{
-		// 	flex-basis: 50%;
-		// }
 	}
 	.two-column-list {
 		height: calc(100% - 5.278em);

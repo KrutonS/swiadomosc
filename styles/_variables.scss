@@ -8,6 +8,16 @@ $breakpoint1: 900px;
 	font-size: 0.889em;
 	font-weight: 100;
 }
+@mixin h4 {
+	font-weight: 500;
+	font-size: 1.5em;
+	line-height: 1.27em;
+	text-align: center;
+}
+@mixin h5 {
+	font-size: 1.222em;
+	font-weight: 500;
+}
 // #region Mobile
 // XXX available weights: 100 300 500 700 900
 // NOTE regular-m will spread font attributes to other styles as expected in normal document flow
@@ -20,7 +30,7 @@ $breakpoint1: 900px;
 	color: var(--color-gray1);
 }
 @mixin h1-m {
-	font-size: 1.5em;
+	font-size: 1.8em;
 	letter-spacing: 0.225em;
 	font-weight: 700;
 	line-height: 0.95em;
@@ -29,14 +39,14 @@ $breakpoint1: 900px;
 	@extend %paragraphSpacing;
 }
 @mixin h2-m {
-	font-size: 1.222em;
+	font-size: 2.2em;
 	line-height: 0.95em;
 	font-weight: 500;
 	text-align: center;
 	@extend %paragraphSpacing;
 }
 @mixin h3-m {
-	font-size: 1.111em;
+	font-size: 1.8em;
 	line-height: 0.95em;
 	@extend %paragraphSpacing;
 }
@@ -100,10 +110,17 @@ $breakpoint1: 900px;
 	width: $size;
 	@extend %center-in-oval;
 }
-%page-section-padding-inline {
+%page-padding-inline {
 	padding-inline: var(--page-padding-inline);
 }
 %flex {
 	display: flex;
+}
+%text-reset {
+	font-size: inherit;
+	font-family: inherit;
+	letter-spacing: inherit;
+	font-weight: inherit;
+	line-height: inherit;
 }
 // #endregion

@@ -1,7 +1,62 @@
-/* stylelint-disable-next-line no-empty-source */
+@use 'variables' as var;
+
 .footer {
+	@extend %page-padding-inline;
 	position: relative;
 	background-color: var(--color-gray4);
 	z-index: 20;
-	padding: var(--page-padding);
+	text-align: center;
+	padding-block: 80px;
+}
+.address-desktop {
+	display: none;
+}
+.email {
+	word-break: break-all;
+}
+.row:first-child {
+	height: 60px;
+}
+.row:not(:first-child) a {
+	display: block;
+}
+// .left * + * {
+// 	margin-top: 0.3em;
+// }
+.footer :where(:not(h2, h3, h4) + :not([class*='input'])) {
+	margin-top: 22px;
+}
+.logo {
+	height: revert;
+	align-items: flex-end;
+}
+.line {
+	height: 3px;
+	background-color: var(--color-gray1);
+	// width: 100%;
+}
+.copyright {
+	display: block;
+	margin-top: 2em;
+	opacity: 0.6;
+}
+@media screen and (min-width: var.$breakpoint1) {
+	.footer * + * {
+		margin: 0;
+	}
+	.left,
+	.right {
+		width: 50%;
+		display: inline-block;
+	}
+	.right {
+		margin-block: 0;
+		padding: 60px;
+	}
+	.address-mobile {
+		display: none;
+	}
+	.address-desktop {
+		display: block;
+	}
 }

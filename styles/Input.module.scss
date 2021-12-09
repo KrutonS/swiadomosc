@@ -1,18 +1,30 @@
 @use 'variables' as var;
+
+.container {
+	width: 100%;
+	max-width: 500px;
+	margin-inline: auto;
+}
 .input {
 	@extend %text-padding;
+	@extend %text-reset;
 	border-radius: var(--radius1);
 	border: none;
 	background-color: var(--color-gray2);
 	color: var(--color-gray1);
 	width: 100%;
-	max-width: 500px;
 }
 .label {
 	display: block;
+	text-align: left;
+	font-weight: 500;
 }
 textarea.input {
 	resize: none;
 	height: 100%;
-	max-height: 250px;
+	min-height: 250px;
+}
+
+:where(* + .container) {
+	margin-top: 0.5em;
 }
