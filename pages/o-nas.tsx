@@ -6,6 +6,7 @@ import LastPost from '../components/last-post';
 import TexTImage from '../components/text-image';
 import TextList from '../components/text-list';
 import { Post } from '../types';
+import styles from '../styles/About.module.scss';
 
 const listMock = [
 	"Use absolutely no pressure. We don't have to be concerned about it.",
@@ -40,6 +41,7 @@ const Home: NextPage = () => {
 				text={textMock}
 				title="Kim jesteśmy?"
 				title2="Nasze wartości"
+				className={styles['who-are-we']}
 			/>
 			<TexTImage
 				src="/greek.jpg"
