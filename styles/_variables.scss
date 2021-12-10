@@ -2,8 +2,10 @@
 // #endregion
 // #region Variables;
 $breakpoint1: 900px;
+$h1-size: min(12vw, 2.6vw + 1.7em);
 // #endregion
 // #region Typography
+
 @mixin small {
 	font-size: 0.889em;
 	font-weight: 100;
@@ -30,7 +32,7 @@ $breakpoint1: 900px;
 	color: var(--color-gray1);
 }
 @mixin h1-m {
-	font-size: 1.8em;
+	font-size: $h1-size;
 	letter-spacing: 0.225em;
 	font-weight: 700;
 	line-height: 0.95em;
@@ -39,7 +41,7 @@ $breakpoint1: 900px;
 	@extend %paragraphSpacing;
 }
 @mixin h2-m {
-	font-size: 2.2em;
+	font-size: 2em;
 	line-height: 0.95em;
 	font-weight: 500;
 	@extend %center-text;
@@ -56,9 +58,9 @@ $breakpoint1: 900px;
 	letter-spacing: 10%;
 }
 @mixin h1-d {
-	font-size: 4.444em;
+	// font-size: 4.444em;
 	line-height: 1.12em;
-	text-align: left;
+	// text-align: left;
 }
 @mixin h2-d {
 	font-size: 3.556em;

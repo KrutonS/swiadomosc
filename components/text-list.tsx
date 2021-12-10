@@ -22,7 +22,7 @@ const TextList: FC<Props> = ({
 	);
 	return (
 		<section id="beginning" className={`${styles['two-column']} ${className}`}>
-			<h1>{title}</h1>
+			<h1 className={styles.title}>{title}</h1>
 			<div className={styles['two-column-flex']}>
 				<article className={styles['first-column']}>{text}</article>
 				<div className={styles['second-column']} style={listStyle}>

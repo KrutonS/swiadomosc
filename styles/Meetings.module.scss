@@ -1,0 +1,25 @@
+@use 'variables' as var;
+
+.main {
+	padding-top: 120px;
+	@extend %center-text;
+}
+.heading {
+	position: relative;
+}
+
+.title-p {
+	display: none;
+}
+
+@media screen and (min-width: var.$breakpoint1) {
+	.title-p {
+		// margin-inline: auto;
+		// padding: 0;
+		display: inline;
+		position: absolute;
+		bottom: -14px;
+		left: calc(50% - 2.45 * var.$h1-size);
+		// bottom: 20px;
+	}
+}
