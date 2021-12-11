@@ -1,11 +1,12 @@
 @use 'variables' as var;
+
 .footer {
 	@extend %page-padding-inline;
 	@extend %center-text;
 	position: relative;
 	background-color: var(--color-gray4);
 	z-index: 20;
-	padding-block: 50px;
+	padding-block: 100px 50px;
 }
 .line {
 	height: 3px;
@@ -106,23 +107,11 @@
 			flex-basis: 30%;
 		}
 	}
-	// .left,
-	// .column {
-	// 	justify-content: space-between;
-	// 	flex-direction: column;
-	// }
-	// .row {
-	// 	gap:30px;
-	// }
 	.right {
 		margin-block: 0;
 		padding: 3vw;
 		border: 3px solid var(--color-accent2);
 		border-radius: var(--radius1);
-
-		// & h3{
-		// 	@include var.h4;
-		// }
 	}
 	.left {
 		text-align: left;
