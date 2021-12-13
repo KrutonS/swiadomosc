@@ -85,15 +85,15 @@ $h1-size: min(12vw, 2.6vw + 1.7em);
 	border-radius: 100%;
 }
 %button-padding {
-	padding: 0.5em 2.2em;
+	padding: 0.5rem 2.2rem;
 }
 %text-padding {
-	padding: 0.5em 1em;
+	padding: 0.5rem 1rem;
 }
 %border {
 	border-radius: var(--radius1);
 	background-color: var(--color-overlay1);
-	border: 2px solid var(--color-accent1);
+	border: 3px solid var(--color-accent1);
 	color: var(--color-gray1);
 }
 %cell {
