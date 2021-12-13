@@ -97,8 +97,8 @@ $h1-size: min(12vw, 2.6vw + 1.7em);
 	color: var(--color-gray1);
 }
 %cell {
-	$primary-color: var(--primary-color);
-	$secondary-color: var(--secondary-color);
+	$primary-color: var(--color-overlay-w1);
+	$secondary-color: var(--color-overlay-w2);
 	background: $primary-color;
 	padding: 0.3em 0.833em;
 	width: 100%;

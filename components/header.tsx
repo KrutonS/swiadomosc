@@ -20,15 +20,15 @@ const Header: FC = () => {
 			<Logo className={styles.logo} />
 			<Hamburger onClick={menuToggle} />
 
-			<div className={styles['nav-wrapper']}>
-				<nav className={cn(styles.nav, { [styles['menu-open']]: show })}>
-					<PagesLinks className={`${styles.link} cell`} />
-					<Link href="/login">
-						{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-						<a className={`${styles.link} page-link cell`}>Zaloguj&nbsp;się</a>
-					</Link>
-				</nav>
-			</div>
+			{/* <div className={styles['nav-wrapper']}> */}
+			<nav className={cn(styles.nav, { [styles['menu-open']]: show })}>
+				<PagesLinks className={`${styles.link} cell`} />
+				<Link href="/login">
+					{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+					<a className={`${styles.link} page-link cell`}>Zaloguj&nbsp;się</a>
+				</Link>
+			</nav>
+			{/* </div> */}
 		</header>
 	);
 };
