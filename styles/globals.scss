@@ -53,41 +53,40 @@ body {
 /* #region Typography */
 
 // #region Mobile
-
-html {
+:where(html) {
 	@include var.regular-m;
 }
-h1 {
+:where(h1) {
 	@include var.h1-m;
 }
-h2 {
+:where(h2) {
 	@include var.h2-m;
 }
-h3 {
+:where(h3) {
 	@include var.h3-m;
 }
-small {
+:where(small) {
 	@include var.small;
 }
-h4 {
+:where(h4) {
 	@include var.h4;
 }
-h5 {
+:where(h5) {
 	@include var.h5;
 }
 // #endregion
 // #region Desktop reset
 @media screen and (min-width: var.$breakpoint1) {
-	html {
+	:where(html) {
 		@include var.regular-d;
 	}
-	h1 {
+	:where(h1) {
 		@include var.h1-d;
 	}
-	h2 {
+	:where(h2) {
 		@include var.h2-d;
 	}
-	h3 {
+	:where(h3) {
 		@include var.h3-d;
 	}
 	// small {
