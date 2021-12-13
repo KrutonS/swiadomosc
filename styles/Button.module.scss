@@ -1,6 +1,6 @@
 @use 'variables' as var;
 
-.btn {
+:where(.btn) {
 	@extend %button-padding;
 	@extend %border;
 	@extend %text-reset;

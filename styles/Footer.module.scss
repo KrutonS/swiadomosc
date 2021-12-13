@@ -50,7 +50,9 @@
 	opacity: 0.6;
 	@extend %center-text;
 }
-
+.button {
+	width: 100%;
+}
 @media screen and (min-width: var.$breakpoint1) {
 	%center-local {
 		text-align: center;
