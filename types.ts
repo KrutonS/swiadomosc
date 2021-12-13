@@ -21,3 +21,10 @@ export type AddressType = {
 	street: string;
 	zip: string;
 };
+
+export interface Meeting {
+	name: string;
+	startTime: number;
+	length: number;
+	annual?: boolean;
+}

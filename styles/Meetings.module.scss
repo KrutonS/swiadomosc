@@ -1,8 +1,11 @@
 @use 'variables' as var;
 
 .main {
-	padding-top: 120px;
+	padding: 120px var(--page-padding-inline);
 	@extend %center-text;
+	& > * + * {
+		margin-top: 60px;
+	}
 }
 .heading {
 	position: relative;

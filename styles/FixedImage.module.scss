@@ -5,3 +5,5 @@
 .image {
 	position: fixed !important;
 }
+// BUG jumping in mobile when bottom toolbar appears on scroll
+// See https://css-tricks.com/the-fixed-background-attachment-hack/

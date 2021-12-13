@@ -26,6 +26,7 @@
 		"react/jsx-props-no-spreading": 0,
 		"react/require-default-props": 0,
 		"@typescript-eslint/ban-ts-comment": 0,
+		"no-plusplus":0,
 		"import/extensions": [
 			2,
 			"ignorePackages",
