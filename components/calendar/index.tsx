@@ -36,7 +36,16 @@ const getReliableDate = (date = new Date(), inverse = false): Date => {
 	}
 	return date;
 };
-
+function monthRangeString(date1: Date, date2: Date) {
+	const month1 = date1.getMonth();
+	const month2 = date2.getMonth();
+	if (month1 !== month2) {
+		const monthShort1 = getMonthName(month1, true);
+		const monthShort2 = getMonthName(month2, true);
+		return `${monthShort1} - ${monthShort2}`;
+	}
+	return getMonthName(month1);
+}
 const hours: ReactNode[] = [];
 for (let i = minHour; i <= maxHour; i += hourStep)
 	hours.push(
@@ -48,6 +57,7 @@ for (let i = minHour; i <= maxHour; i += hourStep)
 //#endregion
 
 const Calendar: FC = () => {
+	// TODO optimizations
 	const [columnsCount, setColumsCount] = useState(1);
 	const [hourHeight, setHourHeight] = useState(1);
 	const [date, setDate] = useState(getReliableDate());
@@ -101,6 +111,9 @@ const Calendar: FC = () => {
 	const goBack = () => {
 		setDate(getReliableDate(forwardDays(date, -columnsCount), true));
 	};
+	const firstDate = days[0];
+	const lastDate = days[days.length - 1];
+	const monthDisplay = monthRangeString(firstDate, lastDate);
 
 	return (
 		<div className={styles.calendar}>
@@ -114,7 +127,7 @@ const Calendar: FC = () => {
 						☛
 					</Button>
 				</nav>
-				<p className={styles.month}>{getMonthName(date.getMonth())}</p>
+				<p className={styles.month}>{monthDisplay}</p>
 				<p className={styles.year}>{date.getFullYear()}</p>
 			</div>
 			<div className={styles.content}>
