@@ -1,14 +1,16 @@
 import { FC, ReactNode, useLayoutEffect, useRef } from 'react';
 import cn from 'classnames';
+import { hourMs } from 'utils/date/msTimes';
 import styles from '../../styles/Calendar.module.scss';
 import { Meeting } from '../../types';
-import numberToHour from '../../utils/date/numberToHour';
+import dateToHour from '../../utils/date/dateToHour';
 
 //#region local types
 interface ColumnProps {
 	dayName: string;
 	dayNumber: number;
 	hourHeight: number;
+	minHour: number;
 	meetings?: Meeting[];
 }
 type CellProps = {
@@ -17,7 +19,7 @@ type CellProps = {
 	className?: string;
 	topOffset?: number;
 };
-type MeetingCellProps = Meeting & Pick<ColumnProps, 'hourHeight'>;
+type MeetingCellProps = Meeting & Pick<ColumnProps, 'hourHeight' | 'minHour'>;
 //#endregion
 
 //#region local components
@@ -27,23 +29,24 @@ const Cell: FC<CellProps> = ({ children, height, className, topOffset }) => {
 	useLayoutEffect(() => {
 		if (topOffset)
 			cellHTML.current?.style.setProperty('--top-offset', `${topOffset}px`);
-	}, [topOffset]);
+		if (height) cellHTML.current?.style.setProperty('--height', `${height}px`);
+	}, [height, topOffset]);
 
 	return (
 		<div
 			className={cn(styles.cell, className)}
-			style={{ height }}
+			// style={{ height }}
 			ref={cellHTML}
 		>
 			{children}
 		</div>
 	);
 };
-
+// 'meetings' | 'hourHeight' | 'minHour'
 const Day = ({
 	dayName,
 	dayNumber,
-}: Omit<ColumnProps, 'meetings' | 'hourHeight'>) => (
+}: Pick<ColumnProps, 'dayName' | 'dayNumber'>) => (
 	<Cell>
 		<div className={styles.day}>
 			<small>{dayName}</small>
@@ -56,30 +59,56 @@ const MeetingCell = ({
 	startTime,
 	length,
 	hourHeight,
+	minHour,
 }: MeetingCellProps) => {
-	const endTime = startTime + length;
+	const startDate = new Date(startTime);
+	const endDate = new Date(startDate.getTime() + length * hourMs);
 
-	const startHour = numberToHour(startTime);
-	const endHour = numberToHour(endTime);
+	const startString = dateToHour(startDate);
+	const endString = dateToHour(endDate);
+	// console.log({[name]:startDate.getHours() + startDate.getMinutes() / 60 - minHour, hours:startDate.getHours(), minutes:startDate.getMinutes()/60});
+
+	const topOffset = Math.max(
+		(startDate.getHours() + startDate.getMinutes() / 60 - minHour) * hourHeight,
+		0
+	);
 
 	return (
-		<Cell height={hourHeight * length} className={styles.meeting}>
-			<p>
-				<strong>{startHour}</strong> - <small>{endHour}</small>
-			</p>
-			<p className={styles['meeting-name']}>{name}</p>
+		<Cell
+			height={hourHeight * length}
+			className={styles['meeting-cell']}
+			topOffset={topOffset}
+		>
+			<div className={styles.meeting}>
+				<p>
+					<strong>{startString}</strong> - <small>{endString}</small>
+				</p>
+				<p className={styles['meeting-name']}>{name}</p>
+			</div>
 		</Cell>
 	);
 };
 //#endregion
 
-const Column = ({ meetings, hourHeight, ...dayProps }: ColumnProps) => {
+const Column = ({
+	meetings,
+	hourHeight,
+	minHour,
+	...dayProps
+}: ColumnProps) => {
 	return (
 		<div className={styles.column}>
 			<Day {...dayProps} />
-			{meetings?.map(m => (
-				<MeetingCell {...m} hourHeight={hourHeight} />
-			))}
+			<div className={styles.meetings}>
+				{meetings?.map(m => (
+					<MeetingCell
+						{...m}
+						hourHeight={hourHeight}
+						minHour={minHour}
+						key={m.id}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };

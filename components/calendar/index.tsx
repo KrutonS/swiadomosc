@@ -6,20 +6,25 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import dayRange from '../../utils/date/dayRange';
-import getMonthName from '../../utils/date/monthNames';
-import debounce from '../../utils/debounce';
-import Button from '../button';
+
+import dayRange from 'utils/date/dayRange';
+import getMonthName from 'utils/date/monthNames';
+import debounce from 'utils/debounce';
+import getDayName from 'utils/date/dayName';
+import styles from 'styles/Calendar.module.scss';
+import clamp from 'utils/math/clamp';
+import forwardDays from 'utils/date/forwardDays';
+import { Meeting } from 'types';
+import { groupMeetings } from 'utils/meetings';
+import Button from 'components/button';
+import setStartOfDay from 'utils/date/startOfDay';
+import setEndOfDay from 'utils/date/endOfDay';
 import Column from './column';
-import getDayName from '../../utils/date/dayName';
-import styles from '../../styles/Calendar.module.scss';
-import clamp from '../../utils/math/clamp';
-import forwardDays from '../../utils/date/forwardDays';
-// import { GetStaticProps } from 'next';
+
 // #region Locals
 const minHour = 8;
 const maxHour = 22;
-const hourStep = 2;
+const hourStep = 1;
 const columnWidth = 220;
 const minDay = 1;
 const maxDay = 5;
@@ -54,9 +59,19 @@ for (let i = minHour; i <= maxHour; i += hourStep)
 		</div>
 	);
 
-//#endregion
+function getDays(date: Date, columnsCount: number) {
+	const daysCount = maxDay - minDay;
+	if (columnsCount >= daysCount) return dayRange(date, minDay, maxDay);
 
-const Calendar: FC = () => {
+	const currentDay = date.getDay();
+	const min = Math.floor(currentDay / columnsCount) * columnsCount;
+	const max = min + columnsCount - 1;
+	return dayRange(date, min, max);
+}
+
+//#endregion
+// type Props = { meetings: Meeting[] };
+const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 	// TODO optimizations
 	const [columnsCount, setColumsCount] = useState(1);
 	const [hourHeight, setHourHeight] = useState(1);
@@ -64,11 +79,29 @@ const Calendar: FC = () => {
 	const containerHTML = useRef<HTMLDivElement>(null);
 	const hoursHTML = useRef<HTMLDivElement>(null);
 
+	const days = getDays(date, columnsCount);
+
+	const firstDate = days[0];
+	const lastDate = days[days.length - 1];
+	setStartOfDay(firstDate);
+	setEndOfDay(lastDate);
+	const monthDisplay = monthRangeString(firstDate, lastDate);
+
+	const groupedMeetings = groupMeetings(meetings, firstDate, lastDate);
+
+	const goNext = () => {
+		setDate(getReliableDate(forwardDays(date, columnsCount)));
+	};
+	const goBack = () => {
+		setDate(getReliableDate(forwardDays(date, -columnsCount), true));
+	};
+
 	useLayoutEffect(() => {
-		const { rowGap, height } = getComputedStyle(
-			hoursHTML.current as HTMLDivElement
-		);
-		setHourHeight((parseFloat(rowGap) + parseFloat(height) / 2) / hourStep);
+		const { height } = getComputedStyle(hoursHTML.current as HTMLDivElement);
+
+		const hourpx = parseFloat(height) / (maxHour - minHour);
+
+		setHourHeight(hourpx);
 	}, []);
 
 	useEffect(() => {
@@ -86,34 +119,17 @@ const Calendar: FC = () => {
 			window.removeEventListener('resize', debouncedUpdate);
 		};
 	}, []);
-
-	let days;
-	const daysCount = maxDay - minDay;
-	if (columnsCount >= daysCount) days = dayRange(date, minDay, maxDay);
-	else {
-		const currentDay = date.getDay();
-		const min = Math.floor(currentDay / columnsCount) * columnsCount;
-		const max = min + columnsCount - 1;
-		days = dayRange(date, min, max);
-	}
-
+	const firstDay = firstDate.getDay();
 	const columns = days.map(d => (
 		<Column
 			hourHeight={hourHeight}
 			dayName={getDayName(d.getDay(), true)}
 			dayNumber={d.getDate()}
+			key={d.getTime()}
+			meetings={groupedMeetings[d.getDay() - firstDay]}
+			minHour={minHour}
 		/>
 	));
-
-	const goNext = () => {
-		setDate(getReliableDate(forwardDays(date, columnsCount)));
-	};
-	const goBack = () => {
-		setDate(getReliableDate(forwardDays(date, -columnsCount), true));
-	};
-	const firstDate = days[0];
-	const lastDate = days[days.length - 1];
-	const monthDisplay = monthRangeString(firstDate, lastDate);
 
 	return (
 		<div className={styles.calendar}>
@@ -131,11 +147,12 @@ const Calendar: FC = () => {
 				<p className={styles.year}>{date.getFullYear()}</p>
 			</div>
 			<div className={styles.content}>
-				<div className={styles.hours} ref={hoursHTML}>
+				<div className={styles['hours-tab']}>
 					<h5 className={styles['h-label']}>godz</h5>
-					{hours}
+					<div className={styles.hours} ref={hoursHTML}>
+						{hours}
+					</div>
 				</div>
-				{/* eslint-disable-next-line react/self-closing-comp */}
 				<div className={styles.days} ref={containerHTML}>
 					{columns}
 				</div>
@@ -145,8 +162,3 @@ const Calendar: FC = () => {
 };
 
 export default Calendar;
-
-// eslint-disable-next-line no-unused-vars
-// export async const getStaticProps:GetStaticProps = (context) => {
-
-// }
