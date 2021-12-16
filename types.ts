@@ -10,9 +10,10 @@ export interface Author {
 }
 export interface Post {
 	title: string;
-	author: Author;
 	commentsCount: number;
-	ytUrl: string;
+	author: Author;
+	ytUrl?: string;
+	category?: string;
 }
 export type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>['type'];
 

@@ -1,0 +1,23 @@
+@use 'variables' as var;
+
+.heading {
+	position: relative;
+}
+
+.title-p {
+	display: none;
+}
+
+@media screen and (min-width: var.$breakpoint1) {
+	.title-p {
+		display: inline;
+		position: absolute;
+		bottom: -14px;
+	}
+	.heading--left .title-p {
+		left: calc(50% - var(--offset-mult, 2.45) * var.$h1-size);
+	}
+	.heading--right .title-p {
+		right: calc(50% - var(--offset-mult, 0.62) * var.$h1-size);
+	}
+}

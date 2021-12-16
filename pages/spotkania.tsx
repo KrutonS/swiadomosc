@@ -1,3 +1,4 @@
+import DescTitle from 'components/desc-title';
 import datoReq from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -16,10 +17,11 @@ const MeetingsPage: NextPage<QueryResponse> = ({ meetings }) => {
 
 	return (
 		<main className={styles.main}>
-			<div className={styles.heading}>
-				<h1 className={styles.title}>Spotkania</h1>
-				<p className={styles['title-p']}>Chciałbym zapisać się na...</p>
-			</div>
+			<DescTitle
+				title="Spotkania"
+				desc="Chciałbym zapisać się na..."
+				leftSide
+			/>
 			{showCalendar && <Calendar meetings={meetings} />}
 		</main>
 	);
