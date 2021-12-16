@@ -7,6 +7,7 @@ $days-padding: 15px;
 
 .calendar {
 	@extend %flex;
+	border-radius: var(--radius1);
 	padding: $calendar-padding 0 0 $calendar-padding;
 	background: var(--color-overlay1);
 	height: 2000px;
@@ -77,6 +78,7 @@ $days-padding: 15px;
 }
 .days {
 	@extend %flex;
+	border-radius: var(--radius2) 0 var(--radius1) 0;
 	justify-content: space-between;
 	flex-basis: 100%;
 	gap: $grid-gap;
