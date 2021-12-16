@@ -23,8 +23,9 @@ export type AddressType = {
 };
 
 export interface Meeting {
+	id: string;
 	name: string;
-	startTime: number;
+	startTime: string;
 	length: number;
-	annual?: boolean;
+	weekly: boolean;
 }
