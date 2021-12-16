@@ -6,12 +6,12 @@ $cell-height: 150px;
 $days-padding: 15px;
 
 .calendar {
+	@extend %flex;
 	padding: $calendar-padding 0 0 $calendar-padding;
 	background: var(--color-overlay1);
 	height: 2000px;
 	text-align: left;
 	max-width: 1332px;
-	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
@@ -43,17 +43,14 @@ $days-padding: 15px;
 	padding-bottom: $calendar-padding - 14px;
 }
 .hours {
-	display: flex;
+	@extend %flex-center;
 	flex-direction: column;
 	justify-content: space-between;
 	height: calc(100% - $cell-height + 17px - $calendar-padding);
-	align-items: center;
 }
 .hour {
-	display: flex;
+	@extend %flex-center;
 	gap: 10px;
-	// justify-content: space-between;
-	align-items: center;
 	width: 100%;
 	&::after {
 		content: '';
@@ -75,26 +72,20 @@ $days-padding: 15px;
 // }
 // #region main content
 .content {
-	display: flex;
+	@extend %flex;
 	height: calc(100% - $calendar-padding - 2em);
 }
 .days {
-	flex-basis: 100%;
-	display: flex;
+	@extend %flex;
 	justify-content: space-between;
+	flex-basis: 100%;
 	gap: $grid-gap;
 	background-color: var(--color-overlay2);
 	padding: $days-padding $days-padding $calendar-padding;
-	// display: inline-block;
-	// width: max(75%, 100% - 150px);
-	// height: calc(100% - $calendar-padding);
 }
 .column {
-	// display: inline-block;
 	width: 100%;
-	// background-color: #aa000055;
 	& h3 {
-		// margin-top: -11px;
 		font-size: 3em;
 		color: var(--color-accent1);
 		line-height: 0.9em;
@@ -105,9 +96,7 @@ $days-padding: 15px;
 	height: calc(100% - $cell-height);
 }
 .cell {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	@extend %flex-center;
 	background: var(--color-overlay2);
 	border-radius: var(--radius1);
 	height: $cell-height;

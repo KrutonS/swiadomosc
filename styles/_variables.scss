@@ -77,7 +77,6 @@ $h1-size: min(12vw, 2.6vw + 1.7em);
 // #region Utils
 
 %paragraphSpacing {
-	// margin-top: 1em;
 	margin-bottom: 0.6em;
 }
 %center-in-oval {
@@ -117,6 +116,11 @@ $h1-size: min(12vw, 2.6vw + 1.7em);
 }
 %flex {
 	display: flex;
+}
+%flex-center {
+	@extend %flex;
+	align-items: center;
+	justify-content: center;
 }
 %text-reset {
 	font-size: inherit;
