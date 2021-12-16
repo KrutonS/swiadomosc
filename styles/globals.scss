@@ -101,6 +101,9 @@ body {
 /* #endregion */
 /* #region Mobile First */
 // #region Global Effects
+main {
+	padding: 120px var(--page-padding-inline);
+}
 main > * {
 	@extend %page-padding-inline;
 }
@@ -108,8 +111,6 @@ main > * + * {
 	padding-top: 1em;
 }
 main > * + section {
-	// position: sticky;
-	// top: 4em;
 	padding-block: 2em 3em;
 }
 h1,

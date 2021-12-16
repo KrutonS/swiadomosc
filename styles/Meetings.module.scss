@@ -1,28 +1,8 @@
 @use 'variables' as var;
 
 .main {
-	padding: 120px var(--page-padding-inline);
 	@extend %center-text;
 	& > * + * {
 		margin-top: 60px;
-	}
-}
-.heading {
-	position: relative;
-}
-
-.title-p {
-	display: none;
-}
-
-@media screen and (min-width: var.$breakpoint1) {
-	.title-p {
-		// margin-inline: auto;
-		// padding: 0;
-		display: inline;
-		position: absolute;
-		bottom: -14px;
-		left: calc(50% - 2.45 * var.$h1-size);
-		// bottom: 20px;
 	}
 }
