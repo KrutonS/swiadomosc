@@ -3,11 +3,12 @@
 $calendar-padding: 20px;
 $grid-gap: 5px;
 $cell-height: 150px;
+$days-padding: 15px;
 
 .calendar {
 	padding: $calendar-padding 0 0 $calendar-padding;
 	background: var(--color-overlay1);
-	height: 800px;
+	height: 2000px;
 	text-align: left;
 	max-width: 1332px;
 	display: flex;
@@ -34,17 +35,19 @@ $cell-height: 150px;
 	padding: 10px;
 }
 // #endregion
-
-.hours {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
-	align-items: center;
+// #region hoursTab
+.hours-tab {
 	width: 35%;
 	max-width: 100px;
 	padding-right: 30px;
 	padding-bottom: $calendar-padding - 14px;
+}
+.hours {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: calc(100% - $cell-height + 17px - $calendar-padding);
+	align-items: center;
 }
 .hour {
 	display: flex;
@@ -63,12 +66,14 @@ $cell-height: 150px;
 }
 .h-label {
 	color: var(--color-accent1);
-	height: $cell-height - 40px;
+	height: $cell-height + $days-padding + $grid-gap - 15.3;
 }
+// #endregion
 // .day{
 // 	display: inline-block;
 // 	width: 200px;
 // }
+// #region main content
 .content {
 	display: flex;
 	height: calc(100% - $calendar-padding - 2em);
@@ -79,7 +84,7 @@ $cell-height: 150px;
 	justify-content: space-between;
 	gap: $grid-gap;
 	background-color: var(--color-overlay2);
-	padding: 15px 15px $calendar-padding;
+	padding: $days-padding $days-padding $calendar-padding;
 	// display: inline-block;
 	// width: max(75%, 100% - 150px);
 	// height: calc(100% - $calendar-padding);
@@ -95,20 +100,40 @@ $cell-height: 150px;
 		line-height: 0.9em;
 	}
 }
-// .day{
-// margin-inline: auto;
-// width: fit-content;
-// background-color: #aa00aa55;
-// }
+.meetings {
+	position: relative;
+	height: calc(100% - $cell-height);
+}
 .cell {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	// flex-direction: column;
 	background: var(--color-overlay2);
 	border-radius: var(--radius1);
 	height: $cell-height;
 }
+.meeting-cell {
+	position: absolute;
+	top: var(--top-offset);
+	margin-top: $grid-gap * 0.5;
+	height: calc(var(--height) - $grid-gap);
+	left: 0;
+	right: 0;
+}
+.meeting {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	& small {
+		opacity: 0.7;
+	}
+}
+.meeting-name {
+	color: var(--color-accent2);
+}
+// #endregion
 @media screen and (min-width: var.$breakpoint1) {
 	// #region topBar
 	$p-offset: 13ch;
