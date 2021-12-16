@@ -81,8 +81,8 @@ const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 
 	const days = getDays(date, columnsCount);
 
-	const firstDate = days[0];
-	const lastDate = days[days.length - 1];
+	const firstDate = new Date(days[0]);
+	const lastDate = new Date(days[days.length - 1]);
 	setStartOfDay(firstDate);
 	setEndOfDay(lastDate);
 	const monthDisplay = monthRangeString(firstDate, lastDate);
