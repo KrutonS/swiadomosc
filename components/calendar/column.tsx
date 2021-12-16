@@ -76,15 +76,13 @@ const MeetingCell = ({
 	return (
 		<Cell
 			height={hourHeight * length}
-			className={styles['meeting-cell']}
+			className={styles.meeting}
 			topOffset={topOffset}
 		>
-			<div className={styles.meeting}>
-				<p>
-					<strong>{startString}</strong> - <small>{endString}</small>
-				</p>
-				<p className={styles['meeting-name']}>{name}</p>
-			</div>
+			<p>
+				<strong>{startString}</strong> - <small>{endString}</small>
+			</p>
+			<p className={styles['meeting-name']}>{name}</p>
 		</Cell>
 	);
 };
