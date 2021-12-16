@@ -8,7 +8,8 @@ $days-padding: 15px;
 .calendar {
 	@extend %flex;
 	border-radius: var(--radius1);
-	padding: $calendar-padding 0 0 $calendar-padding;
+	padding: $calendar-padding 0 0;
+	// padding-left: $calendar-padding;
 	background: var(--color-overlay1);
 	height: 2000px;
 	text-align: left;
@@ -19,16 +20,18 @@ $days-padding: 15px;
 // #region topBar
 .top-bar {
 	text-align: center;
-	padding-right: $calendar-padding;
+	padding-inline: $calendar-padding;
 }
 
 .h {
 	// text-align: center
+	margin-bottom: 0.3em;
 	color: var(--color-accent1);
 	text-align: center;
 }
 .buttons {
 	@extend %flex;
+	// margin-top: 1em;
 	justify-content: space-between;
 	font-size: 2.5em;
 }
@@ -38,10 +41,8 @@ $days-padding: 15px;
 // #endregion
 // #region hoursTab
 .hours-tab {
-	width: 35%;
 	max-width: 100px;
-	padding-right: 30px;
-	padding-bottom: $calendar-padding - 14px;
+	padding: 0 $calendar-padding $calendar-padding - 14px;
 }
 .hours {
 	@extend %flex-center;
@@ -75,6 +76,7 @@ $days-padding: 15px;
 .content {
 	@extend %flex;
 	height: calc(100% - $calendar-padding - 2em);
+	text-align: center;
 }
 .days {
 	@extend %flex;
