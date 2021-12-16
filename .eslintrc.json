@@ -9,7 +9,7 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended",
 		"next/core-web-vitals",
 		"plugin:jsx-a11y/recommended",
 		"airbnb",
@@ -26,7 +26,8 @@
 		"react/jsx-props-no-spreading": 0,
 		"react/require-default-props": 0,
 		"@typescript-eslint/ban-ts-comment": 0,
-		"no-plusplus":0,
+		"no-plusplus": 0,
+		"import/prefer-default-export": 0,
 		"import/extensions": [
 			2,
 			"ignorePackages",
