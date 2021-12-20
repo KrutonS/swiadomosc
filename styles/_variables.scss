@@ -132,4 +132,10 @@ $h1-size: min(12vw, 2.6vw + 1.7em);
 %center-text {
 	text-align: center;
 }
+
+@mixin page-items-margin($offset: 0px) {
+	& > * + * {
+		margin-top: calc(var(--page-items-margin) + $offset);
+	}
+}
 // #endregion

@@ -2,7 +2,5 @@
 
 .main {
 	@extend %center-text;
-	& > * + * {
-		margin-top: 60px;
-	}
+	@include var.page-items-margin(2em);
 }
