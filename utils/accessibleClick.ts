@@ -18,9 +18,10 @@ type OnClick = (
 type KeysFilter = { whitelist?: string[]; blacklist?: string[] };
 type AccessibleClick = (
 	onClick: OnClick,
-	role: AriaRole,
-	keys: KeysFilter
+	role?: AriaRole,
+	keys?: KeysFilter
 ) => { onClick: OnClick; onKeyDown: KeyboardEventHandler; role: AriaRole };
+
 const accessibleClick: AccessibleClick = (
 	onClick,
 	role = 'button',
