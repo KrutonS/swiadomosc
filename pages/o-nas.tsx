@@ -21,6 +21,7 @@ const textMock2 =
 	"If we're going to have animals around we all have to be concerned about them and take care of them. Just make a decision and let it go. Let your heart take you to wherever you want to be. There comes a nice little fluffer. I guess I'm a little weird. I like to talk to trees and animals. That's okay though; I have more fun than most people. Use absolutely no pressure. Just like an angel's wing. In painting, you have unlimited power. You have the ability to move mountains. You can bend rivers. But when I get home, the only thing I have power over is the garbage. Now it's beginning to make a little sense. Look around, look at what we have. Beauty is everywhere, you only have to look to see it. Use what you see, don't plan it.";
 
 const postMock: Post = {
+	image: '',
 	author: { avatar: '/mock/avatar.jpg', name: 'Marcus Aurelius' },
 	commentsCount: 12,
 	title:

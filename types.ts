@@ -10,8 +10,9 @@ export interface Author {
 }
 export interface Post {
 	title: string;
-	commentsCount: number;
-	author: Author;
+	image: string;
+	commentsCount?: number;
+	author?: Author;
 	ytUrl?: string;
 	category?: string;
 }

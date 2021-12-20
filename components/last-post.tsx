@@ -22,15 +22,19 @@ const LastPost: FC<Props> = ({ title, post }) => {
 			</h3>
 			<div className={styles['video-layout']}>
 				<div className={styles['video-bar']}>
-					<small className={styles.author}>{author.name}</small>
-					<Image
-						className={styles.avatar}
-						src="/mock/avatar.jpg"
-						width="25px"
-						height="25px"
-						alt="avatar"
-						layout="fixed"
-					/>
+					{author && (
+						<>
+							<small className={styles.author}>{author.name}</small>
+							<Image
+								className={styles.avatar}
+								src="/mock/avatar.jpg"
+								width="25px"
+								height="25px"
+								alt="avatar"
+								layout="fixed"
+							/>
+						</>
+					)}
 					<small className={styles['comments-count']}>
 						{post.commentsCount}
 					</small>
