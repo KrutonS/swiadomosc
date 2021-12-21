@@ -1,5 +1,6 @@
+import { gql } from '@apollo/client';
 import DescTitle from 'components/desc-title';
-import datoReq from 'lib/datocms';
+import dato from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { Meeting } from 'types';
@@ -27,23 +28,22 @@ const MeetingsPage: NextPage<QueryResponse> = ({ meetings }) => {
 	);
 };
 export const getStaticProps: GetStaticProps<QueryResponse> = async () => {
-	// const allMeetings = (await getAllMeetings()) ?? [];
-	const query = `
-	query AllMeetings{
-		allMeetings {
-			id
-			name
-			weekly
-			startTime
-			length
+	const query = gql`
+		query AllMeetings {
+			allMeetings {
+				id
+				name
+				weekly
+				startTime
+				length
+			}
 		}
-	}`;
-	const { allMeetings: meetings } = await datoReq<
-		{ allMeetings: Meeting[] },
-		never
-	>(query);
-	// const grouped = meetingsByWeekly(allMeetings);
-	// return { props: { meetings: grouped } };
+	`;
+	const {
+		data: { allMeetings: meetings },
+	} = await dato.query<{
+		allMeetings: Meeting[];
+	}>({ query });
 
 	return { props: { meetings } };
 };
