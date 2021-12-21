@@ -7,20 +7,24 @@ import {
 	KeyboardEvent,
 	KeyboardEventHandler,
 	MouseEvent,
+	MouseEventHandler,
 } from 'react';
 
 // };
-type OnClick = (
-	e:
-		| MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-		| KeyboardEvent<Element>
-) => void;
+// type OnClick = MouseEventHandler
+
+type OnClick = (e: MouseEvent | KeyboardEvent) => void;
+
 type KeysFilter = { whitelist?: string[]; blacklist?: string[] };
 type AccessibleClick = (
 	onClick: OnClick,
 	role?: AriaRole,
 	keys?: KeysFilter
-) => { onClick: OnClick; onKeyDown: KeyboardEventHandler; role: AriaRole };
+) => {
+	onClick: MouseEventHandler;
+	onKeyDown: KeyboardEventHandler;
+	role: AriaRole;
+};
 
 const accessibleClick: AccessibleClick = (
 	onClick,
@@ -31,7 +35,8 @@ const accessibleClick: AccessibleClick = (
 	const onKeyDown: KeyboardEventHandler = e => {
 		const { key } = e;
 		const arrayIncludes = (arr?: string[]) => arr?.includes?.(key);
-		if (arrayIncludes(whitelist) || !arrayIncludes(blacklist)) onClick(e);
+		if (arrayIncludes(whitelist) || !arrayIncludes(blacklist))
+			onClick(e as Parameters<OnClick>[0]);
 	};
 	return { onClick, onKeyDown, role, tabIndex: 0 };
 };
