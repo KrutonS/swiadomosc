@@ -39,11 +39,10 @@ export const getStaticProps: GetStaticProps<QueryResponse> = async () => {
 			}
 		}
 	`;
+	type Response = { allMeetings: QueryResponse['meetings'] };
 	const {
 		data: { allMeetings: meetings },
-	} = await dato.query<{
-		allMeetings: Meeting[];
-	}>({ query });
+	} = await dato<Response>({ query });
 
 	return { props: { meetings } };
 };
