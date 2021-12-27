@@ -1,1 +1,16 @@
 /* stylelint-disable-next-line no-empty-source */
+@use 'variables' as var;
+.main {
+	max-width: 1000px;
+	margin-inline: auto;
+	// @include var.page-items-margin;
+	& section {
+		padding-inline: 0;
+	}
+}
+.posts > * + * {
+	margin-top: 40px;
+}
+.posts {
+	margin-inline: auto;
+}

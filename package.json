@@ -16,6 +16,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^7.0.1",
     "react": "17.0.2",
+    "react-datocms": "^1.6.7",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.21.0",
     "react-player": "^2.9.0"
