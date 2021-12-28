@@ -22,6 +22,7 @@ $post-gap: 30px;
 	text-align: left;
 	background-color: var(--color-overlay3);
 	border-radius: $radius $radius 0 0;
+	word-break: break-all;
 }
 // .image-wrapper {
 // 	margin-top: 20px;
@@ -63,6 +64,9 @@ $post-gap: 30px;
 @media (min-width: 500px) {
 	$gap: 10px;
 
+	.title {
+		word-break: normal;
+	}
 	.comments {
 		margin-left: auto;
 	}
