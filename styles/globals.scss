@@ -103,6 +103,7 @@ body {
 /* #region Mobile First */
 // #region Global Effects
 main {
+	@include var.page-items-margin;
 	padding: 120px var(--page-padding-inline);
 }
 main > * {
