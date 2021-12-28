@@ -37,7 +37,7 @@ const Option: FC<OptionProps> = ({ children, isActive, setActive }) => {
 				{...buttonClick(() => setActive(isActive ? null : children))}
 				// ref={ref as Ref<HTMLButtonElement>}
 			>
-				{children}
+				{capitalize(children)}
 			</Button>
 		</li>
 	);
@@ -53,7 +53,7 @@ const Select = ({
 }: Props) => {
 	const optionsJSX = options.map((o, i) => (
 		<Option index={i} isActive={o === active} setActive={setActive} key={o}>
-			{capitalize(o)}
+			{o}
 		</Option>
 	));
 	// const [show, setShow] = useState(false);
