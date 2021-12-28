@@ -5,7 +5,7 @@ $imageZ: 10vh;
 
 .two-column-list {
 	font-size: 0.8rem;
-	padding: 0;
+	@extend %clear-padding;
 	opacity: 0.9;
 	counter-reset: fancy-numbers;
 	position: relative;

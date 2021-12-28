@@ -45,7 +45,7 @@ $post-gap: 30px;
 	// & *{
 	// 	margin-inline: auto;
 	// 	// display: block;
-	// 	width: fit-content;
+	// 	@extend %fit-content;
 	// }
 }
 .category {

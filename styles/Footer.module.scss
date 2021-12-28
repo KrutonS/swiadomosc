@@ -21,7 +21,7 @@
 .row a {
 	display: block;
 	&:not(.button) {
-		width: fit-content;
+		@extend %fit-content;
 		margin-inline: auto;
 	}
 }

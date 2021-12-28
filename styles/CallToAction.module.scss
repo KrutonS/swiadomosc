@@ -1,3 +1,5 @@
+@use 'variables' as var;
+
 .section {
 	padding-block: 100px;
 	background: black;
@@ -5,7 +7,7 @@
 .action-button {
 	margin-inline: auto;
 	display: block;
-	width: fit-content;
+	@extend %fit-content;
 }
 .section > span:first-child {
 	z-index: -1;

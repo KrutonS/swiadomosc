@@ -6,5 +6,5 @@
 	@extend %text-reset;
 	@extend %center-text;
 	cursor: pointer;
-	width: fit-content;
+	@extend %fit-content;
 }
