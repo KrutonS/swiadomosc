@@ -176,7 +176,7 @@ $text-indent: 1em;
 	}
 }
 @mixin page-items-margin($offset: 0px) {
-	--spacing: calc(var(--page-items-margin) + $offset);
+	--spacing: calc(var(--page-items-margin) + #{$offset});
 	@extend %items-spacing;
 }
 // #endregion
