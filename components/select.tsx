@@ -1,89 +1,83 @@
 import cn from 'classnames';
-import {
-	Dispatch,
-	memo,
-	ReactElement,
-	SetStateAction,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react';
-import { Option } from 'types';
-import accessibleClick from 'utils/accessibleClick';
+import { Dispatch, FC, SetStateAction } from 'react';
+import styles from 'styles/Select.module.scss';
+import { buttonClick } from 'utils/accessibleClick';
+import capitalize from 'utils/string/capitalize';
+import Button from './button';
 
 interface Props {
+	active: string | null;
+	setActive: Dispatch<SetStateAction<string | null>>;
+	options: string[];
 	label: string;
-	noChoiceText?: string;
-	options: Option[];
-	selected: Option;
-	setSelected: Dispatch<SetStateAction<Option>>;
+	noActiveText?: string;
 	className?: string;
+	onRight?: boolean;
 }
-const Select = memo<Props>(
-	({
-		options,
-		label,
-		selected,
-		setSelected,
-		className,
-		noChoiceText,
-	}): ReactElement => {
-		const [show, setShow] = useState(false);
-		const toggle = () => setShow(!show);
-		const accessibleToggle = accessibleClick(toggle);
-		const containerRef = useRef<HTMLElement>(null);
-		const onFocus = () => {
-			if (!show) setShow(true);
-		};
-		useLayoutEffect(() => {
-			const containerHtml = containerRef.current;
-			const onFocusOut = () => {
-				setShow(false);
-			};
-			(containerHtml as HTMLElement).addEventListener('focusout', onFocusOut);
-			return () => {
-				(containerHtml as HTMLElement).removeEventListener(
-					'focusout',
-					onFocusOut
-				);
-			};
-		}, []);
-		const onBlur = () => {
-			if (show) setShow(false);
-		};
-		// const onClick = (option: Option) => setSelected(option);
 
-		return (
-			<nav
-				onFocus={onFocus}
-				className={cn('dropdown-container', className)}
-				ref={containerRef}
-				onBlurCapture={onBlur}
+type OptionProps = {
+	index: number;
+	isActive?: boolean;
+	children: string;
+	setActive: Props['setActive'];
+};
+const Option: FC<OptionProps> = ({ children, isActive, setActive }) => {
+	// 	const ref = useRef<HTMLLIElement>(null);
+	// 	useLayoutEffect(() => {
+	// 		ref.current?.style.setProperty('--index', `${index}`);
+	// 	}, [index]);
+	return (
+		<li
+			className={cn(styles.option, styles.cell, {
+				[styles['option--active']]: isActive,
+			})}
+			// ref={ref}
+		>
+			<Button
+				{...buttonClick(() => setActive(isActive ? null : children))}
+				// ref={ref as Ref<HTMLButtonElement>}
 			>
-				<span className="dropdown-label" role="button" tabIndex={0}>
-					{label}
-				</span>
-				<div className="dropdown-header dropdown-cell">
-					{selected?.label || noChoiceText || '-'}
-				</div>
-				<div className="dropdown-list-wrapper">
-					<ul className={cn('dropdown-list', { 'dropdown-list--show': show })}>
-						{options.map(o => (
-							<li
-								key={o.value}
-								className={cn('dropdown-item dropdown-cell', {
-									'dropdown-item--selected': selected === o,
-								})}
-								{...accessibleClick(() => setSelected(o))}
-							>
-								{o.label}
-							</li>
-						))}
-					</ul>
-				</div>
-			</nav>
-		);
-	}
-);
+				{children}
+			</Button>
+		</li>
+	);
+};
+const Select = ({
+	active,
+	label,
+	options,
+	setActive,
+	noActiveText,
+	className,
+	onRight,
+}: Props) => {
+	const optionsJSX = options.map((o, i) => (
+		<Option index={i} isActive={o === active} setActive={setActive} key={o}>
+			{capitalize(o)}
+		</Option>
+	));
+	// const [show, setShow] = useState(false);
+	return (
+		<div
+			className={cn(
+				styles.select,
+				{ [styles['select--right']]: onRight },
+				className
+				// { [styles['select--show']]: show,}
+			)}
+		>
+			{/* <div
+				className={styles.header}
+				// onClick={() => setShow(!show)}
+			> */}
+			<div className={styles.label}>{label}</div>
+			<div className={cn(styles['display-option'], styles.cell)}>
+				{active || noActiveText || '-'}
+			</div>
+			{/* </div> */}
+			<ul className={styles['options-list']}>{optionsJSX}</ul>
+		</div>
+	);
+};
 
 export default Select;

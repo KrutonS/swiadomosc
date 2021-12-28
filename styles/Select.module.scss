@@ -1,0 +1,76 @@
+@use 'variables' as var;
+
+// $prim-dark: darken(var.$color-primary, 5%);
+// $prim-pink: mix(var.$color-accent1, $prim-dark, 60%);
+
+.option > button {
+	// all: unset;
+	background: none;
+	border: none;
+	border-radius: 0;
+	width: 100%;
+	color: inherit;
+}
+.cell {
+	width: 13ch;
+}
+.display-option {
+	background-color: var.$color-overlay3;
+}
+.option {
+	$original-color: transparentize(darken(var.$color-primary, 10%), 0.1);
+	$active-weight: 600;
+	@extend %pointer;
+	background-color: $original-color;
+	&:hover,
+	&:focus-within,
+	&--active {
+		background-color: var.$color-accent1;
+		color: var.$color-primary;
+		font-weight: $active-weight;
+	}
+}
+.options-list {
+	@extend %clear-padding;
+	@extend %fit-content;
+	transform: scaleY(0);
+	transform-origin: top center;
+	list-style-type: none;
+	margin: -1.7em 0 0 0;
+}
+.select {
+	@extend %clear-padding;
+	text-align: center;
+	@extend %fit-content;
+	z-index: 10;
+	height: 3.3em;
+	position: relative;
+
+	&:hover,
+	&:focus-within {
+		.options-list {
+			transform: scaleY(1);
+		}
+		.display-option {
+			visibility: hidden;
+		}
+	}
+
+	&--right {
+		&,
+		& .option {
+			margin-left: auto;
+		}
+	}
+}
+// .select:hover .options-list {
+// 	transform: scaleY(1);
+// }
+@media (prefers-reduced-motion: no-preference) {
+	.select:hover .options-list {
+		transition: 0.2s transform ease-in-out;
+	}
+}
+@media (min-width: 1000px) {
+	// a
+}
