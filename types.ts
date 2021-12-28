@@ -42,7 +42,7 @@ export interface Meeting {
 	length: number;
 	weekly: boolean;
 }
-export interface Option {
-	value: string;
-	label?: string;
-}
+// export interface Option {
+// 	value: string;
+// 	label?: string;
+// }
