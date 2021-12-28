@@ -3,8 +3,10 @@
 import { gql } from '@apollo/client';
 import DescTitle from 'components/desc-title';
 import PostItem from 'components/post-item';
+import Select from 'components/select';
 import dato from 'lib/datocms';
 import { NextPage, GetStaticProps } from 'next';
+import { useState } from 'react';
 import styles from 'styles/Blog.module.scss';
 import { Category, Post } from 'types';
 
@@ -12,8 +14,14 @@ interface Data {
 	allPosts: Post[];
 	allCategories: Category[];
 }
-
 const Blog: NextPage<Data> = ({ allPosts, allCategories }) => {
+	const [filter, setFilter] = useState<string | null>(null);
+	// TODO optimize
+	const filters = allCategories.map<string>(c => c.name);
+	let posts = allPosts;
+	if (filter)
+		posts = allPosts.filter(({ category }) => category?.name === filter);
+	const postsNodes = posts.map(p => <PostItem post={p} key={p.title} />);
 	return (
 		<main className={styles.main}>
 			<DescTitle
@@ -21,11 +29,15 @@ const Blog: NextPage<Data> = ({ allPosts, allCategories }) => {
 				desc="Co tam u nas?"
 				className={styles['desc-title']}
 			/>
-			<section className={styles.posts}>
-				{allPosts.map(p => (
-					<PostItem post={p} key={p.title} />
-				))}
-			</section>
+			<Select
+				options={filters}
+				label="Kategoria"
+				active={filter}
+				setActive={setFilter}
+				className={styles.filters}
+				onRight
+			/>
+			<section className={styles.posts}>{postsNodes}</section>
 		</main>
 	);
 };
