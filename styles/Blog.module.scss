@@ -1,6 +1,7 @@
 /* stylelint-disable-next-line no-empty-source */
 @use 'variables' as var;
 .main {
+	position: relative;
 	max-width: 1000px;
 	margin-inline: auto;
 	// @include var.page-items-margin;
@@ -13,4 +14,13 @@
 }
 .posts {
 	margin-inline: auto;
+}
+.applied-filter {
+	text-transform: capitalize;
+}
+@media (min-width: var.$breakpoint1) {
+	.applied-filter {
+		position: absolute;
+		left: 0;
+	}
 }

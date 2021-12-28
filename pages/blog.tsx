@@ -29,6 +29,7 @@ const Blog: NextPage<Data> = ({ allPosts, allCategories }) => {
 				desc="Co tam u nas?"
 				className={styles['desc-title']}
 			/>
+			{filter && <h4 className={styles['applied-filter']}>{filter}</h4>}
 			<Select
 				options={filters}
 				label="Kategoria"
