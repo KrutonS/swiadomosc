@@ -2,7 +2,6 @@ import cn from 'classnames';
 import { Dispatch, FC, SetStateAction } from 'react';
 import styles from 'styles/Select.module.scss';
 import { buttonClick } from 'utils/accessibleClick';
-import capitalize from 'utils/string/capitalize';
 import Button from './button';
 
 interface Props {
@@ -37,7 +36,7 @@ const Option: FC<OptionProps> = ({ children, isActive, setActive }) => {
 				{...buttonClick(() => setActive(isActive ? null : children))}
 				// ref={ref as Ref<HTMLButtonElement>}
 			>
-				{capitalize(children)}
+				{children}
 			</Button>
 		</li>
 	);
