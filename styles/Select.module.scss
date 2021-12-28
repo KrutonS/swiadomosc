@@ -11,7 +11,8 @@
 	width: 100%;
 	color: inherit;
 }
-.cell {
+.cell,
+.cell button {
 	width: 13ch;
 	text-transform: capitalize;
 }
@@ -26,6 +27,7 @@
 	&:hover,
 	&:focus-within,
 	&--active {
+		margin-inline: auto;
 		background-color: var.$color-accent1;
 		color: var.$color-primary;
 		font-weight: $active-weight;
@@ -46,7 +48,7 @@
 	z-index: 10;
 	height: 3.3em;
 	position: relative;
-
+	margin-inline: auto;
 	&:hover,
 	&:focus-within {
 		.options-list {
@@ -54,13 +56,6 @@
 		}
 		.display-option {
 			visibility: hidden;
-		}
-	}
-
-	&--right {
-		&,
-		& .option {
-			margin-left: auto;
 		}
 	}
 }
@@ -72,6 +67,18 @@
 		transition: 0.2s transform ease-in-out;
 	}
 }
-@media (min-width: 1000px) {
-	// a
+@media (min-width: var.$breakpoint1) {
+	.option {
+		margin-inline: revert;
+	}
+	.select {
+		margin-inline: revert;
+		&--right {
+			&,
+			& .option {
+				margin-left: auto;
+				margin-right: revert;
+			}
+		}
+	}
 }
