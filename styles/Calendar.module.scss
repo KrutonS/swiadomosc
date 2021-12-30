@@ -7,10 +7,10 @@ $days-padding: 15px;
 
 .calendar {
 	@extend %flex;
-	border-radius: var(--radius1);
+	border-radius: var.$radius1;
 	padding: $calendar-padding 0 0;
 	// padding-left: $calendar-padding;
-	background: var(--color-overlay1);
+	background: var.$color-overlay1;
 	height: 2000px;
 	text-align: left;
 	max-width: 1332px;
@@ -26,7 +26,7 @@ $days-padding: 15px;
 .h {
 	// text-align: center
 	margin-bottom: 0.3em;
-	color: var(--color-accent1);
+	color: var.$color-accent1;
 	text-align: center;
 }
 .buttons {
@@ -64,7 +64,7 @@ $days-padding: 15px;
 	}
 }
 .h-label {
-	color: var(--color-accent1);
+	color: var.$color-accent1;
 	height: $cell-height + $days-padding + $grid-gap - 15.3;
 }
 // #endregion
@@ -80,18 +80,18 @@ $days-padding: 15px;
 }
 .days {
 	@extend %flex;
-	border-radius: var(--radius2) 0 var(--radius1) 0;
+	border-radius: var.$radius2 0 var.$radius1 0;
 	justify-content: space-between;
 	flex-basis: 100%;
 	gap: $grid-gap;
-	background-color: var(--color-overlay2);
+	background-color: var.$color-overlay2;
 	padding: $days-padding $days-padding $calendar-padding;
 }
 .column {
 	width: 100%;
 	& h3 {
 		font-size: 3em;
-		color: var(--color-accent1);
+		color: var.$color-accent1;
 		line-height: 0.9em;
 	}
 }
@@ -101,8 +101,8 @@ $days-padding: 15px;
 }
 .cell {
 	@extend %flex-center;
-	background: var(--color-overlay2);
-	border-radius: var(--radius1);
+	background: var.$color-overlay2;
+	border-radius: var.$radius1;
 	height: $cell-height;
 }
 .meeting {
@@ -118,7 +118,7 @@ $days-padding: 15px;
 	}
 }
 .meeting-name {
-	color: var(--color-accent2);
+	color: var.$color-accent2;
 }
 // #endregion
 @media screen and (min-width: var.$breakpoint1) {

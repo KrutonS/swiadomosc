@@ -1,10 +1,10 @@
 @use 'variables' as var;
 $margin-bottom: 80px;
 .post {
-	--color: var(--color-gray3);
+	--color: var.$color-gray3;
 	margin-top: 0;
 	color: var(--color);
-	background-color: var(--color-accent1);
+	background-color: var.$color-accent1;
 	position: relative;
 	padding-bottom: $margin-bottom;
 	& small {
@@ -15,10 +15,10 @@ $margin-bottom: 80px;
 		font-weight: 900;
 	}
 	& > h3 {
-		text-indent: var(--text-indent);
+		text-indent: var.$text-indent;
 	}
 	&::before {
-		background-color: var(--color-gray3);
+		background-color: var.$color-gray3;
 		position: absolute;
 		bottom: 0;
 		left: 0;

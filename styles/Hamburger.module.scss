@@ -1,13 +1,13 @@
 @use 'variables' as var;
 .hamburger {
-	$color: var(--color-gray1);
+	$color: var.$color-gray1;
 	$thickness: 1px;
 	$spread: 5px;
 	$line-width: 50%;
 
 	box-sizing: content-box;
 	background: var(--color-black-overlay1);
-	border-radius: var(--radius1);
+	border-radius: var.$radius1;
 	position: relative;
 	border: 2px solid $color;
 	width: 38px;

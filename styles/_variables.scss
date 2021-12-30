@@ -57,14 +57,14 @@ $text-indent: 1em;
 	font-weight: 300;
 	line-height: 1.7em;
 	letter-spacing: 0.1em;
-	color: var(--color-gray1);
+	color: $color-gray1;
 }
 @mixin h1-m {
 	font-size: $h1-size;
 	letter-spacing: 0.225em;
 	font-weight: 700;
 	line-height: 0.95em;
-	color: var(--color-accent1);
+	color: $color-accent1;
 	@extend %center-text;
 	@extend %paragraphSpacing;
 }
@@ -118,14 +118,14 @@ $text-indent: 1em;
 	padding: 0.5rem 1rem;
 }
 %border {
-	border-radius: var(--radius1);
-	background-color: var(--color-overlay1);
-	border: 3px solid var(--color-accent1);
-	color: var(--color-gray1);
+	border-radius: $radius1;
+	background-color: $color-overlay1;
+	border: 3px solid $color-accent1;
+	color: $color-gray1;
 }
 %cell {
-	$primary-color: var(--color-overlay-w1);
-	$secondary-color: var(--color-overlay-w2);
+	$primary-color: $color-overlay-w1;
+	$secondary-color: $color-overlay-w2;
 	background: $primary-color;
 	padding: 0.3em 0.833em;
 	width: 100%;
@@ -140,7 +140,7 @@ $text-indent: 1em;
 	@extend %center-in-oval;
 }
 %page-padding-inline {
-	padding-inline: var(--page-padding-inline);
+	padding-inline: $page-padding-inline;
 }
 %flex {
 	display: flex;
@@ -176,7 +176,7 @@ $text-indent: 1em;
 	}
 }
 @mixin page-items-margin($offset: 0px) {
-	--spacing: calc(var(--page-items-margin) + #{$offset});
+	--spacing: calc(#{$page-items-margin} + #{$offset});
 	@extend %items-spacing;
 }
 // #endregion

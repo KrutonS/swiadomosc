@@ -8,10 +8,10 @@
 .input {
 	@extend %text-padding;
 	@extend %text-reset;
-	border-radius: var(--radius1);
+	border-radius: var.$radius1;
 	border: none;
-	background-color: var(--color-gray2);
-	color: var(--color-gray1);
+	background-color: var.$color-gray2;
+	color: var.$color-gray1;
 	width: 100%;
 }
 .label {

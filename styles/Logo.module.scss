@@ -1,7 +1,7 @@
 @use 'variables' as var;
 
 .logo {
-	color: var(--color-accent1);
+	color: var.$color-accent1;
 	@extend %flex;
 	gap: 0.7em;
 	align-items: center;
@@ -11,7 +11,7 @@
 		width: 2em;
 	}
 	& > h1::first-letter {
-		color: var(--color-gray1);
+		color: var.$color-gray1;
 	}
 	& > h1 {
 		font-weight: 900;

@@ -25,7 +25,7 @@ $imageZ: 10vh;
 			font-weight: 900;
 			flex-shrink: 0;
 			left: calc(-1 * $size - 10px);
-			border: 2px solid var(--color-accent2);
+			border: 2px solid var.$color-accent2;
 			@include var.letterInCircle($size, 1);
 		}
 	}
@@ -46,7 +46,7 @@ $imageZ: 10vh;
 .two-column-flex {
 	& h3 {
 		@include var.h2-m;
-		color: var(--color-accent2);
+		color: var.$color-accent2;
 	}
 }
 .image {
