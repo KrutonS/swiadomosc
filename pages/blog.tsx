@@ -4,7 +4,7 @@ import { gql } from '@apollo/client';
 import DescTitle from 'components/desc-title';
 import PostItem from 'components/post-item';
 import Select from 'components/select';
-import dato from 'lib/datocms';
+import dato, { responsiveImageFragment } from 'lib/datocms';
 import { NextPage, GetStaticProps } from 'next';
 import { useState } from 'react';
 import styles from 'styles/Blog.module.scss';
@@ -14,7 +14,7 @@ interface Data {
 	allPosts: Post[];
 	allCategories: Category[];
 }
-const Blog: NextPage<Data> = ({ allPosts, allCategories }) => {
+const Blog: NextPage<Data> = ({ allCategories, allPosts }) => {
 	const [filter, setFilter] = useState<string | null>(null);
 	// TODO optimize
 	const filters = allCategories.map<string>(c => c.name);
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
 				author {
 					avatar {
 						responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 40, h: 40 }) {
-							...responsiveImageFragment
+							${responsiveImageFragment}
 						}
 						title
 					}
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps = async () => {
 							crop: focalpoint
 						}
 					) {
-						...responsiveImageFragment
+						${responsiveImageFragment}
 					}
 				}
 			}
@@ -103,20 +103,6 @@ export const getStaticProps: GetStaticProps = async () => {
 				id
 				name
 			}
-		}
-
-		fragment responsiveImageFragment on ResponsiveImage {
-			srcSet
-			webpSrcSet
-			sizes
-			src
-			width
-			height
-			aspectRatio
-			alt
-			title
-			bgColor
-			base64
 		}
 	`;
 

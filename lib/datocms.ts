@@ -12,3 +12,17 @@ const client = new ApolloClient({
 });
 const dato: typeof client.query = options => client.query(options);
 export default dato;
+
+export const responsiveImageFragment = `
+	srcSet
+	webpSrcSet
+	sizes
+	src
+	width
+	height
+	aspectRatio
+	alt
+	title
+	bgColor
+	base64
+`;

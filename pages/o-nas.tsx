@@ -1,50 +1,56 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import CallToAction from '../components/call-to-action';
-import Hero from '../components/hero';
-import LastPost from '../components/last-post';
-import TexTImage from '../components/text-image';
-import TextList from '../components/text-list';
-import { Post } from '../types';
-import styles from '../styles/About.module.scss';
+import { gql } from '@apollo/client';
+import dato, { responsiveImageFragment } from 'lib/datocms';
+// import aboutContent from 'utils/about-page-content';
+import Hero from 'components/hero';
+import LastPost from 'components/last-post';
+import { SliceObject, Post, DatoImg, AboutContentType } from 'types';
+import styles from 'styles/About.module.scss';
 
-const listMock = [
-	"Use absolutely no pressure. We don't have to be concerned about it.",
-	"We'll have a super time. Let's make a nice big leafy tree.",
-	"We don't really know where this goes - and I'm not sure we really care.",
-];
+// const listMock = [
+// 	"Use absolutely no pressure. We don't have to be concerned about it.",
+// 	"We'll have a super time. Let's make a nice big leafy tree.",
+// 	"We don't really know where this goes - and I'm not sure we really care.",
+// ];
 
-const textMock =
-	"The more we do this - the more it will do good things to our heart. Exercising the imagination, experimenting with talents, being creative; these things, to me, are truly the windows to your soul. That's crazy. You don't have to spend all your time thinking about what you're doing, you just let it happen. Son of a gun. That's crazy. If you've been in Alaska less than a year you're a Cheechako. I really believe that if you practice enough you could paint the 'Mona Lisa' with a two-inch brush. It's cold, but it's beautiful. The secret to doing anything is believing that you can do it. Anything that you believe you can do strong enough, you can do. Anything. As long as you believe.";
+// const textMock =
+// 	"The more we do this - the more it will do good things to our heart. Exercising the imagination, experimenting with talents, being creative; these things, to me, are truly the windows to your soul. That's crazy. You don't have to spend all your time thinking about what you're doing, you just let it happen. Son of a gun. That's crazy. If you've been in Alaska less than a year you're a Cheechako. I really believe that if you practice enough you could paint the 'Mona Lisa' with a two-inch brush. It's cold, but it's beautiful. The secret to doing anything is believing that you can do it. Anything that you believe you can do strong enough, you can do. Anything. As long as you believe.";
 
-const textMock2 =
-	"If we're going to have animals around we all have to be concerned about them and take care of them. Just make a decision and let it go. Let your heart take you to wherever you want to be. There comes a nice little fluffer. I guess I'm a little weird. I like to talk to trees and animals. That's okay though; I have more fun than most people. Use absolutely no pressure. Just like an angel's wing. In painting, you have unlimited power. You have the ability to move mountains. You can bend rivers. But when I get home, the only thing I have power over is the garbage. Now it's beginning to make a little sense. Look around, look at what we have. Beauty is everywhere, you only have to look to see it. Use what you see, don't plan it.";
+// const textMock2 =
+// 	"If we're going to have animals around we all have to be concerned about them and take care of them. Just make a decision and let it go. Let your heart take you to wherever you want to be. There comes a nice little fluffer. I guess I'm a little weird. I like to talk to trees and animals. That's okay though; I have more fun than most people. Use absolutely no pressure. Just like an angel's wing. In painting, you have unlimited power. You have the ability to move mountains. You can bend rivers. But when I get home, the only thing I have power over is the garbage. Now it's beginning to make a little sense. Look around, look at what we have. Beauty is everywhere, you only have to look to see it. Use what you see, don't plan it.";
 
-const postMock: Post = {
-	image: '',
-	author: { avatar: '/mock/avatar.jpg', name: 'Marcus Aurelius' },
-	commentsCount: 12,
-	title:
-		'They say everything looks better with odd numbers of things. But sometimes I put even numbers--just to upset the critics.',
-	ytUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+interface AboutPage {
+	heroImg: DatoImg;
+	content?: AboutContentType;
+}
+
+type Response = {
+	post?: SliceObject<Post, 'title' | 'author' | { showcasedVideo: 'url' }>;
+	aboutPage: AboutPage;
 };
 
-const Home: NextPage = () => {
+const Home: NextPage<Response> = ({ post, aboutPage }) => {
+	const {
+		heroImg: { responsiveImage: heroImageData },
+		// content,
+	} = aboutPage;
+
 	return (
 		<main className={styles.main}>
 			<Head>
 				<title>Świadomość</title>
 				<meta name="description" content="Generated by create next app" />
 			</Head>
-			<Hero src="/hero.jpg" />
-			<TextList
+			<Hero imageData={heroImageData} />
+			{/* <TextList
 				listItems={listMock}
 				text={textMock}
 				title="Kim jesteśmy?"
 				title2="Nasze wartości"
 				className={styles['who-are-we']}
 			/>
-			<TexTImage
+			<TextImage
 				src="/greek.jpg"
 				title="Na czym polegaja spotkania?"
 				text={textMock2}
@@ -52,10 +58,142 @@ const Home: NextPage = () => {
 			/>
 			<CallToAction href="/kalendarz" backgroundUrl="/books.jpg">
 				Zobacz kalendarz ⮚⮚⮚
-			</CallToAction>
-			<LastPost title="Ostatni video post" post={postMock} />
+			</CallToAction> */}
+
+			{/* {content && aboutContent(content as AboutContentType)} */}
+
+			{post && <LastPost title="Ostatni video post" post={post} />}
 		</main>
 	);
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<Response> = async () => {
+	const query = gql`
+		query About {
+			post(filter: {showcasedVideo: {exists: "true"}}, orderBy: _firstPublishedAt_DESC) {
+				title
+				showcasedVideo {
+					url
+				}
+				author {
+					name
+					id
+					avatar{
+						responsiveImage(imgixParams:{fm:jpg, fit:crop, w:40, h:40}){
+							${responsiveImageFragment}
+						}
+					}
+				}
+			}
+
+			aboutPage {
+					heroImg {
+						responsiveImage(imgixParams: {fm:jpg, fit:crop, crop:focalpoint, w:1920	, h:2500 }) {
+							${responsiveImageFragment.replace(/(base64|bgColor)/g, '')}
+						}
+					}
+					content {
+						... on LinkRecord {
+							__typename
+							id
+							href
+							text
+							background {
+								responsiveImage(imgixParams: {fm:jpg, w:1920, h:255, fit:crop, crop:focalpoint}) {
+									${responsiveImageFragment}
+								}
+							}
+						}
+						... on TextImageRecord {
+							__typename
+							id
+							fixed
+							title
+							text{
+								value
+							}
+							backgroundColor{
+								hex
+							}
+							image {
+								responsiveImage {
+									${responsiveImageFragment}
+								}
+							}
+						}
+						... on TextListRecord {
+							__typename
+							id
+							text{
+								value
+							}
+							title
+							title2
+							list {
+								id
+								text
+							}
+						}
+					}
+				}
+			}
+	`;
+
+	const { data } = await dato<Response>({ query });
+	return { props: data };
+};
+
+// query MyQuery {
+//   aboutPage {
+//     heroImg {
+//       responsiveImage(imgixParams: {}) {
+//         ${responsiveImageFragment}
+//       }
+//     }
+//     content {
+//       ... on LastPostRecord {
+//         id
+//       }
+//       ... on LinkRecord {
+//         id
+//         href
+//         background {
+//           responsiveImage(imgixParams: {}) {
+//             ${responsiveImageFragment}
+//           }
+//         }
+//       }
+//       ... on TextImageRecord {
+//         id
+//         fixed
+//         title
+//         text {
+//           value
+//         }
+//       }
+//       ... on TextListRecord {
+//         id
+//         title
+//         text {
+//           value
+//         }
+//       }
+//     }
+//   }
+// }
+
+// fragment responsiveDatoImage on ResponsiveImage {
+//   srcSet
+//   webpSrcSet
+//   sizes
+//   src
+//   width
+//   height
+//   aspectRatio
+//   alt
+//   title
+//   bgColor
+//   base64
+// }
