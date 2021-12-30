@@ -16,7 +16,7 @@ const PostItem: FC<Props> = ({
 }) => {
 	const {
 		avatar: { responsiveImage: avatarImageData },
-		id,
+		// id,
 		name,
 	} = author ?? { avatar: {} };
 

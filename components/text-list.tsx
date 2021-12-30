@@ -1,11 +1,13 @@
 import { FC, useMemo } from 'react';
+import { StructuredText, StructuredTextDocument } from 'react-datocms';
+import { TextListRecord } from 'types';
 import styles from '../styles/TwoColumn.module.scss';
 
 interface Props {
-	text: string;
-	listItems: string[];
 	title: string;
-	title2: string;
+	title2?: string;
+	text?: StructuredTextDocument;
+	listItems?: TextListRecord['list'];
 	className?: string;
 }
 
@@ -17,19 +19,23 @@ const TextList: FC<Props> = ({
 	className = '',
 }) => {
 	const listStyle = useMemo(
-		() => ({ maxHeight: `${listItems.length * 6}em` }),
+		() => listItems && { maxHeight: `${listItems.length * 6}em` },
 		[listItems]
 	);
+
 	return (
+		// null
 		<section id="beginning" className={`${styles['two-column']} ${className}`}>
 			<h1 className={styles.title}>{title}</h1>
 			<div className={styles['two-column-flex']}>
-				<article className={styles['first-column']}>{text}</article>
+				<article className={styles['first-column']}>
+					<StructuredText data={text} />
+				</article>
 				<div className={styles['second-column']} style={listStyle}>
 					<h3>{title2}</h3>
 					<ol className={styles['two-column-list']}>
-						{listItems.map(v => (
-							<li key={v}>{v}</li>
+						{listItems?.map(({ text: listText, id }) => (
+							<li key={id}>{listText}</li>
 						))}
 					</ol>
 				</div>

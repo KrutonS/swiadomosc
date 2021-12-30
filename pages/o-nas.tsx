@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { gql } from '@apollo/client';
 import dato, { responsiveImageFragment } from 'lib/datocms';
-// import aboutContent from 'utils/about-page-content';
+import aboutContent from 'utils/about-page-content';
 import Hero from 'components/hero';
 import LastPost from 'components/last-post';
 import { SliceObject, Post, DatoImg, AboutContentType } from 'types';
@@ -33,7 +33,7 @@ type Response = {
 const Home: NextPage<Response> = ({ post, aboutPage }) => {
 	const {
 		heroImg: { responsiveImage: heroImageData },
-		// content,
+		content,
 	} = aboutPage;
 
 	return (
@@ -60,7 +60,7 @@ const Home: NextPage<Response> = ({ post, aboutPage }) => {
 				Zobacz kalendarz ⮚⮚⮚
 			</CallToAction> */}
 
-			{/* {content && aboutContent(content as AboutContentType)} */}
+			{content && aboutContent(content as AboutContentType)}
 
 			{post && <LastPost title="Ostatni video post" post={post} />}
 		</main>

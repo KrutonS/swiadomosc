@@ -1,25 +1,24 @@
-import Image from 'next/image';
+// import Image from 'next/image';
+import { Image, ResponsiveImageType } from 'react-datocms';
 import { FC } from 'react';
 import Button, { ButtonProps } from './button';
 import styles from '../styles/CallToAction.module.scss';
 
 type Props = {
-	backgroundUrl: string;
+	imageData?: ResponsiveImageType;
 } & ButtonProps;
 
-const CallToAction: FC<Props> = ({
-	backgroundUrl,
-	className,
-	...buttonProps
-}) => {
+const CallToAction: FC<Props> = ({ imageData, className, ...buttonProps }) => {
 	return (
 		<section className={styles.section}>
-			<Image
-				src={backgroundUrl}
-				layout="fill"
-				objectFit="cover"
-				className={styles.image}
-			/>
+			{imageData && (
+				<Image
+					data={imageData}
+					// layout="fill"
+					// objectFit="cover"
+					className={styles.image}
+				/>
+			)}
 			<Button
 				{...buttonProps}
 				className={`${styles['action-button']} ${className}`}
