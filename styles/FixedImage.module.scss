@@ -1,9 +1,9 @@
-.wrapper > span:first-child {
+.wrapper {
 	z-index: -1;
+	position: absolute;
+	inset: 0;
 	clip-path: inset(0);
 }
 .image {
 	position: fixed !important;
 }
-// BUG jumping in mobile when bottom toolbar appears on scroll
-// See https://css-tricks.com/the-fixed-background-attachment-hack/

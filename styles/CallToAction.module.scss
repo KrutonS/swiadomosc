@@ -1,6 +1,7 @@
 @use 'variables' as var;
 
 .section {
+	margin-top: 0;
 	padding-block: 100px;
 	background: black;
 }
@@ -9,6 +10,11 @@
 	display: block;
 	@extend %fit-content;
 }
-.section > span:first-child {
+.image {
+	position: absolute !important;
+	inset: 0;
 	z-index: -1;
+	& img {
+		object-fit: cover;
+	}
 }
