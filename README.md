@@ -5,6 +5,7 @@ A website for SWiadomość group, which is about mindfullness, conscience and me
 ### Technologies used
 `HTML`\
 `SCSS`\
+`TypeScript`\
 `React` + react-hook-form\
 `Next.js`\
 `GraphQL`\
