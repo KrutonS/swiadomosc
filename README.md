@@ -13,4 +13,4 @@ A website for SWiadomość group, which is about mindfullness, conscience and me
 `Next.js`\
 `GraphQL`\
 `DatoCMS`\
-`eslint` + stylelint
+`eslint` + husky + stylelint
