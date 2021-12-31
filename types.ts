@@ -32,12 +32,6 @@ export interface Post {
 
 export type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>['type'];
 
-export type AddressType = {
-	city: string;
-	street: string;
-	zip: string;
-};
-
 export interface Meeting {
 	id: string;
 	name: string;
@@ -78,6 +72,15 @@ export type AboutContentType = (
 	| LinkRecord
 )[];
 
+export interface Contact {
+	contact: {
+		city: string;
+		street: string;
+		zip: string;
+		email: string;
+		phone?: string;
+	};
+}
 /*
 "__typename": "TextListRecord
 "__typename": "TextImageRecord

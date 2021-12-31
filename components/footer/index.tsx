@@ -1,13 +1,14 @@
 import { FC } from 'react';
+import { Contact } from 'types';
 import styles from '../../styles/Footer.module.scss';
 import Left from './left.';
 import Right from './right';
 
-const Footer: FC = () => {
+const Footer: FC<Contact> = ({ contact }) => {
 	return (
 		<footer className={styles.footer}>
 			<div className={styles.main}>
-				<Left />
+				<Left {...contact} />
 				<Right />
 			</div>
 

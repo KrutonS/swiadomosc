@@ -1,7 +1,11 @@
 import { FC } from 'react';
-import { AddressType } from '../../types';
+import { Contact } from '../../types';
 
-const Address: FC<AddressType> = ({ street, zip, city }) => (
+const Address: FC<Pick<Contact['contact'], 'street' | 'zip' | 'city'>> = ({
+	street,
+	zip,
+	city,
+}) => (
 	<>
 		<div>{city}</div>
 		<div>ul. {street}</div>

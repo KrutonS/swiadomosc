@@ -1,8 +1,9 @@
-// import Image from 'next/image';
 import { FC } from 'react';
 import { Post } from 'types';
 import { Image } from 'react-datocms';
-import styles from '../styles/PostItem.module.scss';
+import styles from 'styles/PostItem.module.scss';
+// Ignore can't find file false error
+// @ts-ignore
 import CommentsIcon from '../public/comments.svg';
 
 interface Props {

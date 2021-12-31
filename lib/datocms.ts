@@ -26,3 +26,13 @@ export const responsiveImageFragment = `
 	bgColor
 	base64
 `;
+
+export const contactFragment = `
+	contact {
+		zip
+		street
+		phone
+		email
+		city
+	}
+`;

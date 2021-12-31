@@ -1,15 +1,16 @@
 import { gql } from '@apollo/client';
 import DescTitle from 'components/desc-title';
-import dato from 'lib/datocms';
+import Layout from 'components/layout';
+import dato, { contactFragment } from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Meeting } from 'types';
+import { Contact, Meeting } from 'types';
 import Calendar from '../components/calendar';
 import styles from '../styles/Meetings.module.scss';
 
-type QueryResponse = { meetings: Meeting[] };
+type Data = { meetings: Meeting[] } & Contact;
 
-const MeetingsPage: NextPage<QueryResponse> = ({ meetings }) => {
+const MeetingsPage: NextPage<Data> = ({ meetings, contact }) => {
 	const [showCalendar, setShowCalendar] = useState(false);
 	// console.log(allMeetings);
 	useEffect(() => {
@@ -17,17 +18,19 @@ const MeetingsPage: NextPage<QueryResponse> = ({ meetings }) => {
 	}, []);
 
 	return (
-		<main className={styles.main}>
-			<DescTitle
-				title="Spotkania"
-				desc="Chciałbym zapisać się na..."
-				leftSide
-			/>
-			{showCalendar && <Calendar meetings={meetings} />}
-		</main>
+		<Layout contact={contact}>
+			<main className={styles.main}>
+				<DescTitle
+					title="Spotkania"
+					desc="Chciałbym zapisać się na..."
+					leftSide
+				/>
+				{showCalendar && <Calendar meetings={meetings} />}
+			</main>
+		</Layout>
 	);
 };
-export const getStaticProps: GetStaticProps<QueryResponse> = async () => {
+export const getStaticProps: GetStaticProps<Data> = async () => {
 	const query = gql`
 		query AllMeetings {
 			allMeetings {
@@ -37,13 +40,14 @@ export const getStaticProps: GetStaticProps<QueryResponse> = async () => {
 				startTime
 				length
 			}
+			${contactFragment}
 		}
 	`;
-	type Response = { allMeetings: QueryResponse['meetings'] };
+	type Response = Omit<Data, 'meetings'> & { allMeetings: Data['meetings'] };
 	const {
-		data: { allMeetings: meetings },
+		data: { allMeetings: meetings, contact },
 	} = await dato<Response>({ query });
 
-	return { props: { meetings } };
+	return { props: { meetings, contact } };
 };
 export default MeetingsPage;
