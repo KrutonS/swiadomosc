@@ -33,16 +33,11 @@ const Cell: FC<CellProps> = ({ children, height, className, topOffset }) => {
 	}, [height, topOffset]);
 
 	return (
-		<div
-			className={cn(styles.cell, className)}
-			// style={{ height }}
-			ref={cellHTML}
-		>
+		<div className={cn(styles.cell, className)} ref={cellHTML}>
 			{children}
 		</div>
 	);
 };
-// 'meetings' | 'hourHeight' | 'minHour'
 const Day = ({
 	dayName,
 	dayNumber,
@@ -68,12 +63,10 @@ const MeetingCell = ({
 	const endString = dateToHour(endDate);
 	// console.log({[name]:startDate.getHours() + startDate.getMinutes() / 60 - minHour, hours:startDate.getHours(), minutes:startDate.getMinutes()/60});
 
-	const topOffset = Math.max(
-		(startDate.getHours() + startDate.getMinutes() / 60 - minHour) * hourHeight,
-		0
-	);
+	const topOffset =
+		(startDate.getHours() + startDate.getMinutes() / 60 - minHour) * hourHeight;
 
-	return (
+	return topOffset >= 0 ? (
 		<Cell
 			height={hourHeight * length}
 			className={styles.meeting}
@@ -84,7 +77,7 @@ const MeetingCell = ({
 			</p>
 			<p className={styles['meeting-name']}>{name}</p>
 		</Cell>
-	);
+	) : null;
 };
 //#endregion
 
