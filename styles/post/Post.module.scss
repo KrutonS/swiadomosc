@@ -36,6 +36,6 @@
 	hr {
 		border: none;
 		border-top: 1px dashed darken(var.$color-accent1, 10%);
-		padding: 0;
+		margin-block: 1em;
 	}
 }
