@@ -40,6 +40,17 @@ export interface Post {
 	showcasedVideo?: Video;
 }
 
+export interface CalendarData {
+	calendar: {
+		maxHour: number;
+		minHour: number;
+		hourStep: number;
+		minDay: string;
+		maxDay: string;
+		height?: number;
+	};
+}
+
 export type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>['type'];
 
 export interface Meeting {

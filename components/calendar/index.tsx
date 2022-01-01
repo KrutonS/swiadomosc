@@ -14,7 +14,7 @@ import getDayName from 'utils/date/dayName';
 import styles from 'styles/meetings/Calendar.module.scss';
 import clamp from 'utils/math/clamp';
 import forwardDays from 'utils/date/forwardDays';
-import { Meeting } from 'types';
+import { CalendarData, Meeting } from 'types';
 import { groupMeetings } from 'utils/meetings';
 import Button from 'components/button';
 import setStartOfDay from 'utils/date/startOfDay';
@@ -22,14 +22,18 @@ import setEndOfDay from 'utils/date/endOfDay';
 import Column from './column';
 
 // #region Locals
-const minHour = 8;
-const maxHour = 22;
-const hourStep = 1;
 const columnWidth = 220;
-const minDay = 1;
-const maxDay = 5;
-
-const getReliableDate = (date = new Date(), inverse = false): Date => {
+// const minHour = 8;
+// const maxHour = 22;
+// const hourStep = 1;
+// const minDay = 1;
+// const maxDay = 5;
+const getReliableDate = (
+	minDay: number,
+	maxDay: number,
+	date = new Date(),
+	inverse = false
+): Date => {
 	const day = date.getDay();
 	if (day > maxDay) {
 		const daysToGo = inverse ? maxDay - day : day - maxDay + minDay;
@@ -51,15 +55,12 @@ function monthRangeString(date1: Date, date2: Date) {
 	}
 	return getMonthName(month1);
 }
-const hours: ReactNode[] = [];
-for (let i = minHour; i <= maxHour; i += hourStep)
-	hours.push(
-		<div className={styles.hour} key={i}>
-			{i}
-		</div>
-	);
-
-function getDays(date: Date, columnsCount: number) {
+function getDays(
+	minDay: number,
+	maxDay: number,
+	date: Date,
+	columnsCount: number
+) {
 	const daysCount = maxDay - minDay;
 	if (columnsCount >= daysCount) return dayRange(date, minDay, maxDay);
 
@@ -68,18 +69,24 @@ function getDays(date: Date, columnsCount: number) {
 	const max = min + columnsCount - 1;
 	return dayRange(date, min, max);
 }
-
 //#endregion
-// type Props = { meetings: Meeting[] };
-const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
+interface Props {
+	meetings: Meeting[];
+	data: CalendarData['calendar'];
+}
+const Calendar: FC<Props> = ({ meetings, data }) => {
 	// TODO optimizations
+	const { hourStep, maxHour, minHour, height: calendarHeight } = data;
+	const minDay = parseInt(data.minDay, 10);
+	const maxDay = parseInt(data.maxDay, 10);
+
 	const [columnsCount, setColumsCount] = useState(1);
 	const [hourHeight, setHourHeight] = useState(1);
-	const [date, setDate] = useState(getReliableDate());
+	const [date, setDate] = useState(getReliableDate(minDay, maxDay));
 	const containerHTML = useRef<HTMLDivElement>(null);
 	const hoursHTML = useRef<HTMLDivElement>(null);
 
-	const days = getDays(date, columnsCount);
+	const days = getDays(minDay, maxDay, date, columnsCount);
 
 	const firstDate = new Date(days[0]);
 	const lastDate = new Date(days[days.length - 1]);
@@ -87,13 +94,13 @@ const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 	setEndOfDay(lastDate);
 	const monthDisplay = monthRangeString(firstDate, lastDate);
 
-	const groupedMeetings = groupMeetings(meetings, firstDate, lastDate);
-
 	const goNext = () => {
-		setDate(getReliableDate(forwardDays(date, columnsCount)));
+		setDate(getReliableDate(minDay, maxDay, forwardDays(date, columnsCount)));
 	};
 	const goBack = () => {
-		setDate(getReliableDate(forwardDays(date, -columnsCount), true));
+		setDate(
+			getReliableDate(minDay, maxDay, forwardDays(date, -columnsCount), true)
+		);
 	};
 
 	useLayoutEffect(() => {
@@ -102,7 +109,7 @@ const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 		const hourpx = parseFloat(height) / (maxHour - minHour);
 
 		setHourHeight(hourpx);
-	}, []);
+	}, [maxHour, minHour]);
 
 	useEffect(() => {
 		const updateWidth = () => {
@@ -119,6 +126,8 @@ const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 			window.removeEventListener('resize', debouncedUpdate);
 		};
 	}, []);
+
+	const groupedMeetings = groupMeetings(meetings, firstDate, lastDate);
 	const firstDay = firstDate.getDay();
 	const columns = days.map(d => (
 		<Column
@@ -130,9 +139,15 @@ const Calendar: FC<{ meetings: Meeting[] }> = ({ meetings }) => {
 			minHour={minHour}
 		/>
 	));
-
+	const hours: ReactNode[] = [];
+	for (let i = minHour; i <= maxHour; i += hourStep)
+		hours.push(
+			<div className={styles.hour} key={i}>
+				{i}
+			</div>
+		);
 	return (
-		<div className={styles.calendar}>
+		<div className={styles.calendar} style={{ height: calendarHeight }}>
 			<div className={styles['top-bar']}>
 				<h2 className={styles.h}>Kalendarz</h2>
 				<nav className={styles.buttons}>

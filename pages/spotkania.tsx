@@ -4,15 +4,19 @@ import Layout from 'components/layout';
 import dato, { contactFragment } from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Contact, Meeting } from 'types';
+import { CalendarData, Contact, Meeting } from 'types';
 import Calendar from 'components/calendar';
 import styles from 'styles/meetings/Meetings.module.scss';
 
-type Data = { meetings: Meeting[] } & Contact;
+type Data = { meetings: Meeting[] } & Contact & CalendarData;
 
-const MeetingsPage: NextPage<Data> = ({ meetings, contact }) => {
+const MeetingsPage: NextPage<Data> = ({
+	meetings,
+	contact,
+	calendar: calendarData,
+}) => {
 	const [showCalendar, setShowCalendar] = useState(false);
-	// console.log(allMeetings);
+
 	useEffect(() => {
 		setShowCalendar(true);
 	}, []);
@@ -25,7 +29,7 @@ const MeetingsPage: NextPage<Data> = ({ meetings, contact }) => {
 					desc="Chciałbym zapisać się na..."
 					leftSide
 				/>
-				{showCalendar && <Calendar meetings={meetings} />}
+				{showCalendar && <Calendar meetings={meetings} data={calendarData} />}
 			</main>
 		</Layout>
 	);
@@ -40,14 +44,23 @@ export const getStaticProps: GetStaticProps<Data> = async () => {
 				startTime
 				length
 			}
+			calendar {
+					maxHour
+					minHour
+					hourStep
+					minDay
+					maxDay
+					height
+				}
 			${contactFragment}
 		}
 	`;
 	type Response = Omit<Data, 'meetings'> & { allMeetings: Data['meetings'] };
 	const {
-		data: { allMeetings: meetings, contact },
+		data: { allMeetings: meetings, ...otherData },
 	} = await dato<Response>({ query });
 
-	return { props: { meetings, contact } };
+	return { props: { meetings, ...otherData } };
 };
+
 export default MeetingsPage;
