@@ -1,5 +1,8 @@
 import { ButtonHTMLAttributes } from 'react';
-import { ResponsiveImageType, StructuredTextDocument } from 'react-datocms';
+import {
+	ResponsiveImageType,
+	StructuredTextGraphQlResponse,
+} from 'react-datocms';
 
 export type UArray = Array<unknown>;
 export type FArgs<P extends UArray> = (...args: P) => void;
@@ -12,18 +15,25 @@ export interface DatoImg {
 
 export interface Author {
 	avatar: DatoImg;
-	id: string;
 	name: string;
 }
 export interface Category {
-	id: string;
 	name: string;
 }
 export interface Video {
-	url: string;
+	// url: string;
+	title: string;
+	providerUid: string;
+	width?: number;
+	height?: number;
 }
 export interface Post {
 	title: string;
+	slug: string;
+	content: StructuredTextGraphQlResponse<
+		| { __typename: 'VideoBlockRecord'; id: string; video: Video }
+		| { __typename: 'ImageBlockRecord'; id: string; image: DatoImg }
+	>;
 	author?: Author;
 	category?: Category;
 	picture?: DatoImg;
@@ -48,14 +58,14 @@ export interface TextListRecord {
 	title: string;
 	title2?: string;
 	list?: { text: string; id: string }[];
-	text?: StructuredTextDocument;
+	text?: StructuredTextGraphQlResponse;
 }
 export interface TextImageRecord {
 	__typename: 'TextImageRecord';
 	id: string;
 	fixed: boolean;
 	title: string;
-	text?: StructuredTextDocument;
+	text?: StructuredTextGraphQlResponse;
 	image?: DatoImg;
 	backgroundColor?: DatoColor;
 }
