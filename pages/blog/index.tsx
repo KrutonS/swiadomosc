@@ -1,16 +1,19 @@
 import { gql } from '@apollo/client';
-import DescTitle from 'components/desc-title';
+import DescTitle from 'components/title-desc';
 import Layout from 'components/layout';
-import PostItem from 'components/post-item';
+import PostItem from 'components/blog/post-item';
 import Select from 'components/select';
 import dato, { contactFragment, responsiveImageFragment } from 'lib/datocms';
 import { NextPage, GetStaticProps } from 'next';
 import { useState } from 'react';
-import styles from 'styles/Blog.module.scss';
-import { Category, Contact, Post } from 'types';
+import styles from 'styles/blog/Blog.module.scss';
+import { Category, Contact, Post, SliceObject } from 'types';
 
 interface Data extends Contact {
-	allPosts: Post[];
+	allPosts: SliceObject<
+		Post,
+		'title' | 'author' | 'category' | 'slug' | 'picture'
+	>[];
 	allCategories: Category[];
 }
 const Blog: NextPage<Data> = ({ allCategories, allPosts, contact }) => {
@@ -49,6 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
 	const allPostsFragment = `
 	allPosts(orderBy: _firstPublishedAt_DESC) {
 		title
+		slug
 		author {
 			avatar {
 				responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 40, h: 40 }) {
@@ -84,6 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
 		name
 	}
 	`;
+
 	const mainQuery = gql`
 		query BlogPosts {
 		${allPostsFragment}

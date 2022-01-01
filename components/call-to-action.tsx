@@ -1,8 +1,8 @@
 // import Image from 'next/image';
 import { Image, ResponsiveImageType } from 'react-datocms';
 import { FC } from 'react';
+import styles from 'styles/about/CallToAction.module.scss';
 import Button, { ButtonProps } from './button';
-import styles from '../styles/CallToAction.module.scss';
 
 type Props = {
 	imageData?: ResponsiveImageType;

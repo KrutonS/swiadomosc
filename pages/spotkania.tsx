@@ -1,12 +1,12 @@
 import { gql } from '@apollo/client';
-import DescTitle from 'components/desc-title';
+import DescTitle from 'components/title-desc';
 import Layout from 'components/layout';
 import dato, { contactFragment } from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { Contact, Meeting } from 'types';
-import Calendar from '../components/calendar';
-import styles from '../styles/Meetings.module.scss';
+import Calendar from 'components/calendar';
+import styles from 'styles/meetings/Meetings.module.scss';
 
 type Data = { meetings: Meeting[] } & Contact;
 

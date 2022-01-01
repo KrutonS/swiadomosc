@@ -1,9 +1,9 @@
 import { FC, ReactNode, useLayoutEffect, useRef } from 'react';
 import cn from 'classnames';
 import { hourMs } from 'utils/date/msTimes';
-import styles from '../../styles/Calendar.module.scss';
-import { Meeting } from '../../types';
-import dateToHour from '../../utils/date/dateToHour';
+import styles from 'styles/meetings/Calendar.module.scss';
+import { Meeting } from 'types';
+import dateToHour from 'utils/date/dateToHour';
 
 //#region local types
 interface ColumnProps {

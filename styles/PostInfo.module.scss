@@ -1,0 +1,35 @@
+@use 'variables' as var;
+$gap: 10px;
+$avatar-size: var(--avatar-size, 40px);
+.info {
+	@extend %flex;
+	flex-direction: column;
+	align-items: center;
+	padding-block: 0.4em;
+	position: relative;
+}
+.category {
+	margin-left: 5px;
+}
+.avatar {
+	border-radius: 50px;
+	width: $avatar-size;
+	height: $avatar-size;
+}
+.comments-icon path,
+.comments-icon {
+	fill: var(--color, var.$color-gray1);
+}
+.comments-icon {
+	margin-left: $gap;
+}
+@media (min-width: 500px) {
+	.comments {
+		margin-left: auto;
+	}
+	.info {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: $gap;
+	}
+}

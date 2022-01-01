@@ -2,38 +2,23 @@ import { FC } from 'react';
 import { Post } from 'types';
 import { Image } from 'react-datocms';
 import styles from 'styles/PostItem.module.scss';
-// Ignore can't find file false error
-// @ts-ignore
-import CommentsIcon from '../public/comments.svg';
+import PostInfo from '../postInfo';
 
 interface Props {
-	post: Post;
+	post: Pick<Post, 'author' | 'picture' | 'category' | 'title'>;
 }
 
-const commentsCount = 12;
-
 const PostItem: FC<Props> = ({
-	post: { author, picture, category, title },
+	post: { picture, title, ...postInfoProps },
 }) => {
-	const {
-		avatar: { responsiveImage: avatarImageData },
-		// id,
-		name,
-	} = author ?? { avatar: {} };
-
 	const { responsiveImage: postImageData } = picture ?? {};
 
 	return (
 		<div className={styles.post}>
 			<div className={styles.header}>
 				<h4 className={styles.title}>{title}</h4>
-				<div className={styles.info}>
-					{name && avatarImageData && (
-						<>
-							<span className={styles.author}>{name}</span>
-							<Image className={styles.avatar} data={avatarImageData} />
-						</>
-					)}
+				{/* <div className={styles.info}>
+					<PostAuthor author={author} />
 					{category && (
 						<small className={styles.category}>{category.name}</small>
 					)}
@@ -43,7 +28,12 @@ const PostItem: FC<Props> = ({
 							<CommentsIcon className={styles['comments-icon']} />
 						</div>
 					)}
-				</div>
+				</div> */}
+				<PostInfo
+					{...postInfoProps}
+					commentsCount={12}
+					className={styles.info}
+				/>
 			</div>
 			{postImageData && (
 				// <div className={styles['image-wrapper']}>

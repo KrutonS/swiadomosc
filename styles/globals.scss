@@ -91,17 +91,26 @@ h4,
 h5,
 h6,
 p,
-article {
+article,
+blockquote {
 	max-width: 60ch;
 }
-article {
+article,
+blockquote {
 	margin-inline: auto;
 	text-indent: var.$text-indent;
 }
 html {
 	scroll-behavior: smooth;
 }
-
+blockquote {
+	font-style: italic;
+	background-color: var.$color-overlay1;
+	padding: 1em;
+	& footer {
+		@include var.small;
+	}
+}
 // #endregion
 // #endregion
 // #region Desktop And Resets

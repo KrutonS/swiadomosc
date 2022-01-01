@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
-import { StructuredText, StructuredTextDocument } from 'react-datocms';
+import { StructuredTextGraphQlResponse, StructuredText } from 'react-datocms';
 import { TextListRecord } from 'types';
-import styles from '../styles/TwoColumn.module.scss';
+import styles from 'styles/about/TwoColumn.module.scss';
 
 interface Props {
 	title: string;
 	title2?: string;
-	text?: StructuredTextDocument;
+	text?: StructuredTextGraphQlResponse;
 	listItems?: TextListRecord['list'];
 	className?: string;
 }

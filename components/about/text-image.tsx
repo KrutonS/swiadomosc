@@ -1,11 +1,15 @@
-import { Image, StructuredText, StructuredTextDocument } from 'react-datocms';
+import {
+	Image,
+	StructuredTextGraphQlResponse,
+	StructuredText,
+} from 'react-datocms';
 import { DatoImg } from 'types';
-import styles from '../styles/TwoColumn.module.scss';
-import FixedImage from './fixed-image';
+import styles from 'styles/about/TwoColumn.module.scss';
+import FixedImage from '../fixed-image';
 
 interface Props {
 	title: string;
-	text?: StructuredTextDocument;
+	text?: StructuredTextGraphQlResponse;
 	image?: DatoImg;
 	className?: string;
 	backgroundColor?: string;

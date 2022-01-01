@@ -11,7 +11,7 @@ import dayRange from 'utils/date/dayRange';
 import getMonthName from 'utils/date/monthNames';
 import debounce from 'utils/debounce';
 import getDayName from 'utils/date/dayName';
-import styles from 'styles/Calendar.module.scss';
+import styles from 'styles/meetings/Calendar.module.scss';
 import clamp from 'utils/math/clamp';
 import forwardDays from 'utils/date/forwardDays';
 import { Meeting } from 'types';

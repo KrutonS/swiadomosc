@@ -1,7 +1,7 @@
 import { AboutContentType } from 'types';
-import CallToAction from '../components/call-to-action';
-import TextImage from '../components/text-image';
-import TextList from '../components/text-list';
+import CallToAction from 'components/call-to-action';
+import TextImage from 'components/about/text-image';
+import TextList from 'components/about/text-list';
 
 const aboutContent = (content: AboutContentType) => {
 	const elements = content.map(item => {
