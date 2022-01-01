@@ -9,6 +9,10 @@
 		padding-inline: revert;
 		text-align: left;
 	}
+	& > *:not(.info) + * {
+		margin-top: 0.2em;
+		padding-top: 0;
+	}
 	& p {
 		text-indent: var.$text-indent;
 	}

@@ -19,7 +19,7 @@ const PostPage: FC<Response> = ({ post, contact }) => {
 		<Layout contact={contact}>
 			<main className={styles.main}>
 				<h1 className={styles.title}>{title}</h1>
-				<PostInfo {...postInfo} />
+				<PostInfo {...postInfo} className={styles.info} />
 				{pictureData && <Image data={pictureData} />}
 				<StructuredText
 					data={content}
