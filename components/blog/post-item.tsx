@@ -2,21 +2,27 @@ import { FC } from 'react';
 import { Post } from 'types';
 import { Image } from 'react-datocms';
 import styles from 'styles/PostItem.module.scss';
+import Link from 'next/link';
 import PostInfo from '../postInfo';
 
 interface Props {
-	post: Pick<Post, 'author' | 'picture' | 'category' | 'title'>;
+	post: Pick<Post, 'author' | 'picture' | 'category' | 'title' | 'slug'>;
 }
 
 const PostItem: FC<Props> = ({
-	post: { picture, title, ...postInfoProps },
+	post: { picture, title, slug, ...postInfoProps },
 }) => {
 	const { responsiveImage: postImageData } = picture ?? {};
 
 	return (
 		<div className={styles.post}>
 			<div className={styles.header}>
-				<h4 className={styles.title}>{title}</h4>
+				<Link href={`blog/${slug}`}>
+					{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+					<a>
+						<h4 className={styles.title}>{title}</h4>
+					</a>
+				</Link>
 				{/* <div className={styles.info}>
 					<PostAuthor author={author} />
 					{category && (

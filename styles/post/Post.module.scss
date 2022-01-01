@@ -1,0 +1,37 @@
+@use '../variables' as var;
+
+.main {
+	background: var.$color-overlay2;
+	margin: 120px calc(5vw + 1px);
+	padding: 2em;
+	border-radius: var.$radius2;
+	& > * {
+		padding-inline: revert;
+		text-align: left;
+	}
+	& p {
+		text-indent: var.$text-indent;
+	}
+	& blockquote {
+		padding: 1em;
+	}
+	& ul {
+		list-style-type: disc;
+	}
+	& ol {
+		list-style-type: upper-roman;
+	}
+	& h2 {
+		color: var.$color-accent1;
+	}
+	& h3,
+	h4,
+	h5 {
+		color: var.$color-accent2;
+	}
+	hr {
+		border: none;
+		border-top: 1px dashed darken(var.$color-accent1, 10%);
+		padding: 0;
+	}
+}
