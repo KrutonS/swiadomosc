@@ -72,7 +72,7 @@ function getDays(
 //#endregion
 interface Props {
 	meetings: Meeting[];
-	data: CalendarData['calendar'];
+	data: Omit<CalendarData['meetingsPage'], 'seoMetaTags'>;
 }
 const Calendar: FC<Props> = ({ meetings, data }) => {
 	// TODO optimizations

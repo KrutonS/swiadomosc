@@ -36,3 +36,10 @@ export const contactFragment = `
 		city
 	}
 `;
+export const SEOFragment = `
+seoMetaTags:_seoMetaTags {
+	attributes
+	content
+	tag
+}
+`;

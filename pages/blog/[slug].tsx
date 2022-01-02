@@ -1,5 +1,9 @@
 import { gql } from '@apollo/client';
-import dato, { contactFragment, responsiveImageFragment } from 'lib/datocms';
+import dato, {
+	contactFragment,
+	responsiveImageFragment,
+	SEOFragment,
+} from 'lib/datocms';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FC } from 'react';
 import { Image, StructuredText } from 'react-datocms';
@@ -10,13 +14,16 @@ import YoutubeEmbed from 'components/video';
 import PostInfo from 'components/postInfo';
 
 interface Response extends Contact {
-	post: Pick<Post, 'title' | 'author' | 'category' | 'content' | 'picture'>;
+	post: Pick<
+		Post,
+		'title' | 'author' | 'category' | 'content' | 'picture' | 'seoMetaTags'
+	>;
 }
 const PostPage: FC<Response> = ({ post, contact }) => {
-	const { title, content, picture, ...postInfo } = post;
+	const { title, content, picture, seoMetaTags, ...postInfo } = post;
 	const pictureData = picture?.responsiveImage;
 	return (
-		<Layout contact={contact}>
+		<Layout contact={contact} seoData={seoMetaTags}>
 			<main className={styles.main}>
 				<h1 className={styles.title}>{title}</h1>
 				<PostInfo {...postInfo} className={styles.info} />
@@ -57,11 +64,7 @@ export const getStaticProps: GetStaticProps<Response, Variables> = async ({
 		category {
 			name
 		}
-		_seoMetaTags {
-			attributes
-			content
-			tag
-		}
+		${SEOFragment}
 		picture {
       responsiveImage{
 				${responsiveImageFragment}

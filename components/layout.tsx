@@ -1,16 +1,20 @@
 import { FC } from 'react';
 import { Contact } from 'types';
 import Head from 'next/head';
+import { renderMetaTags, ToMetaTagsType } from 'react-datocms';
 import Header from './header';
 import Footer from './footer';
 
-type Props = Contact;
+interface Props extends Contact {
+	seoData: ToMetaTagsType;
+}
 
-const Layout: FC<Props> = ({ contact, children }) => {
+const Layout: FC<Props> = ({ contact, children, seoData }) => {
 	return (
 		<>
 			<Head>
-				<link rel="icon" href="/logo.svg" />
+				{/* <link rel="icon" href="/logo.svg" /> */}
+				{renderMetaTags(seoData)}
 			</Head>
 			<Header />
 			{/* <ScrollContextWrapper> */}

@@ -2,11 +2,15 @@ import { ButtonHTMLAttributes } from 'react';
 import {
 	ResponsiveImageType,
 	StructuredTextGraphQlResponse,
+	ToMetaTagsType,
 } from 'react-datocms';
 
 export type UArray = Array<unknown>;
 export type FArgs<P extends UArray> = (...args: P) => void;
 
+export interface SeoData {
+	seoMetaTags: ToMetaTagsType;
+}
 export interface DatoImg {
 	responsiveImage: ResponsiveImageType;
 	title?: string;
@@ -27,7 +31,7 @@ export interface Video {
 	width?: number;
 	height?: number;
 }
-export interface Post {
+export interface Post extends SeoData {
 	title: string;
 	slug: string;
 	content: StructuredTextGraphQlResponse<
@@ -41,14 +45,14 @@ export interface Post {
 }
 
 export interface CalendarData {
-	calendar: {
+	meetingsPage: {
 		maxHour: number;
 		minHour: number;
 		hourStep: number;
 		minDay: string;
 		maxDay: string;
 		height?: number;
-	};
+	} & SeoData;
 }
 
 export type ButtonTypes = ButtonHTMLAttributes<HTMLButtonElement>['type'];

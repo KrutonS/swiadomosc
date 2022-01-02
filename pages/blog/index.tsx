@@ -3,20 +3,27 @@ import DescTitle from 'components/title-desc';
 import Layout from 'components/layout';
 import PostItem from 'components/blog/post-item';
 import Select from 'components/select';
-import dato, { contactFragment, responsiveImageFragment } from 'lib/datocms';
+import dato, {
+	contactFragment,
+	responsiveImageFragment,
+	SEOFragment,
+} from 'lib/datocms';
 import { NextPage, GetStaticProps } from 'next';
 import { useState } from 'react';
 import styles from 'styles/blog/Blog.module.scss';
-import { Category, Contact, Post, SliceObject } from 'types';
+import { Category, Contact, Post, SeoData } from 'types';
 
 interface Data extends Contact {
-	allPosts: SliceObject<
-		Post,
-		'title' | 'author' | 'category' | 'slug' | 'picture'
-	>[];
+	allPosts: Pick<Post, 'title' | 'author' | 'category' | 'slug' | 'picture'>[];
 	allCategories: Category[];
+	blogPage: SeoData;
 }
-const Blog: NextPage<Data> = ({ allCategories, allPosts, contact }) => {
+const Blog: NextPage<Data> = ({
+	allCategories,
+	allPosts,
+	contact,
+	blogPage: { seoMetaTags },
+}) => {
 	const [filter, setFilter] = useState<string | null>(null);
 	// TODO optimize
 	const filters = allCategories.map<string>(c => c.name);
@@ -25,7 +32,7 @@ const Blog: NextPage<Data> = ({ allCategories, allPosts, contact }) => {
 		posts = allPosts.filter(({ category }) => category?.name === filter);
 	const postsNodes = posts.map(p => <PostItem post={p} key={p.title} />);
 	return (
-		<Layout contact={contact}>
+		<Layout contact={contact} seoData={seoMetaTags}>
 			<main className={styles.main}>
 				<DescTitle
 					title="Blog"
@@ -88,12 +95,13 @@ export const getStaticProps: GetStaticProps = async () => {
 		name
 	}
 	`;
-
+	const blogFragment = `blogPage{${SEOFragment}}`;
 	const mainQuery = gql`
 		query BlogPosts {
-		${allPostsFragment}
-		${allCategoriesFragment}
-		${contactFragment}
+			${blogFragment}
+			${allPostsFragment}
+			${allCategoriesFragment}
+			${contactFragment}
 		}
 	`;
 

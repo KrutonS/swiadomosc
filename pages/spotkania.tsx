@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import DescTitle from 'components/title-desc';
 import Layout from 'components/layout';
-import dato, { contactFragment } from 'lib/datocms';
+import dato, { contactFragment, SEOFragment } from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { CalendarData, Contact, Meeting } from 'types';
@@ -13,7 +13,7 @@ type Data = { meetings: Meeting[] } & Contact & CalendarData;
 const MeetingsPage: NextPage<Data> = ({
 	meetings,
 	contact,
-	calendar: calendarData,
+	meetingsPage: calendarData,
 }) => {
 	const [showCalendar, setShowCalendar] = useState(false);
 
@@ -22,7 +22,7 @@ const MeetingsPage: NextPage<Data> = ({
 	}, []);
 
 	return (
-		<Layout contact={contact}>
+		<Layout contact={contact} seoData={calendarData.seoMetaTags}>
 			<main className={styles.main}>
 				<DescTitle
 					title="Spotkania"
@@ -44,7 +44,8 @@ export const getStaticProps: GetStaticProps<Data> = async () => {
 				startTime
 				length
 			}
-			calendar {
+			meetingsPage {
+					${SEOFragment}
 					maxHour
 					minHour
 					hourStep
