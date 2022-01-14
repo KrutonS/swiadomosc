@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Contact } from '../../types';
+import { Contact } from 'types';
 
 const Address: FC<Pick<Contact['contact'], 'street' | 'zip' | 'city'>> = ({
 	street,

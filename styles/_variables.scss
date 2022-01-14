@@ -23,6 +23,8 @@ $color-overlay-x2: hsla(0, 0%, 0%, 0.97);
 $color-overlay-w1: hsla(0, 0%, 100%, 0.05);
 $color-overlay-w2: hsla(0, 0%, 100%, 0.08);
 
+$color-red: #bb4e4e;
+
 $radius1: 5px;
 $radius2: 10px;
 $radius3: 15px;
@@ -83,7 +85,7 @@ $text-indent: 1em;
 // #endregion
 // #region Desktop reset
 @mixin regular-d {
-	letter-spacing: 10%;
+	letter-spacing: 0.1;
 }
 @mixin h1-d {
 	// font-size: 4.444em;

@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import styles from '../../styles/Footer.module.scss';
-import Button from '../button';
-import Input from '../input';
+import { emailRegex } from 'utils/globals';
+
+import styles from 'styles/Footer.module.scss';
+import Button from 'components/user-inputs/button';
+import Input from 'components/user-inputs/input';
 
 interface FormData {
 	email: string;
@@ -29,15 +31,12 @@ const Right: FC = () => {
 				label="Twój email"
 				type="email"
 				options={{
-					required:
-						'Podaj proszę swój email, żebyśmy wiedzieli gdzie odpowiedzieć ;)',
 					pattern: {
-						value:
-							/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+						value: emailRegex,
 						message: 'Email jest nieprawidłowy!',
 					},
 				}}
-				errorMessage={errors.email?.message}
+				errors={errors.email}
 			/>
 			<Input
 				multiLine
@@ -45,10 +44,11 @@ const Right: FC = () => {
 				register={register}
 				id="message"
 				label="Wiadomość"
-				options={{
-					required: 'Wiadomość jest pusta!',
-				}}
-				errorMessage={errors.message?.message}
+				// options={{
+				// 	required: 'Wiadomość jest pusta!',
+				// }}
+				required
+				errors={errors.message}
 				placeholder="You have freedom here. The only guide is your heart."
 			/>
 			<Button type="submit" className={styles.button}>

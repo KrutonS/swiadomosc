@@ -4,6 +4,7 @@ import {
 	TextareaHTMLAttributes,
 } from 'react';
 import {
+	FieldError,
 	FieldPath,
 	FieldPathValue,
 	FieldValues,
@@ -11,7 +12,8 @@ import {
 	UnpackNestedValue,
 	UseFormRegister,
 } from 'react-hook-form';
-import styles from '../styles/Input.module.scss';
+import getDefaultInputErr from 'utils/error/inputDefaultErrors';
+import styles from 'styles/Input.module.scss';
 /*
 | 'button'
 | 'checkbox'
@@ -36,7 +38,7 @@ import styles from '../styles/Input.module.scss';
 | 'url'
 | 'week'
 */
-interface Props<F extends FieldValues> {
+export interface InputProps<F extends FieldValues> {
 	label: string;
 	multiLine?: boolean;
 	type?: Exclude<
@@ -58,7 +60,9 @@ interface Props<F extends FieldValues> {
 	id: FieldPath<F>;
 	options?: RegisterOptions<F>;
 	defaultValue?: UnpackNestedValue<FieldPathValue<F, FieldPath<F>>>;
-	errorMessage?: string;
+	// errorMessage?: string;
+	errors?: FieldError;
+	required?: boolean;
 }
 
 const Input = <F extends FieldValues>({
@@ -71,20 +75,25 @@ const Input = <F extends FieldValues>({
 	register,
 	options,
 	defaultValue,
-	errorMessage,
-}: Props<F>) => {
+	// errorMessage,
+	errors,
+	required,
+}: InputProps<F>) => {
 	type CommonAttr = InputHTMLAttributes<HTMLInputElement> &
 		TextareaHTMLAttributes<HTMLTextAreaElement>;
 	// required: !!options?.required,
+	const hasErrors = Boolean(Object.keys(errors || {}).length);
 
+	const errorMessage =
+		errors?.message || getDefaultInputErr(errors?.type, options);
 	const commonAttr: CommonAttr = {
 		className: `${styles.input} ${className}`,
 		id,
-		'aria-invalid': !!errorMessage,
+		'aria-invalid': hasErrors,
 		disabled: options?.disabled,
-		required: !!options?.required,
+		required: !!options?.required || required,
 		placeholder,
-		...register(id, options),
+		...register(id, { ...options, required: required || options?.required }),
 	};
 	return (
 		<div className={styles.container}>
@@ -103,10 +112,12 @@ const Input = <F extends FieldValues>({
 					type={type}
 				/>
 			)}
-			{errorMessage && (
+			{hasErrors ? (
 				<p role="alert" className={`${styles.error} error`}>
 					{errorMessage}
 				</p>
+			) : (
+				<br />
 			)}
 		</div>
 	);

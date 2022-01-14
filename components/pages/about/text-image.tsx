@@ -5,7 +5,7 @@ import {
 } from 'react-datocms';
 import { DatoImg } from 'types';
 import styles from 'styles/about/TwoColumn.module.scss';
-import FixedImage from '../fixed-image';
+import FixedImage from 'components/fixed-image';
 
 interface Props {
 	title: string;

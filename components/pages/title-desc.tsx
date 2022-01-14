@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import styles from '../styles/DescTitle.module.scss';
+import styles from 'styles/DescTitle.module.scss';
 
 interface Props {
 	title: string;

@@ -28,3 +28,7 @@ textarea.input {
 :where(* + .container) {
 	margin-top: 0.5em;
 }
+
+.error {
+	color: var.$color-red;
+}

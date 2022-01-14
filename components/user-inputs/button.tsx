@@ -9,8 +9,8 @@ import {
 import Link from 'next/link';
 import cn from 'classnames';
 
-import styles from '../styles/Button.module.scss';
-import { ButtonTypes } from '../types';
+import styles from 'styles/Button.module.scss';
+import { ButtonTypes } from '../../types';
 
 type ClickProps = {
 	onClick?: MouseEventHandler;

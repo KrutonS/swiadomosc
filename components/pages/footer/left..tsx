@@ -2,11 +2,10 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { Contact } from 'types';
 import styles from 'styles/Footer.module.scss';
-import Button from '../button';
-import Logo from '../logo';
+import Button from 'components/user-inputs/button';
+import Logo from 'components/logo';
+import Facebook from 'public/facebook.svg';
 import Address from './address';
-// @ts-ignore
-import Facebook from '../../public/facebook.svg';
 import ContactInfo from './contact-info';
 
 // #region Local

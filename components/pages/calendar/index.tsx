@@ -16,7 +16,7 @@ import clamp from 'utils/math/clamp';
 import forwardDays from 'utils/date/forwardDays';
 import { CalendarData, Meeting } from 'types';
 import { groupMeetings } from 'utils/meetings';
-import Button from 'components/button';
+import Button from 'components/user-inputs/button';
 import setStartOfDay from 'utils/date/startOfDay';
 import setEndOfDay from 'utils/date/endOfDay';
 import Column from './column';

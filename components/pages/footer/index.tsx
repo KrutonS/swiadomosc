@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Contact } from 'types';
-import styles from '../../styles/Footer.module.scss';
+import styles from 'styles/Footer.module.scss';
 import Left from './left.';
 import Right from './right';
 

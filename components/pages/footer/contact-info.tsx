@@ -1,5 +1,5 @@
 import { Contact } from 'types';
-import styles from '../../styles/Footer.module.scss';
+import styles from 'styles/Footer.module.scss';
 
 type Props = Pick<Contact['contact'], 'phone' | 'email'>;
 
