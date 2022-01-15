@@ -9,9 +9,9 @@ import { FC } from 'react';
 import { Image, StructuredText } from 'react-datocms';
 import { Contact, Post } from 'types';
 import styles from 'styles/post/Post.module.scss';
-import Layout from 'components/layout';
+import Layout from 'components/pages/layout';
 import YoutubeEmbed from 'components/video';
-import PostInfo from 'components/postInfo';
+import PostInfo from 'components/pages/postInfo';
 
 interface Response extends Contact {
 	post: Pick<

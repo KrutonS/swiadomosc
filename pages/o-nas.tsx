@@ -6,8 +6,8 @@ import dato, {
 	SEOFragment,
 } from 'lib/datocms';
 import aboutContent from 'utils/about-page-content';
-import Hero from 'components/about/hero';
-import LastPost from 'components/about/last-post';
+import Hero from 'components/pages/about/hero';
+import LastPost from 'components/pages/about/last-post';
 import {
 	SliceObject,
 	Post,
@@ -17,7 +17,8 @@ import {
 	SeoData,
 } from 'types';
 import styles from 'styles/about/About.module.scss';
-import Layout from 'components/layout';
+import Layout from 'components/pages/layout';
+import SignUp from 'components/user-inputs/sign-up';
 
 interface AboutPage extends SeoData {
 	heroImg: DatoImg;
@@ -42,6 +43,7 @@ const Home: NextPage<Data> = ({ post, aboutPage, contact }) => {
 				<Hero imageData={heroImageData} />
 				{content && aboutContent(content as AboutContentType)}
 				{post && <LastPost title="Ostatni video post" post={post} />}
+				<SignUp />
 			</main>
 		</Layout>
 	);

@@ -180,3 +180,6 @@ export type SliceObject<O, T extends DeepKeys2<O>> = O extends never
 				? NonNullable<O[K]>
 				: NonNullable<ExcludeEmpty<SliceObject<O[K], Extract<T, object>[K]>>>;
 	  };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type GetProps<T extends (...args: any[]) => any> = Parameters<T>[0];

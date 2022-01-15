@@ -4,6 +4,7 @@ import { Contact } from 'types';
 import styles from 'styles/Footer.module.scss';
 import Button from 'components/user-inputs/button';
 import Logo from 'components/logo';
+// @ts-ignore
 import Facebook from 'public/facebook.svg';
 import Address from './address';
 import ContactInfo from './contact-info';

@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
-import DescTitle from 'components/title-desc';
-import Layout from 'components/layout';
-import PostItem from 'components/blog/post-item';
-import Select from 'components/select';
+import DescTitle from 'components/pages/title-desc';
+import Layout from 'components/pages/layout';
+import PostItem from 'components/pages/blog/post-item';
+import Select from 'components/user-inputs/select';
 import dato, {
 	contactFragment,
 	responsiveImageFragment,
