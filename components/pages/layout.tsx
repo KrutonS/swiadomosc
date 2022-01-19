@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { Contact } from 'types';
 import Head from 'next/head';
 import { renderMetaTags, ToMetaTagsType } from 'react-datocms';
-import Header from '../header';
+import AuthDialog from 'components/auth';
+import Header from './header';
 import Footer from './footer';
 
 interface Props extends Contact {
@@ -17,6 +18,7 @@ const Layout: FC<Props> = ({ contact, children, seoData }) => {
 				{renderMetaTags(seoData)}
 			</Head>
 			<Header />
+			<AuthDialog />
 			{/* <ScrollContextWrapper> */}
 			{children}
 			{/* </ScrollContextWrapper> */}

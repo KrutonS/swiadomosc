@@ -7,7 +7,7 @@ import Button from 'components/user-inputs/button';
 import Input from 'components/user-inputs/input';
 
 interface FormData {
-	email: string;
+	fEmail: string;
 	message: string;
 }
 
@@ -27,7 +27,7 @@ const Right: FC = () => {
 			<Input
 				className={styles.input}
 				register={register}
-				id="email"
+				id="fEmail"
 				label="Twój email"
 				type="email"
 				options={{
@@ -36,7 +36,7 @@ const Right: FC = () => {
 						message: 'Email jest nieprawidłowy!',
 					},
 				}}
-				errors={errors.email}
+				errors={errors.fEmail}
 			/>
 			<Input
 				multiLine

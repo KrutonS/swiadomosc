@@ -183,3 +183,5 @@ export type SliceObject<O, T extends DeepKeys2<O>> = O extends never
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetProps<T extends (...args: any[]) => any> = Parameters<T>[0];
+
+export type EmailWIthPassword = { email: string; password: string };

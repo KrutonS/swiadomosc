@@ -158,14 +158,12 @@ $text-indent: 1em;
 	letter-spacing: inherit;
 	font-weight: inherit;
 	line-height: inherit;
+	color: inherit;
 }
 %center-text {
 	text-align: center;
 }
 
-%pointer {
-	cursor: pointer;
-}
 %fit-content {
 	width: fit-content;
 }
@@ -181,4 +179,17 @@ $text-indent: 1em;
 	--spacing: calc(#{$page-items-margin} + #{$offset});
 	@extend %items-spacing;
 }
+
+%pseudo-init {
+	content: '';
+	position: absolute;
+	inset: 0;
+}
+@mixin pseudo($sel: 'before') {
+	&::#{$sel} {
+		@extend %pseudo-init;
+		@content;
+	}
+}
+
 // #endregion
