@@ -3,8 +3,7 @@
 :where(.btn) {
 	@extend %button-padding;
 	@extend %border;
-	@extend %text-reset;
 	@extend %center-text;
-	cursor: pointer;
 	@extend %fit-content;
+	text-decoration: none;
 }

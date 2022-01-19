@@ -111,6 +111,13 @@ blockquote {
 		@include var.small;
 	}
 }
+:where(button) {
+	cursor: pointer;
+	border: none;
+	background: none;
+	@extend %text-reset;
+	text-decoration: underline;
+}
 // #endregion
 // #endregion
 // #region Desktop And Resets

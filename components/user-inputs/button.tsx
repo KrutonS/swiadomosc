@@ -24,12 +24,13 @@ type LinkProps = {
 export type ButtonProps = {
 	className?: string;
 	children: ReactNode;
+	clearStyles?: boolean;
 } & (ClickProps | LinkProps);
 
 const Button = forwardRef<HTMLElement | HTMLAnchorElement, ButtonProps>(
-	({ children, className, ...props }, ref) => {
+	({ children, className, clearStyles, ...props }, ref) => {
 		// const { className = '', children } = props;
-		const nodeClass = cn(className, styles.btn);
+		const nodeClass = cn(className, { [styles.btn]: !clearStyles });
 		if ('href' in props) {
 			const { href, ...attrs } = props;
 			return (
