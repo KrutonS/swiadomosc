@@ -22,7 +22,6 @@
 .option {
 	$original-color: transparentize(darken(var.$color-primary, 10%), 0.1);
 	$active-weight: 600;
-	@extend %pointer;
 	background-color: $original-color;
 	&:hover,
 	&:focus-within,
