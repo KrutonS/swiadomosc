@@ -4,7 +4,7 @@ import {
 	TextareaHTMLAttributes,
 } from 'react';
 import {
-	FieldError,
+	FieldErrors,
 	FieldPath,
 	FieldPathValue,
 	FieldValues,
@@ -38,9 +38,21 @@ import styles from 'styles/Input.module.scss';
 | 'url'
 | 'week'
 */
-export interface InputProps<F extends FieldValues> {
+type InputAttributes = InputHTMLAttributes<HTMLInputElement>;
+type TextAreaAttributes = TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+type SingleInputProps = {
+	multiLine?: false;
+} & InputAttributes;
+
+type TextAreaProps = {
+	multiLine: true;
+} & TextAreaAttributes;
+
+export type InputProps<F extends FieldValues> = {
 	label: string;
-	multiLine?: boolean;
+	register: UseFormRegister<F>;
+	id: FieldPath<F>;
 	type?: Exclude<
 		HTMLInputTypeAttribute,
 		| 'button'
@@ -55,15 +67,11 @@ export interface InputProps<F extends FieldValues> {
 	>;
 	className?: string;
 	placeholder?: string;
-
-	register: UseFormRegister<F>;
-	id: FieldPath<F>;
 	options?: RegisterOptions<F>;
 	defaultValue?: UnpackNestedValue<FieldPathValue<F, FieldPath<F>>>;
-	// errorMessage?: string;
-	errors?: FieldError;
+	errors?: FieldErrors;
 	required?: boolean;
-}
+} & (SingleInputProps | TextAreaProps);
 
 const Input = <F extends FieldValues>({
 	id,
@@ -75,18 +83,15 @@ const Input = <F extends FieldValues>({
 	register,
 	options,
 	defaultValue,
-	// errorMessage,
 	errors,
 	required,
+	...otherProps
 }: InputProps<F>) => {
-	type CommonAttr = InputHTMLAttributes<HTMLInputElement> &
-		TextareaHTMLAttributes<HTMLTextAreaElement>;
-	// required: !!options?.required,
 	const hasErrors = Boolean(Object.keys(errors || {}).length);
 
 	const errorMessage =
 		errors?.message || getDefaultInputErr(errors?.type, options);
-	const commonAttr: CommonAttr = {
+	const commonAttr = {
 		className: `${styles.input} ${className}`,
 		id,
 		'aria-invalid': hasErrors,
@@ -94,20 +99,25 @@ const Input = <F extends FieldValues>({
 		required: !!options?.required || required,
 		placeholder,
 		...register(id, { ...options, required: required || options?.required }),
+		...otherProps,
 	};
+
 	return (
 		<div className={styles.container}>
 			<label className={styles.label} htmlFor={id}>
 				{label}
 			</label>
 			{multiLine ? (
-				<textarea className={styles.input} {...commonAttr}>
+				<textarea
+					{...(commonAttr as TextAreaAttributes)}
+					className={styles.input}
+				>
 					{defaultValue}
 				</textarea>
 			) : (
 				<input
+					{...(commonAttr as InputAttributes)}
 					className={styles.input}
-					{...commonAttr}
 					defaultValue={defaultValue}
 					type={type}
 				/>

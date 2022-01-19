@@ -1,14 +1,12 @@
-import { FieldError, FieldValues, UseFormSetError } from 'react-hook-form';
+import { FieldValues, UseFormSetError } from 'react-hook-form';
 import Input, { InputProps } from './input';
 
 export type MergeWithCompare<T> = T &
 	Partial<Record<`compare ${Extract<keyof T, string>}`, any>>;
 
-type Props<T extends FieldValues> = Omit<InputProps<T>, 'errors'> & {
-	errors: { [key in keyof T]?: FieldError };
-};
+type Props<T extends FieldValues> = InputProps<T>;
 
-const InputCompare = <T extends FieldValues>({
+export const InputCompare = <T extends FieldValues>({
 	id,
 	label,
 	errors,
@@ -24,7 +22,7 @@ const InputCompare = <T extends FieldValues>({
 				{...passProps}
 				id={id}
 				label={label}
-				errors={errors[id]}
+				errors={errors && errors[id]}
 				required={required}
 				options={options}
 			/>
@@ -32,13 +30,12 @@ const InputCompare = <T extends FieldValues>({
 				{...passProps}
 				id={comparerKey as any}
 				label={`Powtórz ${label.toLowerCase()}`}
-				errors={errors[comparerKey]}
+				errors={errors && errors[comparerKey]}
+				autoComplete="off"
 			/>
 		</>
 	);
 };
-
-export default InputCompare;
 
 export function checkCompares<T extends FieldValues>(
 	data: T,
