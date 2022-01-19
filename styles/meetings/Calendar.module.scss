@@ -9,6 +9,7 @@ $days-padding: 15px;
 	@extend %flex;
 	border-radius: var.$radius1;
 	padding: $calendar-padding 0 0;
+	margin-inline: auto;
 	// padding-left: $calendar-padding;
 	background: var.$color-overlay1;
 	height: 2000px;
