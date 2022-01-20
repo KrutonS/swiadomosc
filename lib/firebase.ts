@@ -10,7 +10,11 @@ import {
 	signInWithEmailAndPassword,
 	UserCredential,
 } from 'firebase/auth';
-import { getErrorMessage, UserNotVerifiedError } from 'utils/errors';
+import {
+	getErrorMessage,
+	handleDefaultError,
+	UserNotVerifiedError,
+} from 'utils/errors';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyCcAECDcx5-aBr_d7m5SVaqq1b-EQClriw',
@@ -47,7 +51,7 @@ export const signUp = async (
 				handleError('Nie udało się zarejestrować. Spróbuj później.');
 				break;
 			default:
-				throw e;
+				handleDefaultError(e);
 		}
 	}
 	if (data === null) throw new Error('Error in sign up');
@@ -77,8 +81,7 @@ export const signIn = async (
 				handleError('Błędny email bądź hasło');
 				break;
 			default:
-				if (typeof e === 'string') handleError(e);
-				else handleError('Coś poszło nie tak. Spróbuj ponownie później.');
+				handleDefaultError(e);
 		}
 	}
 	if (data === null) throw new Error('Error in sign in');
