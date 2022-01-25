@@ -1,7 +1,9 @@
 /* stylelint-disable no-duplicate-selectors */
 // @import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
 @use 'variables' as var;
+@use '../node_modules/react-toastify/scss/main.scss';
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;300;500;700;900&display=swap');
+
 // #region Resets
 *,
 *::after,
@@ -116,7 +118,6 @@ blockquote {
 	border: none;
 	background: none;
 	@extend %text-reset;
-	text-decoration: underline;
 }
 // #endregion
 // #endregion
@@ -129,3 +130,8 @@ blockquote {
 }
 // #endregion
 /* #endregion */
+// #region Util classes
+.underline {
+	text-decoration: underline;
+}
+// #endregion
