@@ -1,0 +1,8 @@
+@use 'variables' as var;
+
+.main {
+	height: 100vh;
+}
+.dialog {
+	@extend %dialog;
+}
