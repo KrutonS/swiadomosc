@@ -15,6 +15,8 @@ export type CustomFormErrors = 'user-not-verified' | 'fields-not-equal';
 
 export type FormErrors = FirebaseErrors | CustomFormErrors;
 
+export class AppError extends Error {}
+
 export const authErrors: { [k in FormErrors]: string } = {
 	'auth/email-already-in-use': 'Email jest już w użyciu. Zapomniałeś hasła?',
 	'auth/network-request-failed': 'Brak połączenia, spróbuj ponownie później',
@@ -52,7 +54,8 @@ export class FieldsNotTheSameError<T extends FieldValues> extends FormError<T> {
 
 export function getErrorMessage(e: unknown, strict = true): string {
 	if (e instanceof FirebaseError)
-		return authErrors[e.code as FirebaseErrors] || e.message;
+		return authErrors[e.code as FirebaseErrors] || e.code;
+	if (e instanceof AppError) return e.message;
 	if (!strict) {
 		if (e instanceof Error) return e.message;
 		if (typeof e === 'string') return e;
