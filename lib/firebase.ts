@@ -1,7 +1,4 @@
-// import 'firebase/firestore';
-// import 'firebase/storage';
-
-import { getApps, initializeApp } from 'firebase/app';
+import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
 	ActionCodeSettings,
 	createUserWithEmailAndPassword,
@@ -10,11 +7,9 @@ import {
 	signInWithEmailAndPassword,
 	UserCredential,
 } from 'firebase/auth';
-import {
-	getErrorMessage,
-	handleDefaultError,
-	UserNotVerifiedError,
-} from 'utils/errors';
+import { EmailWIthPassword } from 'types';
+
+import { UserNotVerifiedError } from 'utils/errors';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyCcAECDcx5-aBr_d7m5SVaqq1b-EQClriw',
@@ -27,63 +22,22 @@ const firebaseConfig = {
 };
 if (!getApps().length) initializeApp(firebaseConfig);
 
-export const auth = getAuth();
+export const auth = getAuth(getApp());
 
 const getActionCodeSettings = (): ActionCodeSettings => ({
 	url: window.location.origin,
 });
 
-export const signUp = async (
-	email: string,
-	password: string,
-	handleError: (mess: string) => void
-) => {
+export const signUp = async (email: string, password: string) => {
 	let data: UserCredential | null = null;
-	try {
-		data = await createUserWithEmailAndPassword(auth, email, password);
-		await sendEmailVerification(data.user, getActionCodeSettings());
-	} catch (e) {
-		switch (getErrorMessage(e)) {
-			case 'auth/email-already-in-use':
-				handleError('Email jest już w użyciu. Zapomniałeś hasła?');
-				break;
-			case 'auth/network-request-failed':
-				handleError('Nie udało się zarejestrować. Spróbuj później.');
-				break;
-			default:
-				handleDefaultError(e);
-		}
-	}
-	if (data === null) throw new Error('Error in sign up');
+	data = await createUserWithEmailAndPassword(auth, email, password);
+	await sendEmailVerification(data.user, getActionCodeSettings());
 	return data;
 };
 
-export const signIn = async (
-	email: string,
-	password: string,
-	handleError: (mess: string) => void
-) => {
+export const signIn = async ({ email, password }: EmailWIthPassword) => {
 	let data: UserCredential | null = null;
-
-	try {
-		data = await signInWithEmailAndPassword(auth, email, password);
-		if (!data.user.emailVerified) throw new UserNotVerifiedError();
-	} catch (e) {
-		switch (getErrorMessage(e)) {
-			case 'auth/invalid-email':
-				handleError('Błędny email.');
-				break;
-			case 'auth/user-disabled':
-				handleError('Twoje konto jest zablokowane.');
-				break;
-			case 'auth/user-not-found':
-			case 'auth/wrong-password':
-				handleError('Błędny email bądź hasło');
-				break;
-			default:
-				handleDefaultError(e);
-		}
-	}
-	if (data === null) throw new Error('Error in sign in');
+	data = await signInWithEmailAndPassword(auth, email, password);
+	if (data && !data.user.emailVerified) throw new UserNotVerifiedError();
 	return data;
 };

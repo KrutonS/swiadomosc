@@ -1,27 +1,52 @@
 import Spinner from 'components/spinner';
 import Button from 'components/user-inputs/button';
 import Input from 'components/user-inputs/input';
+import { UserCredential } from 'firebase/auth';
 import { signIn } from 'lib/firebase';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { EmailWIthPassword } from 'types';
+import { useAuthDialog } from 'utils/contexts/auth-dialog';
+import { useUser } from 'utils/contexts/user';
+import { UserNotVerifiedError } from 'utils/errors';
+import { useAsync } from 'utils/hooks/async';
+import { useFormError } from 'utils/hooks/errors';
 import { commonEmailProps, commonPassProps } from 'utils/inputProps';
 
 const SignInForm = () => {
-	const { register, handleSubmit } = useForm<EmailWIthPassword>();
-	const [loading, setLoading] = useState(false);
+	const { register, handleSubmit, setError, control } =
+		useForm<EmailWIthPassword>();
+	const [, setUser] = useUser();
 
-	const onSubmit = async ({ email, password }: EmailWIthPassword) => {
-		setLoading(true);
-		await signIn(email, password, toast.error);
-		setLoading(false);
+	const [, setShow] = useAuthDialog();
+
+	const { generalError, onError, refreshError } = useFormError(
+		setError,
+		{
+			'auth/invalid-email': 'email',
+			'auth/email-already-in-use': 'email',
+		},
+		control
+	);
+	const onSuccess = ({ user }: UserCredential) => {
+		if (!user.emailVerified) throw new UserNotVerifiedError();
+		setShow(false);
+		setUser(user);
 	};
+	const { loading, handler: signInHandler } = useAsync(
+		(data: EmailWIthPassword) => {
+			refreshError();
+			return signIn(data);
+		},
+		onSuccess,
+		onError
+	);
+
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(data => signInHandler(data))}>
 			{loading && <Spinner />}
 			<Input {...commonEmailProps} register={register} />
 			<Input {...commonPassProps} register={register} />
+			<p className="error">{generalError}</p>
 			<Button type="submit">Zaloguj się</Button>
 		</form>
 	);

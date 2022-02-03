@@ -88,7 +88,6 @@ const Input = <F extends FieldValues>({
 	...otherProps
 }: InputProps<F>) => {
 	const hasErrors = Boolean(Object.keys(errors || {}).length);
-
 	const errorMessage =
 		errors?.message || getDefaultInputErr(errors?.type, options);
 	const commonAttr = {

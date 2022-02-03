@@ -6,14 +6,14 @@ import Button from 'components/user-inputs/button';
 import {
 	InputCompare,
 	checkCompares,
-	MergeWithCompare,
 } from 'components/user-inputs/input-compare';
 import { EmailWIthPassword } from 'types';
 import { commonEmailProps, commonPassProps } from 'utils/inputProps';
-import { toast } from 'react-toastify';
 import Spinner from 'components/spinner';
+import { useFormError } from 'utils/hooks/errors';
+import { useAsync } from 'utils/hooks/async';
 
-type AllFields = MergeWithCompare<EmailWIthPassword>;
+// type AllFields = CompareInputsFrom<EmailWIthPassword>;
 
 const SignUp = () => {
 	const {
@@ -21,23 +21,36 @@ const SignUp = () => {
 		setError,
 		formState: { errors },
 		handleSubmit,
+		control,
 	} = useForm<EmailWIthPassword>();
 
-	const [isRegistered, setIsRegistered] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isDone, setIsDone] = useState(false);
+	// const [isLoading, setIsLoading] = useState(false);
 
-	const onSubmit = async (data: AllFields) => {
-		setIsLoading(true);
-		const { email, password } = data;
-		if (checkCompares(data, setError)) {
-			await signUp(email, password, toast.error);
-			setIsLoading(false);
-			setIsRegistered(true);
-		}
-	};
-	return !isRegistered ? (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			{isLoading && <Spinner />}
+	const { generalError, onError } = useFormError(
+		setError,
+		{
+			'auth/email-already-in-use': 'email',
+			'auth/invalid-email': 'email',
+			'auth/user-not-found': 'email',
+		},
+		control
+	);
+	// const onSuccess = () => setIsDone(true);
+
+	const { handler: onSubmit, loading } = useAsync(
+		(data: EmailWIthPassword) => {
+			checkCompares(data);
+			const { email, password } = data;
+			return signUp(email, password);
+		},
+		() => setIsDone(true),
+		onError
+	);
+
+	return !isDone ? (
+		<form onSubmit={handleSubmit(data => onSubmit(data))}>
+			{loading && <Spinner />}
 			<InputCompare {...commonEmailProps} register={register} errors={errors} />
 			<InputCompare
 				{...commonPassProps}
@@ -55,6 +68,7 @@ const SignUp = () => {
 				}}
 				errors={errors}
 			/>
+			<p className="error">{generalError}</p>
 			<Button type="submit">Zarejestruj się</Button>
 		</form>
 	) : (
