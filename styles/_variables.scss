@@ -175,6 +175,25 @@ $text-indent: 1em;
 		margin-top: var(--spacing);
 	}
 }
+%dialog {
+	width: calc(100vw - $page-padding-inline * 2);
+	max-width: 800px;
+	position: fixed;
+	z-index: 100;
+	text-align: center;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 1.5rem $page-padding-inline;
+	// display: grid;
+	// place-content: center;
+	background-color: $color-gray4;
+	border-radius: $radius2;
+
+	& * + :not(input, .exit) {
+		margin-top: 1em;
+	}
+}
 @mixin page-items-margin($offset: 0px) {
 	--spacing: calc(#{$page-items-margin} + #{$offset});
 	@extend %items-spacing;
