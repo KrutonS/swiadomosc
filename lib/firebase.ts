@@ -22,7 +22,8 @@ const firebaseConfig = {
 };
 if (!getApps().length) initializeApp(firebaseConfig);
 
-export const auth = getAuth(getApp());
+export const app = getApp();
+export const auth = getAuth(app);
 
 const getActionCodeSettings = (): ActionCodeSettings => ({
 	url: window.location.origin,
