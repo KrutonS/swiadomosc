@@ -8,47 +8,29 @@ import SignUpForm from './sign-up';
 const questions = ['Nie masz jeszcze konta?', 'Masz już konto?'];
 const buttonLabels = ['Zarejestruj się!', 'Zaloguj się!'];
 
-// type ElementsProps = { onClick: () => void };
-// const SignUpElements = ({ onClick }: ElementsProps) => {
-// 	return (
-// 		<>
-// 			<SignUpForm />
-// 			<p>Masz już konto?</p>
-// 			<Button onClick={onClick} clearStyles>
-// 				Zaloguj się!
-// 			</Button>
-// 		</>
-// 	);
-// };
-// const SignInElements = ({ onClick }: ElementsProps) => {
-// 	return (
-// 		<>
-// 			<SignInForm />
-// 			<p>Nie masz jeszcze konta?</p>
-// 			<Button onClick={onClick} clearStyles>
-// 				Zarejestruj się!
-// 			</Button>
-// 		</>
-// 	);
-// };
-
 const AuthDialog = () => {
 	const [shouldRegister, setShouldRegister] = useState(false);
 	const toggle = () => setShouldRegister(!shouldRegister);
 	const [show, setShow] = useAuthDialog();
-
 	if (show)
 		return (
 			<section className={styles['auth-dialog']}>
 				{shouldRegister ? <SignUpForm /> : <SignInForm />}
 				<p>{questions[+shouldRegister]}</p>
-				<Button onClick={toggle} className={styles.toggle} clearStyles>
+				<Button
+					onClick={toggle}
+					className={[styles.toggle, 'underline']}
+					clearStyles
+				>
 					{buttonLabels[+shouldRegister]}
 				</Button>
 
 				{/* Exit button */}
 				<Button
-					onClick={() => setShow(false)}
+					onClick={() => {
+						setShow(false);
+						setShouldRegister(false);
+					}}
 					className={styles.exit}
 					clearStyles
 				>
