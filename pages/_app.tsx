@@ -8,7 +8,7 @@ function App({ Component, pageProps }: AppProps) {
 	return (
 		<UserProvider>
 			<AuthDialogProvider>
-				<ToastContainer />
+				<ToastContainer limit={3} />
 				<Component {...pageProps} />
 			</AuthDialogProvider>
 		</UserProvider>

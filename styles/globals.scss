@@ -119,6 +119,12 @@ blockquote {
 	background: none;
 	@extend %text-reset;
 }
+
+.Toastify__toast-container {
+	z-index: 150;
+	margin-top: 5rem;
+}
+
 // #endregion
 // #endregion
 // #region Desktop And Resets
@@ -133,5 +139,8 @@ blockquote {
 // #region Util classes
 .underline {
 	text-decoration: underline;
+}
+.error {
+	color: var.$color-red;
 }
 // #endregion

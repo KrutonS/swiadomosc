@@ -2,15 +2,17 @@
 @use 'sass:math';
 
 .auth-dialog {
+	width: calc(100vw - var.$page-padding-inline * 2);
+	max-width: 800px;
 	position: fixed;
-	z-index: 10000;
+	z-index: 100;
 	text-align: center;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	padding: 1.5rem var.$page-padding-inline;
-	display: grid;
-	place-content: center;
+	// display: grid;
+	// place-content: center;
 	background-color: var.$color-gray4;
 	border-radius: var.$radius2;
 

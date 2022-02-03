@@ -3,7 +3,7 @@
 .header {
 	@extend %page-padding-inline;
 	@extend %flex;
-	z-index: 9999;
+	z-index: 50;
 	position: fixed;
 	top: 0;
 	justify-content: space-between;
