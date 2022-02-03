@@ -54,7 +54,7 @@ export class FieldsNotTheSameError<T extends FieldValues> extends FormError<T> {
 
 export function getErrorMessage(e: unknown, strict = true): string {
 	if (e instanceof FirebaseError)
-		return authErrors[e.code as FirebaseErrors] || e.message;
+		return authErrors[e.code as FirebaseErrors] || e.code;
 	if (e instanceof AppError) return e.message;
 	if (!strict) {
 		if (e instanceof Error) return e.message;
