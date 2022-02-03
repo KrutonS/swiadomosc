@@ -3,6 +3,8 @@ import { FirebaseError } from 'firebase/app';
 import { FieldValues } from 'react-hook-form';
 import { EmailWIthPassword } from 'types';
 
+export class AppError extends Error {}
+
 export type FirebaseErrors =
 	| 'auth/email-already-in-use'
 	| 'auth/network-request-failed'
@@ -53,6 +55,7 @@ export class FieldsNotTheSameError<T extends FieldValues> extends FormError<T> {
 export function getErrorMessage(e: unknown, strict = true): string {
 	if (e instanceof FirebaseError)
 		return authErrors[e.code as FirebaseErrors] || e.message;
+	if (e instanceof AppError) return e.message;
 	if (!strict) {
 		if (e instanceof Error) return e.message;
 		if (typeof e === 'string') return e;
