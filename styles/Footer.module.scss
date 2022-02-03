@@ -53,6 +53,9 @@
 .button {
 	width: 100%;
 }
+.form-title {
+	color: var.$color-accent1;
+}
 @media screen and (min-width: var.$breakpoint1) {
 	%center-local {
 		text-align: center;

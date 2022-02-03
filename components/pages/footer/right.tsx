@@ -23,7 +23,7 @@ const Right: FC = () => {
 
 	return (
 		<form className={styles.right} onSubmit={handleSubmit(onSubmit)}>
-			<h4>Chcesz nam coś powiedzieć?</h4>
+			<h4 className={styles['form-title']}>Chcesz nam coś powiedzieć?</h4>
 			<Input
 				className={styles.input}
 				register={register}
