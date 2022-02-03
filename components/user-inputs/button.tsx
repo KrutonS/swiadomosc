@@ -12,20 +12,28 @@ import cn from 'classnames';
 import styles from 'styles/Button.module.scss';
 import { ButtonTypes } from '../../types';
 
-type ClickProps = {
-	onClick?: MouseEventHandler;
-	type?: ButtonTypes;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
-
-type LinkProps = {
-	href: string;
-} & AnchorHTMLAttributes<HTMLAnchorElement>;
-
-export type ButtonProps = {
-	className?: string;
+interface CommonProps {
+	className?: string | string[];
 	children: ReactNode;
 	clearStyles?: boolean;
-} & (ClickProps | LinkProps);
+}
+
+type ClickProps = Omit<
+	{
+		onClick?: MouseEventHandler;
+		type?: ButtonTypes;
+	} & ButtonHTMLAttributes<HTMLButtonElement>,
+	keyof CommonProps
+>;
+
+type LinkProps = Omit<
+	{
+		href: string;
+	} & AnchorHTMLAttributes<HTMLAnchorElement>,
+	keyof CommonProps
+>;
+
+export type ButtonProps = CommonProps & (ClickProps | LinkProps);
 
 const Button = forwardRef<HTMLElement | HTMLAnchorElement, ButtonProps>(
 	({ children, className, clearStyles, ...props }, ref) => {
