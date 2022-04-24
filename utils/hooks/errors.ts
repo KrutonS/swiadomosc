@@ -17,12 +17,15 @@ export const useFormError = <F extends FieldValues>(
 ) => {
 	const [generalError, setGeneralError] = useState<string>();
 	const values = useWatch({ control });
+
 	const refreshError = () => {
 		if (generalError) setGeneralError(undefined);
 	};
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect(refreshError, [values]);
-	const onError = (e: unknown) => {
+
+	const errorHandler = (e: unknown) => {
 		const message = getErrorMessage(e);
 		let field: null | Path<F> = null;
 		if (e instanceof FormError && e.field) {
@@ -40,5 +43,5 @@ export const useFormError = <F extends FieldValues>(
 		else setGeneralError(message);
 	};
 
-	return { generalError, onError, refreshError };
+	return { generalError, errorHandler, refreshError };
 };

@@ -1,7 +1,8 @@
 {
 	"env": {
 		"browser": true,
-		"es2021": true
+		"es2021": true,
+		"node": true
 	},
 	"root": true,
 	"parser": "@typescript-eslint/parser",
@@ -20,6 +21,7 @@
 	"rules": {
 		"react/jsx-filename-extension": 0,
 		"react/function-component-definition": 0,
+		"react-hooks/exhaustive-deps": 1,
 		"react/prop-types": 0,
 		"arrow-body-style": 0,
 		"react/react-in-jsx-scope": 0,
@@ -39,14 +41,6 @@
 				"tsx": "never"
 			}
 		],
-		"spaced-comment": [
-			"warn",
-			"always",
-			{
-				"line": {
-					"markers": ["#region", "#endregion", "region", "endregion"]
-				}
-			}
-		]
+		"spaced-comment": 0
 	}
 }

@@ -11,7 +11,7 @@ import { Contact, Post } from 'types';
 import styles from 'styles/post/Post.module.scss';
 import Layout from 'components/pages/layout';
 import YoutubeEmbed from 'components/video';
-import PostInfo from 'components/pages/postInfo';
+import PostInfo from 'components/postInfo';
 
 interface Response extends Contact {
 	post: Pick<
@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps<Response, Variables> = async ({
 		variables: params,
 	});
 
-	return { props: data };
+	return { props: data, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

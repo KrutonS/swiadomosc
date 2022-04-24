@@ -2,6 +2,7 @@ import Button from 'components/user-inputs/button';
 import { useAuthDialog } from 'utils/contexts/auth-dialog';
 import { useUser } from 'utils/contexts/user';
 import { nbspU } from 'utils/globals';
+import styles from 'styles/Auth.module.scss';
 
 const NavAuth = () => {
 	const [, setShowAuth] = useAuthDialog();
@@ -12,7 +13,7 @@ const NavAuth = () => {
 
 	// const passProps = user?null:{onClick};
 	return (
-		<Button {...passProps} clearStyles>
+		<Button {...passProps} clearStyles className={styles.user}>
 			{label}
 		</Button>
 	);

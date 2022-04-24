@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Post } from 'types';
 import styles from 'styles/about/LastPost.module.scss';
 import YoutubeEmbed from 'components/video';
-import PostInfo from 'components/pages/postInfo';
+import PostInfo from 'components/postInfo';
 
 interface Props {
 	title: string;

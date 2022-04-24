@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { signUp } from 'lib/firebase';
 import { useForm } from 'react-hook-form';
 import { passRegex } from 'utils/globals';
 import Button from 'components/user-inputs/button';
@@ -12,8 +11,7 @@ import { commonEmailProps, commonPassProps } from 'utils/inputProps';
 import Spinner from 'components/spinner';
 import { useFormError } from 'utils/hooks/errors';
 import { useAsync } from 'utils/hooks/async';
-
-// type AllFields = CompareInputsFrom<EmailWIthPassword>;
+import { signUp } from 'utils/firebase/auth';
 
 const SignUp = () => {
 	const {
@@ -27,7 +25,7 @@ const SignUp = () => {
 	const [isDone, setIsDone] = useState(false);
 	// const [isLoading, setIsLoading] = useState(false);
 
-	const { generalError, onError } = useFormError(
+	const { generalError, errorHandler } = useFormError(
 		setError,
 		{
 			'auth/email-already-in-use': 'email',
@@ -45,7 +43,7 @@ const SignUp = () => {
 			return signUp(email, password);
 		},
 		() => setIsDone(true),
-		onError
+		errorHandler
 	);
 
 	return !isDone ? (

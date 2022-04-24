@@ -3,7 +3,7 @@ import { Post } from 'types';
 import { Image } from 'react-datocms';
 import styles from 'styles/PostItem.module.scss';
 import Link from 'next/link';
-import PostInfo from '../postInfo';
+import PostInfo from '../../postInfo';
 
 interface Props {
 	post: Pick<Post, 'author' | 'picture' | 'category' | 'title' | 'slug'>;

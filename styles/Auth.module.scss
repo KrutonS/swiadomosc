@@ -32,3 +32,6 @@
 .toggle:focus {
 	color: var.$color-accent2;
 }
+.user {
+	@include var.small;
+}

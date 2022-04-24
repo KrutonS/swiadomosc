@@ -1,4 +1,6 @@
 @use 'variables' as var;
+$padding-top: 100px;
+$padding-bottom: 1em;
 
 .footer {
 	@extend %page-padding-inline;
@@ -6,7 +8,7 @@
 	position: relative;
 	background-color: var.$color-gray4;
 	z-index: 20;
-	padding-block: 100px 50px;
+	padding-block: $padding-top $padding-bottom;
 }
 .line {
 	height: 3px;
@@ -57,6 +59,7 @@
 	color: var.$color-accent1;
 }
 @media screen and (min-width: var.$breakpoint1) {
+	$padding-inline: calc(8vw + 1px);
 	%center-local {
 		text-align: center;
 	}
@@ -64,7 +67,7 @@
 		margin: 0;
 	}
 	.footer {
-		padding-inline: calc(8vw + 1px);
+		padding-inline: $padding-inline;
 	}
 
 	.left,

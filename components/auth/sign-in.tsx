@@ -2,12 +2,12 @@ import Spinner from 'components/spinner';
 import Button from 'components/user-inputs/button';
 import Input from 'components/user-inputs/input';
 import { UserCredential } from 'firebase/auth';
-import { signIn } from 'lib/firebase';
 import { useForm } from 'react-hook-form';
 import { EmailWIthPassword } from 'types';
 import { useAuthDialog } from 'utils/contexts/auth-dialog';
 import { useUser } from 'utils/contexts/user';
 import { UserNotVerifiedError } from 'utils/errors';
+import { signIn } from 'utils/firebase/auth';
 import { useAsync } from 'utils/hooks/async';
 import { useFormError } from 'utils/hooks/errors';
 import { commonEmailProps, commonPassProps } from 'utils/inputProps';
@@ -17,9 +17,9 @@ const SignInForm = () => {
 		useForm<EmailWIthPassword>();
 	const [, setUser] = useUser();
 
-	const [, setShow] = useAuthDialog();
+	const [, setShowDialog] = useAuthDialog();
 
-	const { generalError, onError, refreshError } = useFormError(
+	const { generalError, errorHandler, refreshError } = useFormError(
 		setError,
 		{
 			'auth/invalid-email': 'email',
@@ -27,18 +27,20 @@ const SignInForm = () => {
 		},
 		control
 	);
+
 	const onSuccess = ({ user }: UserCredential) => {
 		if (!user.emailVerified) throw new UserNotVerifiedError();
-		setShow(false);
+		setShowDialog(false);
 		setUser(user);
 	};
+
 	const { loading, handler: signInHandler } = useAsync(
 		(data: EmailWIthPassword) => {
 			refreshError();
 			return signIn(data);
 		},
 		onSuccess,
-		onError
+		errorHandler
 	);
 
 	return (

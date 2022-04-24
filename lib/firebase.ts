@@ -1,15 +1,6 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import {
-	ActionCodeSettings,
-	createUserWithEmailAndPassword,
-	getAuth,
-	sendEmailVerification,
-	signInWithEmailAndPassword,
-	UserCredential,
-} from 'firebase/auth';
-import { EmailWIthPassword } from 'types';
-
-import { UserNotVerifiedError } from 'utils/errors';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyCcAECDcx5-aBr_d7m5SVaqq1b-EQClriw',
@@ -25,20 +16,4 @@ if (!getApps().length) initializeApp(firebaseConfig);
 export const app = getApp();
 export const auth = getAuth(app);
 
-const getActionCodeSettings = (): ActionCodeSettings => ({
-	url: window.location.origin,
-});
-
-export const signUp = async (email: string, password: string) => {
-	let data: UserCredential | null = null;
-	data = await createUserWithEmailAndPassword(auth, email, password);
-	await sendEmailVerification(data.user, getActionCodeSettings());
-	return data;
-};
-
-export const signIn = async ({ email, password }: EmailWIthPassword) => {
-	let data: UserCredential | null = null;
-	data = await signInWithEmailAndPassword(auth, email, password);
-	if (data && !data.user.emailVerified) throw new UserNotVerifiedError();
-	return data;
-};
+export const db = getFirestore();
