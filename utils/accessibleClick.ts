@@ -1,7 +1,3 @@
-// const defaultKeyFilter = ({ key }) => {
-//   const ignoreKeys = ["Tab"];
-//   return ignoreKeys.includes(key);
-
 import {
 	AriaRole,
 	KeyboardEvent,
@@ -9,9 +5,6 @@ import {
 	MouseEvent,
 	MouseEventHandler,
 } from 'react';
-
-// };
-// type OnClick = MouseEventHandler
 
 type OnClick = (e: MouseEvent | KeyboardEvent) => void;
 

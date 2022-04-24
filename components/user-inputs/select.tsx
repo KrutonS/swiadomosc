@@ -21,21 +21,13 @@ type OptionProps = {
 	setActive: Props['setActive'];
 };
 const Option: FC<OptionProps> = ({ children, isActive, setActive }) => {
-	// 	const ref = useRef<HTMLLIElement>(null);
-	// 	useLayoutEffect(() => {
-	// 		ref.current?.style.setProperty('--index', `${index}`);
-	// 	}, [index]);
 	return (
 		<li
 			className={cn(styles.option, styles.cell, {
 				[styles['option--active']]: isActive,
 			})}
-			// ref={ref}
 		>
-			<Button
-				{...buttonClick(() => setActive(isActive ? null : children))}
-				// ref={ref as Ref<HTMLButtonElement>}
-			>
+			<Button {...buttonClick(() => setActive(isActive ? null : children))}>
 				{children}
 			</Button>
 		</li>
@@ -55,7 +47,6 @@ const Select = ({
 			{o}
 		</Option>
 	));
-	// const [show, setShow] = useState(false);
 
 	return (
 		<div
@@ -63,18 +54,12 @@ const Select = ({
 				styles.select,
 				{ [styles['select--right']]: onRight },
 				className
-				// { [styles['select--show']]: show,}
 			)}
 		>
-			{/* <div
-				className={styles.header}
-				// onClick={() => setShow(!show)}
-			> */}
 			<div className={styles.label}>{label}</div>
 			<div className={cn(styles['display-option'], styles.cell)}>
 				{active || noActiveText || '-'}
 			</div>
-			{/* </div> */}
 			<ul className={styles['options-list']}>{optionsJSX}</ul>
 		</div>
 	);

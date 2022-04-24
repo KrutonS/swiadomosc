@@ -1,4 +1,3 @@
-// import forwardDays from './forwardDays';
 import forwardDays from './forwardDays';
 
 export default function dayRange(
