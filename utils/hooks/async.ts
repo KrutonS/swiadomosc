@@ -5,17 +5,17 @@ type AsyncF<P, R> = (...params: P[]) => Promise<R>;
 
 export const useAsync = <P, R>(
 	func: AsyncF<P, R | undefined>,
-	onSucess?: (data: R) => void,
+	onSucess?: (data: R | undefined) => void,
 	onError?: (error: unknown) => void
 ) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string>();
 	const [data, setData] = useState<R>();
 
-	const handler: typeof func = async (...params) => {
+	const handler = async (...params: P[]) => {
 		setLoading(true);
 		try {
-			const response = (await func(...params)) as R;
+			const response = await func(...params);
 			setData(response);
 			if (onSucess) onSucess(response);
 			return response;

@@ -32,6 +32,7 @@ export interface Video {
 	height?: number;
 }
 export interface Post extends SeoData {
+	id: string;
 	title: string;
 	slug: string;
 	content: StructuredTextGraphQlResponse<
@@ -106,68 +107,6 @@ export interface Contact {
 		phone?: string;
 	};
 }
-/*
-"__typename": "TextListRecord
-"__typename": "TextImageRecord
-"__typename": "LinkRecord
-{
- {
-          "__typename": "TextListRecord",
-          "list": [
-            {
-              "text": "Use absolutely no pressure. We don't have to be concerned about it."
-            },
-            {
-              "text": "We'll have a super time. Let's make a nice big leafy tree."
-            },
-            {
-              "text": "We don't really know where this goes - and I'm not sure we really care"
-            },
-            {
-              "text": "Lorem ipsum"
-            }
-          ]
-        },
-        {
-          "fixed": true,
-          "title": "Na czym polegaja spotkania?",
-          "__typename": "TextImageRecord",
-          "image": {
-            "responsiveImage": {
-              "srcSet": "https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.25 171w,https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.5 342w,https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.75 513w,https://www.datocms-assets.com/59749/1640812842-greek.jpg 685w",
-              "webpSrcSet": "https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.25&fm=webp 171w,https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.5&fm=webp 342w,https://www.datocms-assets.com/59749/1640812842-greek.jpg?dpr=0.75&fm=webp 513w,https://www.datocms-assets.com/59749/1640812842-greek.jpg?fm=webp 685w",
-              "sizes": "(max-width: 685px) 100vw, 685px",
-              "src": "https://www.datocms-assets.com/59749/1640812842-greek.jpg",
-              "width": 685,
-              "height": 678,
-              "aspectRatio": 1.0103244837758112,
-              "alt": null,
-              "title": null,
-              "bgColor": "#bab9b5",
-              "base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICA8VFQoLDhgQDhUSFRUVFhETGR8lJCIWJSomHysjGikoKS0iMDU9KC0vMjIyGSU4PTcwPCsxMjsBCgsLCw0OFRALHDspIhwvLy8vLzsvLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL//AABEIABgAGAMBIgACEQEDEQH/xAAZAAEBAAMBAAAAAAAAAAAAAAAABQQGBwH/xAAlEAABAgMHBQAAAAAAAAAAAAAAAQIDBAUGERIUISJhEzJBUbH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABURAQEAAAAAAAAAAAAAAAAAAAAR/9oADAMBAAIRAxEAPwDlc1SYkGK3D2quvBvlA0lmpwS56C111xUo+2GiAS7aNVZJ13hU+gyrSQsxLOZ7QEom5nrORC3T9rEAKPKgmNtwAA//2Q=="
-            }
-          }
-        },
-        {
-          "href": "spotkania",
-          "__typename": "LinkRecord",
-          "background": {
-            "responsiveImage": {
-              "srcSet": "https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.25 1296w,https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.5 2592w,https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.75 3888w,https://www.datocms-assets.com/59749/1640871666-books.jpg 5184w",
-              "webpSrcSet": "https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.25&fm=webp 1296w,https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.5&fm=webp 2592w,https://www.datocms-assets.com/59749/1640871666-books.jpg?dpr=0.75&fm=webp 3888w,https://www.datocms-assets.com/59749/1640871666-books.jpg?fm=webp 5184w",
-              "sizes": "(max-width: 5184px) 100vw, 5184px",
-              "src": "https://www.datocms-assets.com/59749/1640871666-books.jpg",
-              "width": 5184,
-              "height": 3456,
-              "aspectRatio": 1.5,
-              "alt": null,
-              "title": null,
-              "bgColor": "#b7484d",
-              "base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoKEQ0LBwcHDA0QDgYHDREJFhENFx8ZGCIVFhUaHysjGh0oHRUWJDUlKC0vMjIyGSI4PTcwPCsxMi8BCgsLDg0OEA0NEC8cFh0vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vLy8vL//AABEIABAAGAMBIgACEQEDEQH/xAAYAAACAwAAAAAAAAAAAAAAAAACAwAEB//EABoQAAMAAwEAAAAAAAAAAAAAAAABAwIRIQT/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AMnrlwXLPbLVIpoGfnSEBJ8IMc9IgH//2Q=="
-            }
-          }
-        }
-*/
 
 type DeepKeys2<O> = { [K in keyof O]?: DeepKeys2<NonNullable<O[K]>> } | keyof O;
 type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
@@ -181,7 +120,7 @@ export type SliceObject<O, T extends DeepKeys2<O>> = O extends never
 				: NonNullable<ExcludeEmpty<SliceObject<O[K], Extract<T, object>[K]>>>;
 	  };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type GetProps<T extends (...args: any[]) => any> = Parameters<T>[0];
+export type GetProps<T extends (...args: unknown[]) => unknown> =
+	Parameters<T>[0];
 
 export type EmailWIthPassword = { email: string; password: string };

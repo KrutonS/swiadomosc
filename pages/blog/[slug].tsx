@@ -16,7 +16,13 @@ import PostInfo from 'components/postInfo';
 interface Response extends Contact {
 	post: Pick<
 		Post,
-		'title' | 'author' | 'category' | 'content' | 'picture' | 'seoMetaTags'
+		| 'title'
+		| 'author'
+		| 'category'
+		| 'content'
+		| 'picture'
+		| 'seoMetaTags'
+		| 'id'
 	>;
 }
 const PostPage: FC<Response> = ({ post, contact }) => {
@@ -43,9 +49,6 @@ const PostPage: FC<Response> = ({ post, contact }) => {
 								return null;
 						}
 					}}
-					// customRules={[renderRule(isThematicBreak, ({node, key})=>{
-					// 	return <hr />
-					// })]}
 				/>
 			</main>
 		</Layout>
@@ -60,6 +63,7 @@ export const getStaticProps: GetStaticProps<Response, Variables> = async ({
 }) => {
 	const postFragment = `
 	post(filter: { slug: { eq: $slug } }) {
+		id
 		title
 		category {
 			name

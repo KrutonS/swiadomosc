@@ -10,7 +10,7 @@ import {
 import { FirebaseErrors, FormError, getErrorMessage } from 'utils/errors';
 
 export const useFormError = <F extends FieldValues>(
-	setError: UseFormSetError<F>,
+	onError: UseFormSetError<F>,
 	errorsToInputs: Partial<Record<FirebaseErrors, Path<F>>>,
 	control: Control<F>,
 	shouldFocus?: boolean
@@ -39,7 +39,7 @@ export const useFormError = <F extends FieldValues>(
 			field = errorsToInputs[e.code as FirebaseErrors] as Path<F>;
 		}
 		if (field)
-			setError(field, { message }, shouldFocus ? { shouldFocus } : undefined);
+			onError(field, { message }, shouldFocus ? { shouldFocus } : undefined);
 		else setGeneralError(message);
 	};
 

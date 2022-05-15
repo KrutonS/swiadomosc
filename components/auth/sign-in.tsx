@@ -28,7 +28,9 @@ const SignInForm = () => {
 		control
 	);
 
-	const onSuccess = ({ user }: UserCredential) => {
+	const onSuccess = (response: UserCredential | undefined) => {
+		if (!response) return;
+		const { user } = response;
 		if (!user.emailVerified) throw new UserNotVerifiedError();
 		setShowDialog(false);
 		setUser(user);
