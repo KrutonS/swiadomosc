@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client';
 import DescTitle from 'components/pages/title-desc';
-import Layout from 'components/pages/layout';
 import dato, { contactFragment, SEOFragment } from 'lib/datocms';
 import { GetStaticProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import { CalendarData, Contact, Meeting } from 'types';
+import Layout from 'components/pages/layout';
 import Calendar from 'components/pages/calendar';
 import styles from 'styles/meetings/Meetings.module.scss';
 
@@ -15,12 +14,6 @@ const MeetingsPage: NextPage<Data> = ({
 	contact,
 	meetingsPage: calendarData,
 }) => {
-	const [showCalendar, setShowCalendar] = useState(false);
-
-	useEffect(() => {
-		setShowCalendar(true);
-	}, []);
-
 	return (
 		<Layout contact={contact} seoData={calendarData.seoMetaTags}>
 			<main className={styles.main}>
@@ -29,7 +22,7 @@ const MeetingsPage: NextPage<Data> = ({
 					desc="Chciałbym zapisać się na..."
 					leftSide
 				/>
-				{showCalendar && <Calendar meetings={meetings} data={calendarData} />}
+				<Calendar meetings={meetings} data={calendarData} />
 			</main>
 		</Layout>
 	);

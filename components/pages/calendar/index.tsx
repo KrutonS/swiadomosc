@@ -1,11 +1,4 @@
-import {
-	FC,
-	ReactNode,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
 
 import dayRange from 'utils/date/dayRange';
 import getMonthName from 'utils/date/monthNames';
@@ -19,6 +12,7 @@ import { groupMeetings } from 'utils/meetings';
 import Button from 'components/user-inputs/button';
 import setStartOfDay from 'utils/date/startOfDay';
 import setEndOfDay from 'utils/date/endOfDay';
+import useIsomorphicEffect from 'utils/hooks/isomoprhicEffect';
 import Column from './column';
 
 // #region Locals
@@ -103,8 +97,9 @@ const Calendar: FC<Props> = ({ meetings, data }) => {
 		);
 	};
 
-	useLayoutEffect(() => {
-		const { height } = getComputedStyle(hoursHTML.current as HTMLDivElement);
+	useIsomorphicEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+		const { height } = getComputedStyle(hoursHTML.current!);
 
 		const hourpx = parseFloat(height) / (maxHour - minHour);
 

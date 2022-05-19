@@ -1,3 +1,4 @@
+import { HydratedDocument } from 'mongoose';
 import { ButtonHTMLAttributes } from 'react';
 import {
 	ResponsiveImageType,
@@ -124,3 +125,15 @@ export type GetProps<T extends (...args: unknown[]) => unknown> =
 	Parameters<T>[0];
 
 export type EmailWIthPassword = { email: string; password: string };
+
+export interface IComment {
+	uuid: string;
+	postId: string;
+	content: string;
+	author: string;
+}
+export type DComment = HydratedDocument<IComment>;
+
+export interface ResponseError {
+	error: string;
+}

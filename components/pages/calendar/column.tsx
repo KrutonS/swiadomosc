@@ -1,9 +1,10 @@
-import { FC, ReactNode, useLayoutEffect, useRef } from 'react';
+import { FC, ReactNode, useRef } from 'react';
 import cn from 'classnames';
 import { hourMs } from 'utils/date/msTimes';
 import styles from 'styles/meetings/Calendar.module.scss';
 import { Meeting } from 'types';
 import dateToHour from 'utils/date/dateToHour';
+import useIsomorphicEffect from 'utils/hooks/isomoprhicEffect';
 
 //#region local types
 interface ColumnProps {
@@ -26,7 +27,7 @@ type MeetingCellProps = Meeting & Pick<ColumnProps, 'hourHeight' | 'minHour'>;
 const Cell: FC<CellProps> = ({ children, height, className, topOffset }) => {
 	const cellHTML = useRef<HTMLDivElement>(null);
 
-	useLayoutEffect(() => {
+	useIsomorphicEffect(() => {
 		if (topOffset)
 			cellHTML.current?.style.setProperty('--top-offset', `${topOffset}px`);
 		if (height) cellHTML.current?.style.setProperty('--height', `${height}px`);
