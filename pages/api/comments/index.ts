@@ -11,11 +11,10 @@ export default async function comments(
 	const { method } = req;
 	switch (method?.toUpperCase()) {
 		case 'POST': {
-			addComment(req, res);
-			break;
+			return addComment(req, res);
 		}
 		default: {
-			handleApiError(`Unsupported method ${method}`, 405, res);
+			return handleApiError(`Unsupported method ${method}`, 405, res);
 		}
 	}
 }

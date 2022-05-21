@@ -15,18 +15,15 @@ export default async function queryComments(
 			const { params } = req.query;
 			switch (params.length) {
 				case 1: {
-					getCommentByUser(req, res);
-					break;
+					return getCommentByUser(req, res);
 				}
 				default: {
-					handleApiError('Invalid path', 400, res);
-					break;
+					return handleApiError('Invalid path', 400, res);
 				}
 			}
-			break;
 		}
 		default: {
-			handleApiError(`Unsupported method ${method}`, 405, res);
+			return handleApiError(`Unsupported method ${method}`, 405, res);
 		}
 	}
 }
