@@ -76,3 +76,16 @@ export const getDefaultError = (e: unknown): string => {
 	else if (e instanceof Error) message += e.message;
 	return message;
 };
+
+export class ApiError extends Error {
+	status: number;
+
+	constructor(status: number, message: string) {
+		super(message);
+		this.status = status;
+	}
+
+	toString() {
+		return `[${this.status}] ${this.message}`;
+	}
+}

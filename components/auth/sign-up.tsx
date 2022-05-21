@@ -6,12 +6,13 @@ import {
 	InputCompare,
 	checkCompares,
 } from 'components/user-inputs/input-compare';
-import { EmailWIthPassword } from 'types';
-import { commonEmailProps, commonPassProps } from 'utils/inputProps';
+import { commonEmailProps, commonPasswordProps } from 'utils/inputProps';
 import Spinner from 'components/spinner';
 import { useFormError } from 'utils/hooks/errors';
 import { useAsync } from 'utils/hooks/async';
 import { signUp } from 'utils/firebase/auth';
+import { EmailPasswordAndName } from 'types';
+import Input from 'components/user-inputs/input';
 
 const SignUp = () => {
 	const {
@@ -20,7 +21,7 @@ const SignUp = () => {
 		formState: { errors },
 		handleSubmit,
 		control,
-	} = useForm<EmailWIthPassword>();
+	} = useForm<EmailPasswordAndName>();
 
 	const [isDone, setIsDone] = useState(false);
 	// const [isLoading, setIsLoading] = useState(false);
@@ -34,13 +35,11 @@ const SignUp = () => {
 		},
 		control
 	);
-	// const onSuccess = () => setIsDone(true);
 
 	const { handler: onSubmit, loading } = useAsync(
-		(data: EmailWIthPassword) => {
+		(data: EmailPasswordAndName) => {
 			checkCompares(data);
-			const { email, password } = data;
-			return signUp(email, password);
+			return signUp(data);
 		},
 		() => setIsDone(true),
 		errorHandler
@@ -49,9 +48,17 @@ const SignUp = () => {
 	return !isDone ? (
 		<form onSubmit={handleSubmit(data => onSubmit(data))}>
 			{loading && <Spinner />}
+			<Input
+				register={register}
+				id="displayName"
+				label="Nazwa Użytkownika"
+				maxLength={10}
+				minLength={3}
+				required
+			/>
 			<InputCompare {...commonEmailProps} register={register} errors={errors} />
 			<InputCompare
-				{...commonPassProps}
+				{...commonPasswordProps}
 				register={register}
 				options={{
 					minLength: {

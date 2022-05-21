@@ -1,4 +1,3 @@
-import { UserCredential } from 'firebase/auth';
 import {
 	createContext,
 	Dispatch,
@@ -8,8 +7,8 @@ import {
 	useMemo,
 	useState,
 } from 'react';
+import { User } from 'firebase/auth';
 
-type User = UserCredential['user'];
 type SetUser = Dispatch<SetStateAction<User | undefined>>;
 export type UserState = { user?: User; setUser: SetUser };
 export const userContext = createContext<UserState>({

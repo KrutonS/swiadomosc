@@ -4,7 +4,7 @@ import styles from 'styles/PostInfo.module.scss';
 import Avatar from './avatar';
 
 interface Props {
-	author?: Author;
+	author?: Pick<Author, 'name'> & Partial<Pick<Author, 'avatar'>>;
 }
 
 const PostAuthor: FC<Props> = ({ author }) => {

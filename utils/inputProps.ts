@@ -15,7 +15,7 @@ export const commonEmailProps =
 		autoComplete: 'email',
 	};
 
-export const commonPassProps =
+export const commonPasswordProps =
 	// :Partial<InputProps<FieldValues>>
 	{
 		label: 'Hasło',

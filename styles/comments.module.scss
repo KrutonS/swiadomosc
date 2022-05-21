@@ -1,0 +1,14 @@
+.CommentsInput {
+	max-width: 59.375rem;
+	width: 100%;
+}
+
+.Date {
+	margin-left: auto;
+}
+.CommentInfo {
+	display: flex;
+}
+.Comment + .Comment {
+	margin-top: 2rem;
+}

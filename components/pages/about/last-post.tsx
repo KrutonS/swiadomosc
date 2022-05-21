@@ -12,7 +12,7 @@ interface Props {
 }
 
 const LastPost: FC<Props> = ({ title, post }) => {
-	const { showcasedVideo } = post;
+	const { showcasedVideo, author } = post;
 	return (
 		<section className={styles.post}>
 			<h2>{title}</h2>
@@ -24,11 +24,7 @@ const LastPost: FC<Props> = ({ title, post }) => {
 				<Link href="/">{post.title}</Link>
 			</h3>
 			<div className={styles['video-layout']}>
-				{/* <div className={styles['video-bar']}>
-					<PostAuthor author={author}/>
-					<small className={styles['comments-count']}>{12}</small>
-					<CommentsIcon width="20px" height="17.5px" /> */}
-				<PostInfo {...post} commentsCount={12} className={styles.info} />
+				<PostInfo author={author} commentsCount={12} className={styles.info} />
 				<YoutubeEmbed {...showcasedVideo} className={styles['video-window']} />
 			</div>
 		</section>

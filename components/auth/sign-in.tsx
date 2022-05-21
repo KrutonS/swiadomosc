@@ -10,7 +10,7 @@ import { UserNotVerifiedError } from 'utils/errors';
 import { signIn } from 'utils/firebase/auth';
 import { useAsync } from 'utils/hooks/async';
 import { useFormError } from 'utils/hooks/errors';
-import { commonEmailProps, commonPassProps } from 'utils/inputProps';
+import { commonEmailProps, commonPasswordProps } from 'utils/inputProps';
 
 const SignInForm = () => {
 	const { register, handleSubmit, setError, control } =
@@ -49,7 +49,7 @@ const SignInForm = () => {
 		<form onSubmit={handleSubmit(data => signInHandler(data))}>
 			{loading && <Spinner />}
 			<Input {...commonEmailProps} register={register} />
-			<Input {...commonPassProps} register={register} />
+			<Input {...commonPasswordProps} register={register} />
 			<p className="error">{generalError}</p>
 			<Button type="submit">Zaloguj się</Button>
 		</form>

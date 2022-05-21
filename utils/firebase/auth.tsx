@@ -4,19 +4,26 @@ import {
 	createUserWithEmailAndPassword,
 	sendEmailVerification,
 	signInWithEmailAndPassword,
+	updateProfile,
 } from 'firebase/auth';
 import { auth } from 'lib/firebase';
-import { EmailWIthPassword } from 'types';
+import { EmailPasswordAndName, EmailWIthPassword } from 'types';
 import { UserNotVerifiedError } from 'utils/errors';
 
 const getActionCodeSettings = (): ActionCodeSettings => ({
 	url: window.location.origin,
 });
 
-export const signUp = async (email: string, password: string) => {
-	let data: UserCredential | null = null;
-	data = await createUserWithEmailAndPassword(auth, email, password);
-	await sendEmailVerification(data.user, getActionCodeSettings());
+export const signUp = async ({
+	displayName,
+	email,
+	password,
+}: EmailPasswordAndName) => {
+	const data = await createUserWithEmailAndPassword(auth, email, password);
+	Promise.all([
+		sendEmailVerification(data.user, getActionCodeSettings()),
+		updateProfile(data.user, { displayName }),
+	]);
 	return data;
 };
 

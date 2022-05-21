@@ -17,7 +17,7 @@ const PostItem: FC<Props> = ({
 	return (
 		<div className={styles.post}>
 			<div className={styles.header}>
-				<Link href={`blog/${slug}`}>
+				<Link href={`/blog/${slug}`}>
 					{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 					<a>
 						<h4 className={styles.title}>{title}</h4>

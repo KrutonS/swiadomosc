@@ -15,7 +15,7 @@ const Logo: FC<Props> = ({ className }) => {
 			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 			<a className={cn(styles.logo, className)}>
 				<LogoSVG width="75" alt="logo" />
-				<h1>ŚWiadomość</h1>
+				<h1>Miły Blog</h1>
 			</a>
 		</Link>
 	);
