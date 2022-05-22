@@ -1,5 +1,6 @@
 import { User } from 'firebase/auth';
 import { IComment } from 'types';
+import xss from 'xss';
 import nextApiFetch from '../nextApiFetch';
 
 interface Arg {
@@ -13,7 +14,7 @@ export default function addClientComment({ content, postId, user }: Arg) {
 		body: JSON.stringify({
 			uuid: user?.uid,
 			author: user?.displayName,
-			content,
+			content: xss(content),
 			postId,
 			stamp: Date.now(),
 		} as IComment),

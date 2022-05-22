@@ -3,7 +3,7 @@ import { HydratedDocument } from 'mongoose';
 import { NextApiRequest } from 'next';
 import { IComment } from 'types';
 import addComment from 'utils/api/comments/addComment';
-import getCommentByPost from 'utils/api/comments/getCommentsByPost';
+import getCommentsByPost from 'utils/api/comments/getCommentsByPost';
 import getCommentsByUser from 'utils/api/comments/getCommentsByUser';
 import getParameterFromUrl from 'utils/api/getParameterFromUrl';
 import handleApiError from 'utils/api/handleApiError';
@@ -30,7 +30,7 @@ export default async function handleApiComments(
 				else {
 					const postId = getParameterFromUrl(req.url, 'postId');
 
-					if (postId !== null) comments = await getCommentByPost(postId);
+					if (postId !== null) comments = await getCommentsByPost(postId);
 					else {
 						throw new ApiError(
 							400,

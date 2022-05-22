@@ -6,11 +6,20 @@ import Link from 'next/link';
 import PostInfo from '../../postInfo';
 
 interface Props {
-	post: Pick<Post, 'author' | 'picture' | 'category' | 'title' | 'slug'>;
+	post: Pick<
+		Post,
+		| 'title'
+		| 'author'
+		| 'category'
+		| 'slug'
+		| 'picture'
+		| 'commentsCount'
+		| 'id'
+	>;
 }
 
 const PostItem: FC<Props> = ({
-	post: { picture, title, slug, ...postInfoProps },
+	post: { picture, title, slug, commentsCount, ...postInfoProps },
 }) => {
 	const { responsiveImage: postImageData } = picture ?? {};
 
@@ -23,21 +32,9 @@ const PostItem: FC<Props> = ({
 						<h4 className={styles.title}>{title}</h4>
 					</a>
 				</Link>
-				{/* <div className={styles.info}>
-					<PostAuthor author={author} />
-					{category && (
-						<small className={styles.category}>{category.name}</small>
-					)}
-					{commentsCount && (
-						<div className={styles.comments}>
-							<span className={styles['comments-count']}>{commentsCount}</span>
-							<CommentsIcon className={styles['comments-icon']} />
-						</div>
-					)}
-				</div> */}
 				<PostInfo
 					{...postInfoProps}
-					commentsCount={12}
+					commentsCount={commentsCount}
 					className={styles.info}
 				/>
 			</div>

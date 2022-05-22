@@ -14,7 +14,7 @@ import YoutubeEmbed from 'components/video';
 import PostInfo from 'components/postInfo';
 import ErrorInfo from 'components/error-info';
 import CommentsView from 'components/comments';
-import getCommentByPost from 'utils/api/comments/getCommentsByPost';
+import getCommentsByPost from 'utils/api/comments/getCommentsByPost';
 import connectMongoDB from 'lib/mongo';
 import useAppSWR from 'utils/apiClient/useAppSWR';
 
@@ -176,7 +176,7 @@ export const getStaticProps: GetStaticProps<StaticProps, Variables> = async ({
 	let comments: IComment[] = [];
 	try {
 		await connectMongoDB();
-		const docComments = await getCommentByPost(postData.post.id);
+		const docComments = await getCommentsByPost(postData.post.id);
 		comments = docComments.map(d => JSON.parse(JSON.stringify(d.toJSON())));
 	} catch (e) {
 		apiError = `${e}`;

@@ -12,9 +12,20 @@ import { NextPage, GetStaticProps } from 'next';
 import { useState } from 'react';
 import styles from 'styles/blog/Blog.module.scss';
 import { Category, Contact, Post, SeoData } from 'types';
+import getCommentsByPost from 'utils/api/comments/getCommentsByPost';
+import connectMongoDB from 'lib/mongo';
 
 interface Data extends Contact {
-	allPosts: Pick<Post, 'title' | 'author' | 'category' | 'slug' | 'picture'>[];
+	allPosts: Pick<
+		Post,
+		| 'title'
+		| 'author'
+		| 'category'
+		| 'slug'
+		| 'picture'
+		| 'commentsCount'
+		| 'id'
+	>[];
 	allCategories: Category[];
 	blogPage: SeoData;
 }
@@ -58,6 +69,7 @@ export default Blog;
 export const getStaticProps: GetStaticProps = async () => {
 	const allPostsFragment = `
 	allPosts(orderBy: _firstPublishedAt_DESC) {
+		id
 		title
 		slug
 		author {
@@ -109,5 +121,14 @@ export const getStaticProps: GetStaticProps = async () => {
 		query: mainQuery,
 	});
 
-	return { props: data };
+	await connectMongoDB();
+
+	const mappedPosts = await Promise.all(
+		data.allPosts.map(async p => {
+			const comments = await getCommentsByPost(p.id);
+			return { ...p, commentsCount: comments.length };
+		})
+	);
+
+	return { revalidate: 120, props: { ...data, allPosts: mappedPosts } };
 };

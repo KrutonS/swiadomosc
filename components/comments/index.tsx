@@ -53,7 +53,6 @@ const CommentsView = ({
 			else onRefresh();
 		}
 	};
-
 	return (
 		<div className={classes.Comments}>
 			<PostInfo
@@ -77,9 +76,12 @@ const CommentsView = ({
 						errors={errors}
 						minLength={1}
 						maxLength={500}
+						required
 						multiLine
 					/>
-					<Button type="submit">Wyślij</Button>
+					<Button className={classes.CommentsSubmit} type="submit">
+						Wyślij
+					</Button>
 				</form>
 			)}
 		</div>

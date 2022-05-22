@@ -43,6 +43,7 @@ export interface Post extends SeoData {
 	category?: Category;
 	picture?: DatoImg;
 	showcasedVideo?: Video;
+	commentsCount?: number;
 }
 
 export interface CalendarData {
